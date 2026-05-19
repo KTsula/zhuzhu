@@ -1,0 +1,27 @@
+---
+import type { Flavour } from '~/content/menu';
+import { categoryLabel, categoryTagClass } from '~/content/menu';
+
+interface Props {
+  flavour: Flavour;
+  index: number;
+}
+const { flavour, index } = Astro.props;
+
+const romans = ['I','II','III','IV','V','VI','VII','VIII','IX','X','XI','XII','XIII','XIV','XV','XVI','XVII','XVIII','XIX','XX'];
+const roman = romans[index - 1] ?? String(index);
+---
+<article class="menu-row" id={flavour.id}>
+  <span class="n">{roman}.</span>
+  <div class="body">
+    <h4>{flavour.name}</h4>
+    {flavour.ka && <div class="ka">{flavour.ka}</div>}
+    <p class="desc">{flavour.description}</p>
+  </div>
+  <div class="tags">
+    <span class={`tag ${categoryTagClass[flavour.category]}`}>{categoryLabel[flavour.category]}</span>
+    {flavour.allergens.length > 0 && (
+      <span class="tag">{flavour.allergens.join(' · ')}</span>
+    )}
+  </div>
+</article>

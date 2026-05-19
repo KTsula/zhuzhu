@@ -1,0 +1,136 @@
+---
+import Base from '~/layouts/Base.astro';
+import MenuRow from '~/components/MenuRow.astro';
+import Reveal from '~/components/Reveal.astro';
+import { flavours, categoryLabel } from '~/content/menu';
+import type { Category } from '~/content/menu';
+
+const order: Category[] = ['georgian', 'premium', 'classic', 'non-alcoholic'];
+const groups = order.map((c) => ({
+  key: c,
+  label: categoryLabel[c],
+  items: flavours.filter((f) => f.category === c),
+}));
+---
+<Base
+  active="menu"
+  title="Menu — ZhuZhu · ჟუჟუ"
+  description="The full ZhuZhu menu — Georgian signature, premium dessert, classic cocktails, and a full alcohol-free collection."
+>
+  <div class="frame">
+    <section class="section">
+      <Reveal>
+        <header class="section-head" style="margin-bottom:60px;">
+          <div>
+            <p class="num"><b>— Menu</b>&nbsp;&nbsp;Twelve cuts</p>
+            <h1 style="margin-top:18px;">
+              The full <em>menu.</em>
+              <span class="ge">გემოები ოთხ ხაზად</span>
+            </h1>
+          </div>
+          <div>
+            <p class="blurb">
+              Filter by line, or read it as a whole. Menus can be tailored to your event —
+              colours, garnishes, themes, ABV — within the limits of food safety and good
+              taste.
+            </p>
+            <nav class="filters" aria-label="Menu filters">
+              <a href="#georgian">Georgian</a>
+              <a href="#premium">Premium</a>
+              <a href="#classic">Classic</a>
+              <a href="#non-alcoholic">Alcohol-free</a>
+            </nav>
+          </div>
+        </header>
+      </Reveal>
+
+      {groups.map((g) => (
+        <Reveal>
+          <section class="group" id={g.key} aria-labelledby={`g-${g.key}`}>
+            <header class="group-head">
+              <h2 id={`g-${g.key}`}>{g.label} <span class="count">· {g.items.length}</span></h2>
+            </header>
+            <div class="menu-list">
+              {g.items.map((f, i) => (
+                <MenuRow flavour={f} index={i + 1} />
+              ))}
+            </div>
+          </section>
+        </Reveal>
+      ))}
+    </section>
+  </div>
+</Base>
+
+<style>
+  h1 {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-style: italic;
+    font-size: clamp(52px, 6.4vw, 100px);
+    line-height: 0.94;
+    letter-spacing: -0.018em;
+    color: var(--color-bone);
+  }
+  h1 em { color: var(--color-wine-glow); }
+  h1 .ge {
+    display: block;
+    font-family: var(--font-ka);
+    font-style: italic;
+    color: var(--color-gold-bright);
+    font-size: 0.5em;
+    margin-top: 12px;
+  }
+
+  .filters {
+    margin-top: 28px;
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  .filters a {
+    font-family: var(--font-serif);
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 0.24em;
+    color: var(--color-gold-bright);
+    border: 1px solid var(--gold-line);
+    padding: 8px 14px;
+    border-radius: 999px;
+    transition: all 0.3s ease;
+  }
+  .filters a:hover {
+    background: var(--color-gold);
+    color: var(--color-night);
+    border-color: var(--color-gold);
+  }
+
+  .group + .group { margin-top: 80px; }
+  .group-head {
+    border-top: 1px solid var(--gold-hair);
+    padding-top: 22px;
+    margin-bottom: 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .group-head h2 {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-style: italic;
+    font-size: clamp(32px, 3.6vw, 52px);
+    letter-spacing: -0.012em;
+    color: var(--color-bone);
+  }
+  .group-head .count {
+    font-family: var(--font-serif);
+    font-style: italic;
+    color: var(--color-gold-bright);
+    font-size: 0.6em;
+  }
+  .menu-list {
+    border-top: 1px solid var(--gold-hair);
+    border-bottom: 1px solid var(--gold-hair);
+  }
+</style>

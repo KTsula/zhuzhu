@@ -1,0 +1,138 @@
+---
+const year = new Date().getFullYear();
+---
+<footer>
+  <div class="frame">
+    <div class="top">
+      <a href="/" class="brand-big" aria-label="ZhuZhu home">
+        ZhuZhu<em>.</em>
+        <span class="ka">ჟუჟუ</span>
+      </a>
+      <div class="columns">
+        <div class="col">
+          <h5>Menu</h5>
+          <ul>
+            <li><a href="/menu#georgian">Georgian <em>signature</em></a></li>
+            <li><a href="/menu#premium">Premium <em>dessert</em></a></li>
+            <li><a href="/menu#classic">Classics</a></li>
+            <li><a href="/menu#non-alcoholic">Alcohol-free</a></li>
+          </ul>
+        </div>
+        <div class="col">
+          <h5>Packages</h5>
+          <ul>
+            <li><a href="/packages#party-starter">Party Starter</a></li>
+            <li><a href="/packages#event-box">Event Box</a></li>
+            <li><a href="/packages#premium-jelly-bar">Premium Jelly Bar</a></li>
+            <li><a href="/book">Request a sample</a></li>
+          </ul>
+        </div>
+        <div class="col">
+          <h5>ZhuZhu</h5>
+          <ul>
+            <li><a href="mailto:shezhuzhundi@gmail.com">shezhuzhundi@gmail.com</a></li>
+            <li><a href="https://instagram.com/she_zhuzhu_ndi" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+            <li><a href="https://tiktok.com/@she_zhuzhu_ndi" target="_blank" rel="noopener noreferrer">TikTok</a></li>
+            <li>
+              {/* TODO: replace # with the real FB page URL once confirmed */}
+              <a href="#" data-todo="confirm FB page URL" target="_blank" rel="noopener noreferrer">Facebook</a>
+            </li>
+            <li><a href="/about">About · Tbilisi</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="bottom">
+      <span>© {year} ZhuZhu · ჟუჟუ · Tbilisi · All shots set in Georgia</span>
+      <span>Contains alcohol · 18+ only · <span class="ig">შეჟუჟუნდი</span></span>
+    </div>
+  </div>
+</footer>
+
+<style>
+  footer {
+    position: relative;
+    z-index: 2;
+    border-top: 1px solid var(--gold-hair);
+    padding: 80px 0 40px;
+    background: linear-gradient(180deg, rgba(13, 10, 8, 0), var(--color-obsidian));
+    margin-top: 60px;
+  }
+  .top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 60px;
+    margin-bottom: 56px;
+    flex-wrap: wrap;
+  }
+  .brand-big {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-style: italic;
+    font-size: clamp(80px, 12vw, 200px);
+    line-height: 0.88;
+    color: var(--color-bone);
+    letter-spacing: -0.018em;
+  }
+  .brand-big em { color: var(--color-wine-glow); font-style: italic; font-weight: 500; }
+  .brand-big .ka {
+    display: block;
+    font-family: var(--font-ka);
+    font-style: italic;
+    font-weight: 500;
+    color: var(--color-gold-bright);
+    font-size: 0.52em;
+    letter-spacing: -0.005em;
+    margin-top: 8px;
+  }
+  .columns {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 44px;
+    min-width: 480px;
+  }
+  .col h5 {
+    font-family: var(--font-serif);
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 12.5px;
+    letter-spacing: 0.26em;
+    color: var(--color-gold);
+    margin-bottom: 16px;
+  }
+  .col ul { list-style: none; display: grid; gap: 8px; margin: 0; padding: 0; }
+  .col ul a {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 18px;
+    color: var(--color-ash);
+    transition: color 0.25s;
+  }
+  .col ul a:hover { color: var(--color-gold-bright); }
+  .col ul a em { font-style: italic; }
+
+  .bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    padding-top: 24px;
+    border-top: 1px solid var(--gold-hair);
+    font-family: var(--font-serif);
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    color: var(--color-ash-dim);
+  }
+  .bottom .ig { color: var(--color-gold-bright); font-style: italic; font-family: var(--font-ka); text-transform: none; }
+
+  @media (max-width: 1100px) {
+    .columns { min-width: 0; grid-template-columns: repeat(3, 1fr); width: 100%; }
+  }
+  @media (max-width: 640px) {
+    .columns { grid-template-columns: 1fr 1fr; }
+  }
+</style>

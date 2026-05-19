@@ -1,0 +1,157 @@
+---
+import Base from '~/layouts/Base.astro';
+import BookingForm from '~/components/BookingForm.astro';
+import Reveal from '~/components/Reveal.astro';
+---
+<Base
+  active="book"
+  title="Reserve a date — ZhuZhu · ჟუჟუ"
+  description="Book ZhuZhu for your wedding, brand activation, gala or hotel event. Tbilisi-based, will travel."
+>
+  <div class="frame">
+    <section class="section" style="padding-top:40px;">
+      <Reveal>
+        <div class="reserve-section">
+          <div>
+            <p class="num"><b>— Reserve</b>&nbsp;&nbsp;Tell us about your event</p>
+            <h1 style="margin-top:18px;">
+              Let’s set<br />the <em>date.</em>
+              <span class="ge">დაგვიკავშირდი</span>
+            </h1>
+            <p class="blurb">
+              Send the form, message us on Instagram, or write directly. We reply within
+              two working days with a draft menu and a quote. Sample boxes ship within the
+              week.
+            </p>
+            <div class="reserve-meta">
+              <div>
+                <b>Email</b>
+                <a href="mailto:shezhuzhundi@gmail.com">shezhuzhundi@gmail.com</a>
+              </div>
+              <div>
+                <b>Instagram</b>
+                <a href="https://instagram.com/she_zhuzhu_ndi" target="_blank" rel="noopener noreferrer">@she_zhuzhu_ndi</a>
+              </div>
+              <div>
+                <b>TikTok</b>
+                <a href="https://tiktok.com/@she_zhuzhu_ndi" target="_blank" rel="noopener noreferrer">@she_zhuzhu_ndi</a>
+              </div>
+              <div>
+                <b>Facebook</b>
+                {/* TODO: replace # with the real FB page URL once confirmed */}
+                <a href="#" data-todo="confirm FB page URL" target="_blank" rel="noopener noreferrer">ZhuZhu · ჟუჟუ</a>
+              </div>
+              <div>
+                <b>Based in</b>
+                <span>Tbilisi · თბილისი</span>
+              </div>
+            </div>
+          </div>
+          <BookingForm />
+        </div>
+      </Reveal>
+    </section>
+  </div>
+</Base>
+
+<style>
+  .reserve-section {
+    position: relative;
+    background:
+      radial-gradient(700px 400px at 20% 30%, rgba(138, 31, 60, 0.10), transparent 60%),
+      radial-gradient(700px 500px at 80% 70%, rgba(198, 152, 89, 0.10), transparent 60%),
+      var(--color-graphite);
+    border: 1px solid var(--gold-line);
+    padding: 80px 64px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: start;
+  }
+  .reserve-section::before {
+    content: "";
+    position: absolute;
+    inset: 14px;
+    pointer-events: none;
+    border: 1px solid var(--gold-hair);
+  }
+  .reserve-section > * { position: relative; z-index: 1; }
+  .reserve-section h1 {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-style: italic;
+    font-size: clamp(44px, 5.2vw, 80px);
+    line-height: 0.98;
+    letter-spacing: -0.018em;
+    color: var(--color-bone);
+  }
+  .reserve-section h1 em { color: var(--color-wine-glow); }
+  .reserve-section h1 .ge {
+    display: block;
+    font-family: var(--font-ka);
+    font-style: italic;
+    color: var(--color-gold-bright);
+    font-size: 0.5em;
+    margin-top: 10px;
+  }
+  .reserve-section .blurb {
+    margin-top: 22px;
+    font-size: 17.5px;
+    color: var(--color-bone-warm);
+    line-height: 1.7;
+    max-width: 460px;
+  }
+  .reserve-meta {
+    margin-top: 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 26px;
+  }
+  .reserve-meta b {
+    display: block;
+    font-family: var(--font-serif);
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 0.24em;
+    color: var(--color-gold);
+    margin-bottom: 10px;
+  }
+  .reserve-meta span {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 19px;
+    color: var(--color-bone);
+  }
+  .reserve-meta a {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 19px;
+    color: var(--color-gold-bright);
+    border-bottom: 1px solid var(--gold-line);
+    padding-bottom: 2px;
+    transition: color 0.25s, border-color 0.25s;
+  }
+  .reserve-meta a:hover {
+    color: var(--color-bone);
+    border-color: var(--color-gold-bright);
+  }
+
+  @media (max-width: 1100px) {
+    .reserve-section { grid-template-columns: 1fr; padding: 48px 28px; }
+    .reserve-meta { grid-template-columns: 1fr; }
+  }
+</style>
+
+<script>
+  // Pre-select package if /book?package=event-box
+  const url = new URL(window.location.href);
+  const pkg = url.searchParams.get('package');
+  if (pkg) {
+    const sel = document.querySelector<HTMLSelectElement>('#bf-package');
+    if (sel) {
+      const opt = Array.from(sel.options).find((o) => o.value === pkg);
+      if (opt) sel.value = opt.value;
+    }
+  }
+</script>

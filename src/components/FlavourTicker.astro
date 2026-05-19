@@ -1,0 +1,35 @@
+---
+const items = [
+  { text: 'After-hours',         kind: 'alt' as const },
+  { text: 'Saperavi Berry',      kind: 'en'  as const },
+  { text: 'Chacha Honey',        kind: 'alt' as const },
+  { text: 'შეჟუჟუნდი',           kind: 'ge'  as const },
+  { text: 'Tarragon Lemonade',   kind: 'en'  as const },
+  { text: 'Aperol Spritz',       kind: 'alt' as const },
+  { text: 'Frangelico Sour',     kind: 'en'  as const },
+  { text: 'Espresso Baileys',    kind: 'alt' as const },
+  { text: 'Mojito',              kind: 'en'  as const },
+  { text: 'Churchkhela Cream',   kind: 'alt' as const },
+  { text: 'Feijoa Citrus',       kind: 'en'  as const },
+];
+---
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    <span>
+      {items.map((i, idx) => (
+        <>
+          <em class={i.kind}>{i.text}</em>
+          {idx < items.length - 1 && <span class="ticker-star"></span>}
+        </>
+      ))}
+    </span>
+    <span aria-hidden="true">
+      {items.map((i, idx) => (
+        <>
+          <em class={i.kind}>{i.text}</em>
+          {idx < items.length - 1 && <span class="ticker-star"></span>}
+        </>
+      ))}
+    </span>
+  </div>
+</div>

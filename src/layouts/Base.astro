@@ -1,0 +1,75 @@
+---
+import '~/styles/global.css';
+import Nav from '~/components/Nav.astro';
+import Footer from '~/components/Footer.astro';
+import GrainOverlay from '~/components/GrainOverlay.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  active?: 'home' | 'menu' | 'packages' | 'process' | 'book' | 'about';
+  ogImage?: string;
+}
+const {
+  title,
+  description = 'ZhuZhu · ჟუჟუ — premium jelly cocktail shots for weddings, brand activations and after-hours events. Hand-set in Tbilisi.',
+  active,
+  ogImage = '/og.svg', // TODO: render to /og.jpg (1200x630) before launch
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://zhuzhu.ge').toString();
+---
+<!doctype html>
+<html lang="en" data-lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0a0706" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={canonical} />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={new URL(ogImage, Astro.site ?? 'https://zhuzhu.ge').toString()} />
+    <meta property="og:site_name" content="ZhuZhu" />
+    <meta property="og:locale" content="en_GE" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL(ogImage, Astro.site ?? 'https://zhuzhu.ge').toString()} />
+  </head>
+  <body>
+    <GrainOverlay />
+    <Nav active={active} />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+
+    <script>
+      const prm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (prm) {
+        document.querySelectorAll('.reveal').forEach((el) => el.classList.add('is-visible'));
+      } else {
+        const io = new IntersectionObserver(
+          (entries) => {
+            for (const entry of entries) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                io.unobserve(entry.target);
+              }
+            }
+          },
+          { threshold: 0.12, rootMargin: '0px 0px -10% 0px' }
+        );
+        document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+      }
+    </script>
+  </body>
+</html>

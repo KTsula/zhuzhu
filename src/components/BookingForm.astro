@@ -1,0 +1,103 @@
+---
+import { packages } from '~/content/packages';
+---
+<form class="form-card" id="booking-form" novalidate>
+  <noscript>
+    <p style="font-family:var(--font-serif);font-style:italic;color:var(--color-wine-glow);margin:0 0 8px;">
+      JavaScript is off — please email <a href="mailto:shezhuzhundi@gmail.com">shezhuzhundi@gmail.com</a> directly.
+    </p>
+  </noscript>
+
+  <div class="row">
+    <label for="bf-name">Your name · სახელი</label>
+    <input id="bf-name" name="name" type="text" placeholder="Nino Lashkhi" required />
+  </div>
+
+  <div class="two">
+    <div class="row">
+      <label for="bf-email">Email</label>
+      <input id="bf-email" name="email" type="email" placeholder="you@…" required />
+    </div>
+    <div class="row">
+      <label for="bf-phone">Phone · ტელ.</label>
+      <input id="bf-phone" name="phone" type="tel" placeholder="+995…" />
+    </div>
+  </div>
+
+  <div class="two">
+    <div class="row">
+      <label for="bf-event">Event type · ივენთი</label>
+      <select id="bf-event" name="event">
+        <option>Wedding</option>
+        <option>Birthday</option>
+        <option>Corporate · brand activation</option>
+        <option>Hotel · bar · venue</option>
+        <option>Festival</option>
+        <option>Sample box only</option>
+        <option>Other</option>
+      </select>
+    </div>
+    <div class="row">
+      <label for="bf-package">Package</label>
+      <select id="bf-package" name="package">
+        {packages.map((p) => (
+          <option value={p.id}>{p.name} — {p.size}</option>
+        ))}
+        <option value="">Not sure yet</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="two">
+    <div class="row">
+      <label for="bf-date">Preferred date</label>
+      <input id="bf-date" name="date" type="text" placeholder="DD / MM / YYYY" />
+    </div>
+    <div class="row">
+      <label for="bf-guests">Guests</label>
+      <input id="bf-guests" name="guests" type="text" placeholder="approx. number" />
+    </div>
+  </div>
+
+  <div class="row">
+    <label for="bf-notes">Notes · შენიშვნა</label>
+    <textarea id="bf-notes" name="notes" placeholder="Theme, colours, allergens, anything else…"></textarea>
+  </div>
+
+  <button class="submit" type="submit" data-default="Send request">Send request</button>
+</form>
+
+<script>
+  // TODO: replace with Resend/Formspree when backend is ready
+  const form = document.getElementById('booking-form') as HTMLFormElement | null;
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const data = new FormData(form);
+      const get = (k: string) => String(data.get(k) ?? '').trim();
+
+      const subject = `Booking inquiry — ${get('event') || 'Event'} · ${get('name') || 'Guest'}`;
+      const body =
+`Name: ${get('name')}
+Email: ${get('email')}
+Phone: ${get('phone')}
+
+Event: ${get('event')}
+Package: ${get('package')}
+Date: ${get('date')}
+Guests: ${get('guests')}
+
+Notes:
+${get('notes')}
+`;
+      const href = `mailto:shezhuzhundi@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      window.location.href = href;
+
+      const btn = form.querySelector<HTMLButtonElement>('.submit');
+      if (btn) {
+        btn.disabled = true;
+        btn.textContent = "Sent — we'll reply within 24h ✦";
+      }
+    });
+  }
+</script>

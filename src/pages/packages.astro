@@ -1,0 +1,167 @@
+---
+import Base from '~/layouts/Base.astro';
+import PackageCard from '~/components/PackageCard.astro';
+import Reveal from '~/components/Reveal.astro';
+import { packages } from '~/content/packages';
+---
+<Base
+  active="packages"
+  title="Packages — ZhuZhu · ჟუჟუ"
+  description="ZhuZhu packages — Party Starter (₾250), Event Box (₾500), Premium Jelly Bar (₾1200). For weddings, brand activations and after-hours events in Tbilisi."
+>
+  <div class="frame">
+    <section class="section">
+      <Reveal>
+        <header class="section-head" style="margin-bottom:60px;">
+          <div>
+            <p class="num"><b>— Packages</b>&nbsp;&nbsp;Three ways in</p>
+            <h1 style="margin-top:18px;">
+              From a table<br />to a <em>full bar.</em>
+              <span class="ge">პაკეტები ნებისმიერი ივენთისთვის</span>
+            </h1>
+          </div>
+          <div>
+            <p class="blurb">
+              Every package includes labelled cups with allergens, a printed menu card,
+              chilled transport and a clear handover. Live bar setup adds one host and a
+              dressed jelly bar on site. Custom branding and colour-matching available on
+              quote.
+            </p>
+          </div>
+        </header>
+      </Reveal>
+
+      <div class="pkg-grid">
+        {packages.map((p, i) => (
+          <Reveal delay={i * 80}>
+            <PackageCard pkg={p} />
+          </Reveal>
+        ))}
+      </div>
+
+      <Reveal>
+        <section class="long-form">
+          {packages.map((p) => (
+            <article class="pkg-long" id={p.id}>
+              <header>
+                <p class="num">{p.name}</p>
+                <h2>{p.size}</h2>
+                {p.ka && <p class="ka">{p.ka}</p>}
+              </header>
+              <div class="body">
+                <p class="flavours">{p.flavours}</p>
+                <p>{p.blurb}</p>
+                <p class="photos" aria-hidden="true">
+                  <span class="photo-slot">/* Event photo placeholder · {p.name} */</span>
+                  <span class="photo-slot">/* Event photo placeholder · {p.name} */</span>
+                </p>
+                <a href={`/book?package=${p.id}`} class="btn-primary">
+                  Reserve {p.name} <span class="arr">→</span>
+                </a>
+              </div>
+            </article>
+          ))}
+        </section>
+      </Reveal>
+    </section>
+  </div>
+</Base>
+
+<style>
+  h1 {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-style: italic;
+    font-size: clamp(52px, 6.4vw, 100px);
+    line-height: 0.94;
+    letter-spacing: -0.018em;
+    color: var(--color-bone);
+  }
+  h1 em { color: var(--color-wine-glow); }
+  h1 .ge {
+    display: block;
+    font-family: var(--font-ka);
+    font-style: italic;
+    color: var(--color-gold-bright);
+    font-size: 0.5em;
+    margin-top: 12px;
+  }
+
+  .pkg-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    margin-bottom: 100px;
+  }
+  @media (max-width: 1100px) { .pkg-grid { grid-template-columns: 1fr; } }
+
+  .long-form { display: grid; gap: 80px; }
+  .pkg-long {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 60px;
+    padding-top: 60px;
+    border-top: 1px solid var(--gold-hair);
+  }
+  @media (max-width: 1100px) { .pkg-long { grid-template-columns: 1fr; gap: 24px; } }
+
+  .pkg-long .num {
+    font-family: var(--font-serif);
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--color-gold);
+    font-size: 12px;
+    letter-spacing: 0.24em;
+  }
+  .pkg-long h2 {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-style: italic;
+    font-size: clamp(44px, 5.2vw, 78px);
+    line-height: 1.0;
+    margin: 18px 0 10px;
+    letter-spacing: -0.018em;
+    color: var(--color-bone);
+  }
+  .pkg-long .ka {
+    font-family: var(--font-ka);
+    font-style: italic;
+    color: var(--color-gold-bright);
+    font-size: 18px;
+  }
+  .pkg-long .flavours {
+    font-family: var(--font-serif);
+    font-style: italic;
+    color: var(--color-wine-glow);
+    font-size: 19px;
+    margin-bottom: 14px;
+  }
+  .pkg-long .body p {
+    color: var(--color-bone-warm);
+    font-size: 17.5px;
+    line-height: 1.7;
+    max-width: 560px;
+  }
+  .pkg-long .body p + p { margin-top: 14px; }
+  .photos {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin: 28px 0 32px;
+  }
+  .photo-slot {
+    aspect-ratio: 4/3;
+    border: 1px dashed var(--gold-hair);
+    background: var(--color-graphite);
+    display: grid;
+    place-items: center;
+    font-family: var(--font-serif);
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    color: var(--color-ash-dim);
+    text-align: center;
+    padding: 12px;
+  }
+</style>

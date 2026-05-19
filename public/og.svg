@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <defs>
+    <radialGradient id="g1" cx="80%" cy="-10%" r="60%">
+      <stop offset="0%" stop-color="#c69859" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#c69859" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="g2" cx="-10%" cy="30%" r="60%">
+      <stop offset="0%" stop-color="#8a1f3c" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#8a1f3c" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="#0a0706"/>
+  <rect width="1200" height="630" fill="url(#g1)"/>
+  <rect width="1200" height="630" fill="url(#g2)"/>
+  <rect x="40" y="40" width="1120" height="550" fill="none" stroke="#c69859" stroke-opacity="0.18" stroke-width="1"/>
+  <text x="80" y="370"
+        font-family="Cormorant Garamond, Georgia, serif"
+        font-style="italic" font-weight="500" font-size="200" fill="#ede1c4"
+        letter-spacing="-4">ZhuZhu<tspan fill="#b73a5a">.</tspan></text>
+  <text x="84" y="440"
+        font-family="Noto Serif Georgian, Cormorant Garamond, serif"
+        font-style="italic" font-weight="500" font-size="64" fill="#e3b76d">ჟუჟუ</text>
+  <text x="84" y="560"
+        font-family="Cormorant Garamond, Georgia, serif"
+        font-weight="600" font-size="22" fill="#c69859" letter-spacing="6">PREMIUM JELLY COCKTAILS · TBILISI · ZHUZHU.GE</text>
+</svg>

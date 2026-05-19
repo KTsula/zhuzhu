@@ -1,0 +1,14 @@
+node_modules/
+dist/
+.astro/
+.env
+.env.*
+!.env.example
+.DS_Store
+*.log
+.vscode/
+.idea/
+
+# Local-only marketing pipeline (Remotion). Per Zutka convention — see
+# decisions.md 2026-05-02 ("Marketing folders are git-ignored by default").
+marketing/
