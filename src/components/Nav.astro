@@ -7,7 +7,7 @@ interface Props { current?: 'menu' | 'order' | 'about' | 'home'; }
 const { current = 'home' } = Astro.props;
 ---
 <header class="zz-nav">
-  <div class="brand"><Wordmark size={38} /></div>
+  <div class="brand"><Wordmark size={22} /></div>
 
   <nav class="links" aria-label="Primary">
     <a href="/menu" class:list={[current === 'menu' && 'active']}>
