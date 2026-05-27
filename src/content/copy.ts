@@ -214,7 +214,7 @@ export const footer = {
     socials: [
       { label: 'Instagram', href: 'https://instagram.com/she_zhuzhu_ndi' },
       { label: 'TikTok',    href: 'https://tiktok.com/@she_zhuzhu_ndi' },
-      { label: 'Facebook',  href: 'https://www.facebook.com/' },
+      { label: 'Facebook',  href: 'https://www.facebook.com/profile.php?id=61589724820624' },
     ],
     legals: ['Terms', 'Privacy'],
     rights: '© 2026 ZhuZhu · Hand-set in Tbilisi.',
@@ -230,7 +230,7 @@ export const footer = {
     socials: [
       { label: 'ინსტაგრამი', href: 'https://instagram.com/she_zhuzhu_ndi' },
       { label: 'ტიკტოკი',    href: 'https://tiktok.com/@she_zhuzhu_ndi' },
-      { label: 'ფეისბუქი',    href: 'https://www.facebook.com/' },
+      { label: 'ფეისბუქი',    href: 'https://www.facebook.com/profile.php?id=61589724820624' },
     ],
     legals: ['პირობები', 'კონფიდენციალურობა'],
     rights: '© 2026 ჟუჟუ · ხელნაკეთი თბილისში.',
