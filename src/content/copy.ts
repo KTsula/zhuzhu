@@ -22,13 +22,13 @@ export const manifesto = {
   en: {
     paras: [
       'A cocktail dessert is not a shot. It is a cocktail measured in bites — the chacha you would sip after a long dinner, suspended in a single edible moment.',
-      'Three founders. One kitchen above Aghmashenebeli Avenue. Two nights a week. Every cube set by hand.',
+      'Three founders. One kitchen. Every cube set by hand.',
     ],
   },
   ka: {
     paras: [
       'კოქტეილ-დესერტი არ არის შოტი. ის კოქტეილია ლუკმად გაზომილი — ის ჭაჭა, რომელსაც სადილის შემდეგ წრუპავდი, ერთ ლუკმაში დაშერული.',
-      'სამი დამფუძნებელი. ერთი სამზარეულო აღმაშენებლის გამზირზე. კვირაში ორი საღამო. ყოველი კუბი ხელით აწყობილი.',
+      'სამი დამფუძნებელი. ერთი სამზარეულო. ყოველი კუბი ხელით აწყობილი.',
     ],
   },
 };

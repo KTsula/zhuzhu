@@ -422,9 +422,7 @@ import { signatures } from '../content/copy';
       order: 2;
       min-height: 0;
     }
-    /* CRITICAL: explicit min-height on text-stack so the absolutely-positioned
-       slots don't collapse to 0 and overflow into the pager below. */
-    .text-stack { min-height: 360px; }
+    .text-stack { min-height: 440px; }
     .image-col {
       min-height: 420px;
       order: 1;
@@ -439,14 +437,10 @@ import { signatures } from '../content/copy';
     .blurb { margin-top: 24px; }
     .meta { gap: 0 32px; margin-top: 28px; }
     .pager { padding-top: 32px; }
-    .arrow {
-      width: 56px;
-      height: 56px;
-    }
-    .arrows { gap: 8px; }
+    .arrows { display: none; }
   }
   @media (max-width: 480px) {
-    .text-stack { min-height: 380px; }
+    .text-stack { min-height: 460px; }
     .image-col { min-height: 380px; }
     .image-slot img {
       inset: 60px 28px;
