@@ -1,138 +1,134 @@
 ---
-const year = new Date().getFullYear();
+import LangSwitch from './LangSwitch.astro';
+import Wordmark from './Wordmark.astro';
+import { footer } from '../content/copy';
 ---
-<footer>
-  <div class="frame">
-    <div class="top">
-      <a href="/" class="brand-big" aria-label="ZhuZhu home">
-        ZhuZhu<em>.</em>
-        <span class="ka">ჟუჟუ</span>
-      </a>
-      <div class="columns">
-        <div class="col">
-          <h5>Menu</h5>
-          <ul>
-            <li><a href="/menu#georgian">Georgian <em>signature</em></a></li>
-            <li><a href="/menu#premium">Premium <em>dessert</em></a></li>
-            <li><a href="/menu#classic">Classics</a></li>
-            <li><a href="/menu#non-alcoholic">Alcohol-free</a></li>
-          </ul>
-        </div>
-        <div class="col">
-          <h5>Packages</h5>
-          <ul>
-            <li><a href="/packages#party-starter">Party Starter</a></li>
-            <li><a href="/packages#event-box">Event Box</a></li>
-            <li><a href="/packages#premium-jelly-bar">Premium Jelly Bar</a></li>
-            <li><a href="/book">Request a sample</a></li>
-          </ul>
-        </div>
-        <div class="col">
-          <h5>ZhuZhu</h5>
-          <ul>
-            <li><a href="mailto:shezhuzhundi@gmail.com">shezhuzhundi@gmail.com</a></li>
-            <li><a href="https://instagram.com/she_zhuzhu_ndi" target="_blank" rel="noopener noreferrer">Instagram</a></li>
-            <li><a href="https://tiktok.com/@she_zhuzhu_ndi" target="_blank" rel="noopener noreferrer">TikTok</a></li>
-            <li>
-              {/* TODO: replace # with the real FB page URL once confirmed */}
-              <a href="#" data-todo="confirm FB page URL" target="_blank" rel="noopener noreferrer">Facebook</a>
-            </li>
-            <li><a href="/about">About · Tbilisi</a></li>
-          </ul>
-        </div>
+<footer class="zz-footer">
+  <div class="grid">
+    <div class="col col-brand">
+      <Wordmark size={28} />
+      <p class="tagline">
+        <span class="lng-en">Cocktail desserts, set by hand. Tbilisi.</span>
+        <span class="lng-ka">კოქტეილ-დესერტები, ხელით აწყობილი. თბილისი.</span>
+      </p>
+    </div>
+
+    <div class="col">
+      <div class="label">
+        <span class="lng-en">Contact</span>
+        <span class="lng-ka">{footer.ka.contact}</span>
       </div>
+      <a class="line" href={`mailto:${footer.en.mail}`}>{footer.en.mail}</a>
     </div>
-    <div class="bottom">
-      <span>© {year} ZhuZhu · ჟუჟუ · Tbilisi · All shots set in Georgia</span>
-      <span>Contains alcohol · 18+ only · <span class="ig">შეჟუჟუნდი</span></span>
+
+    <div class="col">
+      <div class="label">
+        <span class="lng-en">Follow</span>
+        <span class="lng-ka">{footer.ka.follow}</span>
+      </div>
+      {footer.en.socials.map((s, i) => (
+        <a class="line" href={s.href} target="_blank" rel="noopener noreferrer">
+          <span class="lng-en">{s.label}</span>
+          <span class="lng-ka">{footer.ka.socials[i]?.label || s.label}</span>
+        </a>
+      ))}
     </div>
+
+    <div class="col">
+      <div class="label">
+        <span class="lng-en">Language</span>
+        <span class="lng-ka">ენა</span>
+      </div>
+      <LangSwitch />
+    </div>
+  </div>
+
+  <div class="bottom">
+    <span class="rights">
+      <span class="lng-en">© 2026 ZhuZhu. Hand-set in Tbilisi.</span>
+      <span class="lng-ka">© 2026 ჟუჟუ. ხელნაკეთი თბილისში.</span>
+    </span>
   </div>
 </footer>
 
 <style>
-  footer {
-    position: relative;
-    z-index: 2;
-    border-top: 1px solid var(--gold-hair);
-    padding: 80px 0 40px;
-    background: linear-gradient(180deg, rgba(13, 10, 8, 0), var(--color-obsidian));
-    margin-top: 60px;
+  .zz-footer {
+    background: var(--night);
+    padding: 88px 40px 40px;
+    color: var(--bone);
+    border-top: 1px solid rgba(198,152,89,0.18);
   }
-  .top {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 60px;
-    margin-bottom: 56px;
-    flex-wrap: wrap;
-  }
-  .brand-big {
-    font-family: var(--font-serif);
-    font-weight: 500;
-    font-style: italic;
-    font-size: clamp(80px, 12vw, 200px);
-    line-height: 0.88;
-    color: var(--color-bone);
-    letter-spacing: -0.018em;
-  }
-  .brand-big em { color: var(--color-wine-glow); font-style: italic; font-weight: 500; }
-  .brand-big .ka {
-    display: block;
-    font-family: var(--font-ka);
-    font-style: italic;
-    font-weight: 500;
-    color: var(--color-gold-bright);
-    font-size: 0.52em;
-    letter-spacing: -0.005em;
-    margin-top: 8px;
-  }
-  .columns {
+  .grid {
+    max-width: 1200px;
+    margin: 0 auto;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 44px;
-    min-width: 480px;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    gap: 56px;
   }
-  .col h5 {
-    font-family: var(--font-serif);
-    text-transform: uppercase;
+  .col { display: flex; flex-direction: column; gap: 16px; align-items: flex-start; }
+  .col-brand { gap: 20px; }
+  .tagline {
+    font-family: var(--body);
+    font-weight: 350;
+    font-size: var(--t-sm);
+    color: var(--ash);
+    line-height: 1.6;
+    max-width: 30ch;
+    margin: 0;
+  }
+  html[data-lang="ka"] .tagline { font-family: var(--ka); font-weight: 400; }
+
+  .label {
+    font-family: var(--body);
     font-weight: 600;
-    font-size: 12.5px;
-    letter-spacing: 0.26em;
-    color: var(--color-gold);
-    margin-bottom: 16px;
+    font-size: var(--t-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--ash);
+    margin-bottom: 6px;
   }
-  .col ul { list-style: none; display: grid; gap: 8px; margin: 0; padding: 0; }
-  .col ul a {
-    font-family: var(--font-serif);
+  html[data-lang="ka"] .label {
+    font-family: var(--ka);
     font-style: italic;
-    font-size: 18px;
-    color: var(--color-ash);
-    transition: color 0.25s;
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0.04em;
+    font-size: var(--t-sm);
   }
-  .col ul a:hover { color: var(--color-gold-bright); }
-  .col ul a em { font-style: italic; }
+  .line {
+    font-family: var(--body);
+    font-weight: 400;
+    font-size: var(--t-sm);
+    color: var(--bone-warm);
+    transition: color 0.3s var(--ease-out-quart);
+  }
+  html[data-lang="ka"] .line { font-family: var(--ka); font-weight: 400; }
+  a.line:hover { color: var(--gold-bright); }
 
   .bottom {
+    max-width: 1200px;
+    margin: 64px auto 0;
+    padding-top: 32px;
+    border-top: 1px solid rgba(198,152,89,0.12);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 24px;
-    flex-wrap: wrap;
-    padding-top: 24px;
-    border-top: 1px solid var(--gold-hair);
-    font-family: var(--font-serif);
-    text-transform: uppercase;
-    font-weight: 500;
-    font-size: 12px;
-    letter-spacing: 0.22em;
-    color: var(--color-ash-dim);
   }
-  .bottom .ig { color: var(--color-gold-bright); font-style: italic; font-family: var(--font-ka); text-transform: none; }
+  .rights {
+    font-family: var(--body);
+    font-weight: 350;
+    font-size: var(--t-xs);
+    color: var(--ash-dim);
+    letter-spacing: 0.02em;
+  }
+  html[data-lang="ka"] .rights { font-family: var(--ka); font-weight: 400; font-size: var(--t-sm); }
 
-  @media (max-width: 1100px) {
-    .columns { min-width: 0; grid-template-columns: repeat(3, 1fr); width: 100%; }
+  @media (max-width: 900px) {
+    .grid { grid-template-columns: 1fr 1fr; gap: 40px; }
   }
   @media (max-width: 640px) {
-    .columns { grid-template-columns: 1fr 1fr; }
+    .zz-footer { padding: 60px 22px 32px; }
+    .grid { grid-template-columns: 1fr; }
+    .bottom { margin-top: 48px; }
   }
 </style>

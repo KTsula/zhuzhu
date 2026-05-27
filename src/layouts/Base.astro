@@ -1,20 +1,21 @@
 ---
-import '~/styles/global.css';
-import Nav from '~/components/Nav.astro';
-import Footer from '~/components/Footer.astro';
-import GrainOverlay from '~/components/GrainOverlay.astro';
+import '../styles/global.css';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import HookVeil from '../components/HookVeil.astro';
+import { pageMeta } from '../content/copy';
 
 interface Props {
-  title: string;
+  title?: string;
   description?: string;
-  active?: 'home' | 'menu' | 'packages' | 'process' | 'book' | 'about';
-  ogImage?: string;
+  current?: 'menu' | 'order' | 'about' | 'home';
+  showHook?: boolean;
 }
 const {
-  title,
-  description = 'ZhuZhu · ჟუჟუ — premium jelly cocktail shots for weddings, brand activations and after-hours events. Hand-set in Tbilisi.',
-  active,
-  ogImage = '/og.svg', // TODO: render to /og.jpg (1200x630) before launch
+  title = pageMeta.home.en.title,
+  description = pageMeta.home.en.desc,
+  current = 'home',
+  showHook = false,
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://zhuzhu.ge').toString();
@@ -23,7 +24,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://zhuzhu.ge')
 <html lang="en" data-lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="theme-color" content="#0a0706" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="canonical" href={canonical} />
@@ -35,24 +36,40 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://zhuzhu.ge')
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
-    <meta property="og:image" content={new URL(ogImage, Astro.site ?? 'https://zhuzhu.ge').toString()} />
+    <meta property="og:image" content={new URL('/og.svg', Astro.site ?? 'https://zhuzhu.ge').toString()} />
     <meta property="og:site_name" content="ZhuZhu" />
     <meta property="og:locale" content="en_GE" />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={new URL(ogImage, Astro.site ?? 'https://zhuzhu.ge').toString()} />
+
+    <script is:inline>
+      // Set <html data-lang> from localStorage as early as possible to avoid FOUC.
+      (function () {
+        try {
+          var v = localStorage.getItem('zz-lang');
+          if (v !== 'en' && v !== 'ka') {
+            var b = (navigator.language || 'en').slice(0, 2).toLowerCase();
+            v = b === 'ka' ? 'ka' : 'en';
+          }
+          document.documentElement.setAttribute('data-lang', v);
+          document.documentElement.setAttribute('lang', v);
+        } catch (e) {}
+      })();
+    </script>
   </head>
   <body>
-    <GrainOverlay />
-    <Nav active={active} />
+    {showHook && <HookVeil />}
+    <Nav current={current} />
     <main>
       <slot />
     </main>
     <Footer />
 
     <script>
+      import '../scripts/lang';
+
       const prm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       if (prm) {
         document.querySelectorAll('.reveal').forEach((el) => el.classList.add('is-visible'));

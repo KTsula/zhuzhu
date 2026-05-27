@@ -1,177 +1,57 @@
 ---
-const headline = 'You don’t sip — you bite.';
-const words = headline.split(' ');
+import { hero } from '../content/copy';
 ---
-<div class="frame">
-  <section class="hero" id="hero" data-screen-label="01 Hero">
-    <div class="left">
-      <p class="eyebrow">
-        <span class="star"></span>
-        Premium Jelly Cocktails · for the after-hours
-      </p>
+<section class="zz-hero">
+  <h1 class="slogan display">
+    <span class="lng-en">{hero.en.slogan}</span>
+    <span class="lng-ka">{hero.ka.slogan}</span>
+  </h1>
 
-      <h1>
-        {words.map((w, i) => (
-          <>
-            <span class="hero-word" style={`animation-delay:${i * 90}ms`}>{w}</span>
-            {i < words.length - 1 && ' '}
-          </>
-        ))}
-        <span class="ka-big">შეჟუჟუნდი.</span>
-      </h1>
+  <p class="sub">
+    <span class="lng-en">{hero.en.sub}</span>
+    <span class="lng-ka">{hero.ka.sub}</span>
+  </p>
 
-      <p class="lede">
-        Small-batch jelly cocktail shots, hand-set for weddings, gala dinners and
-        brand activations after dark. A short menu of classics, a Georgian signature
-        line — Saperavi, chacha, tarragon — and an alcohol-free collection. Tbilisi,
-        delivered cold.
-      </p>
-
-      <div class="ctas">
-        <a href="/book" class="btn-primary">Reserve a date <span class="arr">→</span></a>
-        <a href="/menu" class="btn-ghost">View the menu</a>
-      </div>
-
-      <div class="meta-row">
-        <div class="stat"><b>12</b><span>Signature flavours</span></div>
-        <div class="stat"><b>50–300</b><span>Shots per event</span></div>
-        <div class="stat"><b>24h</b><span>Min. set time</span></div>
-      </div>
-    </div>
-
-    <div class="stage" aria-label="ZhuZhu jelly bar">
-      <span class="vside">No. 01 — <em>Saperavi Berry</em>, 2026</span>
-
-      <video
-        autoplay
-        muted
-        loop
-        playsinline
-        preload="metadata"
-        onerror="this.style.display='none'"
-      >
-        <source src="/hero.webm" type="video/webm" />
-        <source src="/hero.mp4" type="video/mp4" />
-      </video>
-
-      <div class="video-poster" aria-hidden="true">
-        <div class="vp-inner">
-          <span class="big">after hours</span>
-          drop your video at<br />
-          <strong>/hero.mp4</strong><br />
-          and it autoplays here
-        </div>
-      </div>
-
-      <div class="stage-corner">
-        <span class="dot"></span>
-        <span class="txt"><b>Live jelly bar</b><br />setup in Tbilisi</span>
-      </div>
-    </div>
-  </section>
-</div>
+  <div class="cta-wrap">
+    <a class="cta" href="/#book">
+      <span class="lng-en">{hero.en.cta}</span>
+      <span class="lng-ka">{hero.ka.cta}</span>
+    </a>
+  </div>
+</section>
 
 <style>
-  .hero {
-    position: relative;
-    display: grid;
-    grid-template-columns: 1.05fr 0.95fr;
-    gap: 56px;
-    align-items: stretch;
-    min-height: calc(100vh - 100px);
-    padding: 40px 0 90px;
+  .zz-hero {
+    background: var(--night);
+    text-align: center;
+    padding: 140px 24px 120px;
+    max-width: 880px;
+    margin: 0 auto;
   }
-  .hero .left {
-    position: relative;
-    z-index: 3;
+  .slogan {
+    font-size: var(--t-display);
+    margin: 0;
+  }
+  .sub {
+    font-family: var(--body);
+    font-weight: 350;
+    font-size: var(--t-lg);
+    color: var(--bone-warm);
+    line-height: 1.55;
+    max-width: 38ch;
+    margin: 36px auto 0;
+  }
+  html[data-lang="ka"] .sub { font-family: var(--ka); font-weight: 400; }
+
+  .cta-wrap {
+    margin-top: 56px;
     display: flex;
-    flex-direction: column;
     justify-content: center;
   }
-  .eyebrow { margin-bottom: 36px; }
 
-  .hero h1 {
-    font-family: var(--font-serif);
-    font-weight: 500;
-    font-style: italic;
-    font-size: clamp(72px, 11vw, 188px);
-    line-height: 0.88;
-    letter-spacing: -0.018em;
-    color: var(--color-bone);
-  }
-  .hero h1 .ka-big {
-    display: block;
-    font-family: var(--font-ka);
-    font-style: italic;
-    font-weight: 500;
-    color: var(--color-gold-bright);
-    font-size: 0.5em;
-    line-height: 1;
-    margin-top: 14px;
-    letter-spacing: -0.005em;
-    text-shadow: 0 0 36px rgba(227, 183, 109, 0.18);
-  }
-
-  .lede {
-    margin: 34px 0 44px;
-    max-width: 480px;
-    font-size: 18px;
-    line-height: 1.65;
-    color: var(--color-bone-warm);
-  }
-
-  .ctas { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
-
-  .meta-row {
-    margin-top: 62px;
-    display: flex;
-    gap: 56px;
-    padding-top: 28px;
-    border-top: 1px solid var(--gold-hair);
-    flex-wrap: wrap;
-  }
-  .stat { display: flex; flex-direction: column; gap: 8px; }
-  .stat b {
-    font-family: var(--font-serif);
-    font-weight: 500;
-    font-style: italic;
-    font-size: 32px;
-    color: var(--color-bone);
-    line-height: 1;
-  }
-  .stat span {
-    font-family: var(--font-serif);
-    text-transform: uppercase;
-    font-weight: 600;
-    font-size: 12px;
-    letter-spacing: 0.22em;
-    color: var(--color-ash-dim);
-  }
-
-  .video-poster .vp-inner {
-    max-width: 320px;
-    font-family: var(--font-serif);
-    text-transform: uppercase;
-    font-weight: 500;
-    font-size: 12px;
-    letter-spacing: 0.24em;
-    line-height: 1.8;
-  }
-  .video-poster .vp-inner .big {
-    display: block;
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-weight: 500;
-    font-size: 42px;
-    letter-spacing: 0;
-    color: var(--color-gold-bright);
-    text-transform: none;
-    margin-bottom: 14px;
-  }
-  .video-poster .vp-inner strong { color: var(--color-gold-bright); font-weight: 500; }
-
-  @media (max-width: 1100px) {
-    .hero { grid-template-columns: 1fr; gap: 30px; min-height: auto; padding: 12px 0 60px; }
-    .stage { min-height: 440px; }
+  @media (max-width: 720px) {
+    .zz-hero { padding: 96px 22px 88px; }
+    .sub { font-size: var(--t-base); margin-top: 28px; }
+    .cta-wrap { margin-top: 44px; }
   }
 </style>

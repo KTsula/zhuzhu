@@ -1,176 +1,168 @@
 ---
-import Base from '~/layouts/Base.astro';
-import Reveal from '~/components/Reveal.astro';
+import Base from '../layouts/Base.astro';
 
-// TODO: refine roles + add real bios when finalised
+const origin = {
+  en: [
+    'ZhuZhu began on a winter night above Aghmashenebeli Avenue, when three friends, a chef, a food chemist and a builder, kept ending up in the same kitchen and pouring the last of the Saperavi into whatever else was on the table.',
+    'One of those wines, set the next morning in a small glass tray, became the first cube. It tasted like a cocktail and ate like a dessert.',
+    'Three years on we set cocktail desserts by hand, two nights a week. Weddings, brand evenings, hotel menus, the occasional private dinner that asked us not to tell anyone we came.',
+  ],
+  ka: [
+    'ჟუჟუ ერთ ზამთრის საღამოს დაიწყო აღმაშენებლის გამზირზე, როცა სამი მეგობარი, შეფი, საკვების ქიმიკოსი და მშენებელი, ერთსა და იმავე სამზარეულოში აღმოჩნდნენ და საფერავის ბოლო წვეთებს თეფშზე დარჩენილ ყველაფერში ასხამდნენ.',
+    'ერთ-ერთი ეს ღვინო, მეორე დილით პატარა მინის თეფშზე დაყენებული, პირველი კუბი გახდა. გემოვნება იყო კოქტეილის, ჭამდი როგორც დესერტს.',
+    'სამი წლის შემდეგ კოქტეილ-დესერტებს ხელით ვაყენებთ, კვირაში ორ საღამოს. ქორწილებისთვის, ბრენდის საღამოებისთვის, სასტუმროების მენიუებისთვის და ხანდახან იმ პრივატული სადილისთვის, რომელიც გვთხოვა, არავის ვუთხრათ რომ მოვედით.',
+  ],
+};
+
 const founders = [
-  { initial: 'K', name: 'Keti', role: 'Co-founder' },
-  { initial: 'A', name: 'Anna', role: 'Co-founder' },
-  { initial: 'L', name: 'Lado', role: 'Co-founder' },
+  {
+    name: { en: 'Keti', ka: 'ქეთი' },
+    role: { en: 'Site, business, photography', ka: 'საიტი, ბიზნესი, ფოტოგრაფია' },
+    bio: {
+      en: 'The site, the pricing, the lens. Keti runs the brand surface. What the world sees and what it clicks.',
+      ka: 'საიტი, ფასები, ობიექტივი. ქეთი მართავს ბრენდის ზედაპირს. რასაც სამყარო ხედავს და რასაც აჭერს.',
+    },
+    accent: 'rgba(196, 140, 70, 0.30)',
+  },
+  {
+    name: { en: 'Anna', ka: 'ანა' },
+    role: { en: 'Food chemistry, compliance, kitchen', ka: 'ქიმია, შესაბამისობა, სამზარეულო' },
+    bio: {
+      en: 'The gelatine, the acid, the law. Anna keeps the cube together and the kitchen on the right side of HACCP.',
+      ka: 'ჟელატინი, მჟავა, კანონი. ანა აერთიანებს კუბს და სამზარეულოს ინახავს HACCP-ის სწორ მხარეს.',
+    },
+    accent: 'rgba(220, 170, 70, 0.32)',
+  },
+  {
+    name: { en: 'Lado', ka: 'ლადო' },
+    role: { en: 'Chef, recipes, production', ka: 'შეფი, რეცეპტები, წარმოება' },
+    bio: {
+      en: 'The recipes, the heat, the taste. Lado owns the food itself: every cube on every tray.',
+      ka: 'რეცეპტები, სითბო, გემო. ლადო ფლობს თვით საკვებს: ყოველი თეფშის ყოველი კუბი.',
+    },
+    accent: 'rgba(180, 50, 80, 0.30)',
+  },
 ];
 ---
-<Base
-  active="about"
-  title="About — ZhuZhu · ჟუჟუ"
-  description="Three co-founders, a small Tbilisi kitchen, a love for the Georgian table. The ZhuZhu story."
->
-  <div class="frame">
-    <section class="section">
-      <Reveal>
-        <header class="section-head" style="margin-bottom:60px;">
-          <div>
-            <p class="num"><b>— About</b>&nbsp;&nbsp;ZhuZhu · ჟუჟუ</p>
-            <h1 style="margin-top:18px;">
-              Three people,<br />one <em>small kitchen.</em>
-              <span class="ge">სამი დამფუძნებელი, ერთი პატარა სამზარეულო</span>
-            </h1>
-          </div>
-          <div>
-            <p class="blurb">
-              ZhuZhu was started in Tbilisi in 2026 by three friends who kept ending up in
-              the same kitchen at the end of every dinner — pouring the last of the wine
-              into whatever else was on the table. One of those wines became the first
-              Saperavi cube.
-            </p>
-            <p class="blurb" style="margin-top:14px;">
-              We’re soft-starting this year, ahead of formal registration. Small batches,
-              real cards, every shot labelled — the way it’ll keep being made.
-            </p>
-          </div>
-        </header>
-      </Reveal>
+<Base current="about"
+      title="About. ZhuZhu, cocktail desserts."
+      description="Three founders, one kitchen, two nights a week. The ZhuZhu origin.">
+  <section class="origin">
+    <h1 class="display title">
+      <span class="lng-en">Three founders.<br>One kitchen.<br>Two nights a week.</span>
+      <span class="lng-ka">სამი დამფუძნებელი.<br>ერთი სამზარეულო.<br>კვირაში ორი საღამო.</span>
+    </h1>
+    <div class="paras lng-en">{origin.en.map((p) => <p>{p}</p>)}</div>
+    <div class="paras lng-ka">{origin.ka.map((p) => <p>{p}</p>)}</div>
+  </section>
 
-      <Reveal>
-        <div class="founders">
-          {founders.map((f) => (
-            <article class="founder">
-              <div class="portrait" aria-hidden="true">{f.initial}</div>
-              <h3>{f.name}</h3>
-              <p class="role">{f.role}</p>
-              <p class="bio">
-                {/* TODO: bio placeholder — fill once finalised */}
-                Short bio coming soon — a sentence on who they are, what they do at ZhuZhu,
-                and where to find them on a Friday night.
-              </p>
-            </article>
-          ))}
-        </div>
-      </Reveal>
-
-      <Reveal>
-        <section class="tbilisi">
-          <div>
-            <p class="num">Where we cook</p>
-            <h2>Tbilisi · თბილისი</h2>
-            <p>
-              A small atelier kitchen, food-safe, cold chain unbroken from the fridge to
-              your tray. We deliver across the city by appointment, and travel for
-              weddings and brand events on request.
-            </p>
+  <section class="founders-section">
+    <div class="founders">
+      {founders.map((f) => (
+        <article class="founder">
+          <div class="vignette">
+            <div class="glow" style={`background: radial-gradient(60% 50% at 50% 55%, ${f.accent} 0%, rgba(10,7,6,0) 72%)`}></div>
           </div>
-        </section>
-      </Reveal>
-    </section>
-  </div>
+          <h3 class="name display">
+            <span class="lng-en">{f.name.en}</span>
+            <span class="lng-ka">{f.name.ka}</span>
+          </h3>
+          <div class="role">
+            <span class="lng-en">{f.role.en}</span>
+            <span class="lng-ka">{f.role.ka}</span>
+          </div>
+          <p class="bio">
+            <span class="lng-en">{f.bio.en}</span>
+            <span class="lng-ka">{f.bio.ka}</span>
+          </p>
+        </article>
+      ))}
+    </div>
+  </section>
 </Base>
 
 <style>
-  h1 {
-    font-family: var(--font-serif);
-    font-weight: 500;
-    font-style: italic;
-    font-size: clamp(52px, 6.4vw, 100px);
-    line-height: 0.94;
-    letter-spacing: -0.018em;
-    color: var(--color-bone);
+  .origin {
+    padding: 140px 24px 110px;
+    background: var(--night);
+    max-width: 720px;
+    margin: 0 auto;
+    text-align: center;
   }
-  h1 em { color: var(--color-wine-glow); }
-  h1 .ge {
-    display: block;
-    font-family: var(--font-ka);
-    font-style: italic;
-    color: var(--color-gold-bright);
-    font-size: 0.5em;
-    margin-top: 12px;
+  .origin .title {
+    font-size: var(--t-3xl);
+    margin: 0;
+    line-height: 1.15;
   }
+  .paras { margin-top: 64px; text-align: left; }
+  .paras p {
+    font-family: var(--body);
+    font-weight: 350;
+    font-size: var(--t-base);
+    color: var(--bone-warm);
+    line-height: 1.7;
+    margin: 0 0 24px;
+    max-width: 60ch;
+  }
+  html[data-lang="ka"] .paras p { font-family: var(--ka); font-weight: 400; }
 
+  .founders-section {
+    padding: 100px 40px;
+    background: var(--night);
+    border-top: 1px solid rgba(198,152,89,0.15);
+  }
   .founders {
+    max-width: 1200px;
+    margin: 0 auto;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 40px;
-    margin-bottom: 100px;
+    gap: 64px;
   }
-  @media (max-width: 1100px) { .founders { grid-template-columns: 1fr; } }
-  .founder {
-    border: 1px solid var(--gold-hair);
-    padding: 32px;
-    background: rgba(20, 16, 13, 0.5);
+  .founder { display: flex; flex-direction: column; gap: 18px; }
+  .vignette {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    background: var(--night);
+    overflow: hidden;
+    border-bottom: 1px solid rgba(198,152,89,0.18);
   }
-  .portrait {
-    width: 96px;
-    height: 96px;
-    border-radius: 50%;
-    display: grid;
-    place-items: center;
-    background: var(--color-gold);
-    color: var(--color-night);
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-size: 44px;
-    margin-bottom: 22px;
+  .vignette .glow { position: absolute; inset: 0; }
+  .name {
+    margin: 8px 0 0;
+    font-size: var(--t-xl);
   }
-  .founder h3 {
-    font-family: var(--font-serif);
+  .role {
+    font-family: var(--body);
     font-weight: 500;
-    font-style: italic;
-    font-size: 28px;
-    color: var(--color-bone);
-    letter-spacing: -0.005em;
-  }
-  .founder .role {
-    margin-top: 4px;
-    font-family: var(--font-serif);
-    font-style: italic;
-    color: var(--color-gold-bright);
-    font-size: 16px;
-  }
-  .founder .bio {
-    margin-top: 14px;
-    color: var(--color-bone-warm);
-    font-size: 16px;
-    line-height: 1.7;
-  }
-
-  .tbilisi {
-    border-top: 1px solid var(--gold-hair);
-    padding-top: 60px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 60px;
-  }
-  @media (max-width: 1100px) { .tbilisi { grid-template-columns: 1fr; } }
-  .tbilisi .num {
-    font-family: var(--font-serif);
+    font-size: var(--t-xs);
     text-transform: uppercase;
-    font-weight: 600;
-    color: var(--color-gold);
-    font-size: 12.5px;
-    letter-spacing: 0.26em;
+    letter-spacing: 0.16em;
+    color: var(--ash);
   }
-  .tbilisi h2 {
-    margin-top: 12px;
-    font-family: var(--font-serif);
-    font-weight: 500;
+  html[data-lang="ka"] .role {
+    font-family: var(--ka);
     font-style: italic;
-    font-size: clamp(44px, 5.2vw, 76px);
-    letter-spacing: -0.018em;
-    color: var(--color-bone);
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0.04em;
+    font-size: var(--t-sm);
   }
-  .tbilisi p {
-    margin-top: 22px;
-    color: var(--color-bone-warm);
-    font-size: 17.5px;
-    line-height: 1.7;
-    max-width: 520px;
+  .bio {
+    font-family: var(--body);
+    font-weight: 350;
+    font-size: var(--t-base);
+    color: var(--bone-warm);
+    line-height: 1.65;
+    margin: 0;
+  }
+  html[data-lang="ka"] .bio { font-family: var(--ka); font-weight: 400; }
+
+  @media (max-width: 1024px) {
+    .founders { grid-template-columns: 1fr; gap: 56px; }
+  }
+  @media (max-width: 720px) {
+    .origin { padding: 80px 22px 64px; }
+    .paras { margin-top: 40px; }
+    .founders-section { padding: 64px 22px; }
   }
 </style>

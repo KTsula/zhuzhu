@@ -1,0 +1,457 @@
+---
+import { signatures } from '../content/copy';
+---
+<section class="zz-showcase" id="zz-showcase">
+  <div class="grid">
+    <div class="text-col">
+      <div class="text-stack">
+        {signatures.map((s, i) => (
+          <article class="text-slot" data-idx={i} data-active={i === 0 ? 'true' : 'false'}>
+            <div class="line-row">
+              <span class="line-no">{s.id}</span>
+              <span class="line-name lng-en">{s.line.en}</span>
+              <span class="line-name lng-ka">{s.line.ka}</span>
+            </div>
+
+            <h1 class="name display">
+              <span class="lng-en">{s.name.en}</span>
+              <span class="lng-ka ka">{s.name.ka}</span>
+            </h1>
+
+            <p class="blurb">
+              <span class="lng-en">{s.blurb.en}</span>
+              <span class="lng-ka ka">{s.blurb.ka}</span>
+            </p>
+
+            <div class="meta">
+              <div class="m">
+                <div class="label">
+                  <span class="lng-en">line</span>
+                  <span class="lng-ka">სერია</span>
+                </div>
+                <div class="v">
+                  <span class="lng-en">{s.meta.line.en}</span>
+                  <span class="lng-ka ka">{s.meta.line.ka}</span>
+                </div>
+              </div>
+              <div class="m">
+                <div class="label">
+                  <span class="lng-en">price</span>
+                  <span class="lng-ka">ფასი</span>
+                </div>
+                <div class="v">
+                  <span class="lng-en">₾{s.price} / cube</span>
+                  <span class="lng-ka ka">₾{s.price} / კუბი</span>
+                </div>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <div class="pager">
+        <div class="dots">
+          {signatures.map((_, i) => (
+            <button class="dot" data-dot={i} data-active={i === 0 ? 'true' : 'false'} aria-label={`Slide ${i + 1}`}></button>
+          ))}
+        </div>
+        <div class="arrows">
+          <button class="arrow" id="zz-prev" aria-label="Previous">
+            <svg width="22" height="14" viewBox="0 0 22 14" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 1L1 7l6 6M1 7h20"/></svg>
+          </button>
+          <button class="arrow" id="zz-next" aria-label="Next">
+            <svg width="22" height="14" viewBox="0 0 22 14" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 1l6 6-6 6M21 7H1"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="image-col" id="zz-image-col">
+      <div class="image-stack">
+        {signatures.map((s, i) => (
+          <div class="image-slot" data-idx={i} data-active={i === 0 ? 'true' : 'false'}>
+            <div class="glow" style={`background: radial-gradient(60% 50% at 50% 55%, ${s.accent} 0%, rgba(10,7,6,0) 70%)`}></div>
+            <img src={s.img} alt={s.name.en} onerror="this.style.display='none'" />
+            <div class="corner">
+              <span class="no">№ {s.id}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+      <button class="tap-zone tap-prev" id="zz-tap-prev" aria-label="Previous cube" tabindex="-1">
+        <svg width="16" height="28" viewBox="0 0 16 28" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4L4 14l8 10"/></svg>
+      </button>
+      <button class="tap-zone tap-next" id="zz-tap-next" aria-label="Next cube" tabindex="-1">
+        <svg width="16" height="28" viewBox="0 0 16 28" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4l8 10-8 10"/></svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { animate } from 'motion';
+
+  const root = document.getElementById('zz-showcase');
+  if (root) {
+    const textSlots  = root.querySelectorAll<HTMLElement>('.text-slot');
+    const imageSlots = root.querySelectorAll<HTMLElement>('.image-slot');
+    const dots       = root.querySelectorAll<HTMLButtonElement>('.dot');
+    const prevBtn    = document.getElementById('zz-prev');
+    const nextBtn    = document.getElementById('zz-next');
+    const tapPrev    = document.getElementById('zz-tap-prev');
+    const tapNext    = document.getElementById('zz-tap-next');
+    const imageCol   = document.getElementById('zz-image-col');
+    const total      = textSlots.length;
+    const AUTOPLAY   = 6500;
+    const D          = 0.6;
+    const SHIFT_IMG  = 70;
+    const SHIFT_TXT  = 30;
+    const EASE       = [0.22, 1, 0.36, 1] as const;
+    const reduce     = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    let current = 0;
+    let busy = false;
+    let timer: number | undefined;
+
+    textSlots.forEach((el, i)  => { el.style.opacity = i === 0 ? '1' : '0'; });
+    imageSlots.forEach((el, i) => { el.style.opacity = i === 0 ? '1' : '0'; });
+
+    function transition(next: number) {
+      if (next === current || busy) return;
+      busy = true;
+      const direction: 1 | -1 = next > current ? 1 : -1;
+      const wraps = (current === total - 1 && next === 0) ? 1
+                  : (current === 0 && next === total - 1) ? -1
+                  : 0;
+      const dir = wraps !== 0 ? wraps as 1 | -1 : direction;
+
+      const oldText = textSlots[current];
+      const newText = textSlots[next];
+      const oldImg  = imageSlots[current];
+      const newImg  = imageSlots[next];
+
+      if (reduce) {
+        oldText.style.opacity = '0'; newText.style.opacity = '1';
+        oldImg.style.opacity  = '0'; newImg.style.opacity  = '1';
+        busy = false;
+      } else {
+        const opts = { duration: D, ease: EASE };
+
+        animate(oldImg,
+          { opacity: [1, 0],
+            transform: ['translateX(0px) scale(1)', `translateX(${-SHIFT_IMG * dir}px) scale(1.02)`],
+            filter: ['blur(0px)', 'blur(3px)'] },
+          opts);
+
+        animate(newImg,
+          { opacity: [0, 1],
+            transform: [`translateX(${SHIFT_IMG * dir}px) scale(0.98)`, 'translateX(0px) scale(1)'],
+            filter: ['blur(2px)', 'blur(0px)'] },
+          opts);
+
+        animate(oldText,
+          { opacity: [1, 0], transform: ['translateX(0px)', `translateX(${-SHIFT_TXT * dir}px)`] },
+          opts);
+
+        animate(newText,
+          { opacity: [0, 1], transform: [`translateX(${SHIFT_TXT * dir}px)`, 'translateX(0px)'] },
+          opts);
+
+        window.setTimeout(() => { busy = false; }, D * 1000);
+      }
+
+      textSlots[current].dataset.active = 'false';
+      imageSlots[current].dataset.active = 'false';
+      textSlots[next].dataset.active = 'true';
+      imageSlots[next].dataset.active = 'true';
+      dots.forEach((d, i) => d.dataset.active = i === next ? 'true' : 'false');
+      current = next;
+    }
+
+    function go(delta: number) {
+      transition((current + delta + total) % total);
+      scheduleNext();
+    }
+
+    function scheduleNext() {
+      clearTimeout(timer);
+      timer = window.setTimeout(() => transition((current + 1) % total), AUTOPLAY);
+    }
+
+    nextBtn?.addEventListener('click', () => go(1));
+    prevBtn?.addEventListener('click', () => go(-1));
+    tapNext?.addEventListener('click', () => go(1));
+    tapPrev?.addEventListener('click', () => go(-1));
+    dots.forEach((d) => d.addEventListener('click', () => {
+      transition(Number(d.dataset.dot));
+      scheduleNext();
+    }));
+
+    // Swipe gesture on image area
+    if (imageCol) {
+      let sx = 0, sy = 0, swiping = false;
+      imageCol.addEventListener('pointerdown', (e) => {
+        sx = e.clientX; sy = e.clientY; swiping = true;
+      });
+      imageCol.addEventListener('pointerup', (e) => {
+        if (!swiping) return;
+        swiping = false;
+        const dx = e.clientX - sx;
+        const dy = e.clientY - sy;
+        // Only register as swipe if mostly horizontal + far enough
+        if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.4) {
+          go(dx < 0 ? 1 : -1);
+        }
+      });
+      imageCol.addEventListener('pointercancel', () => { swiping = false; });
+    }
+
+    scheduleNext();
+  }
+</script>
+
+<style>
+  .zz-showcase {
+    width: 100%;
+    background: var(--night);
+    overflow: hidden;
+    position: relative;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 760px;
+  }
+  .text-col {
+    padding: 96px 80px 56px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 2;
+    min-height: 760px;
+  }
+  .text-stack {
+    flex: 1;
+    position: relative;
+  }
+  .text-slot {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    will-change: opacity, transform;
+  }
+  .text-slot[data-active="false"] { pointer-events: none; }
+
+  .line-row {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 56px;
+  }
+  .line-no {
+    font-family: var(--display);
+    font-style: italic;
+    font-weight: 300;
+    font-size: var(--t-lg);
+    color: var(--gold);
+    line-height: 1;
+  }
+  .line-name {
+    font-family: var(--body);
+    font-weight: 500;
+    font-size: var(--t-xs);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ash);
+  }
+  html[data-lang="ka"] .line-name {
+    font-family: var(--ka);
+    font-style: italic;
+    text-transform: none;
+    letter-spacing: 0.04em;
+    font-size: var(--t-sm);
+  }
+
+  .name {
+    margin: 0;
+    font-size: var(--t-display);
+    color: var(--bone);
+  }
+  .name .ka { font-size: clamp(2.5rem, 5vw, 3.75rem); line-height: 1.12; }
+
+  .blurb {
+    margin: 36px 0 0;
+    font-family: var(--body);
+    font-weight: 350;
+    font-size: var(--t-base);
+    line-height: 1.7;
+    color: var(--bone-warm);
+    max-width: 48ch;
+  }
+  html[data-lang="ka"] .blurb { font-family: var(--ka); font-weight: 400; }
+
+  .meta {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    gap: 0 72px;
+    margin-top: 64px;
+  }
+  .meta .label { color: var(--gold); }
+  .meta .v {
+    margin-top: 10px;
+    font-family: var(--body);
+    font-weight: 400;
+    font-size: var(--t-sm);
+    color: var(--bone);
+  }
+  html[data-lang="ka"] .meta .v { font-family: var(--ka); }
+
+  .pager {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 48px;
+  }
+  .dots { display: flex; align-items: center; gap: 10px; }
+  .dot {
+    width: 6px;
+    height: 6px;
+    background: rgba(198,152,89,0.3);
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    transition: width 0.4s var(--ease-out-quart), background 0.4s var(--ease-out-quart);
+  }
+  .dot[data-active="true"] { width: 32px; background: var(--gold); }
+  .arrows { display: flex; gap: 12px; }
+  .arrow {
+    width: 52px;
+    height: 52px;
+    background: transparent;
+    border: 1px solid rgba(198,152,89,0.4);
+    color: var(--bone);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.35s var(--ease-out-quart), color 0.35s var(--ease-out-quart), border-color 0.35s var(--ease-out-quart);
+  }
+  .arrow:hover {
+    background: var(--bone);
+    color: var(--night);
+    border-color: var(--bone);
+  }
+
+  .image-col {
+    position: relative;
+    background: var(--night);
+    overflow: hidden;
+    min-height: 760px;
+    touch-action: pan-y;
+  }
+  .image-stack {
+    position: absolute;
+    inset: 0;
+  }
+  .image-slot {
+    position: absolute;
+    inset: 0;
+    will-change: opacity, transform, filter;
+  }
+  .image-slot[data-active="false"] { pointer-events: none; }
+  .image-slot .glow {
+    position: absolute;
+    inset: 0;
+  }
+  .image-slot img {
+    position: absolute;
+    inset: 200px;
+    width: calc(100% - 400px);
+    height: calc(100% - 400px);
+    object-fit: contain;
+    object-position: 50% 50%;
+    z-index: 2;
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+  .corner {
+    position: absolute;
+    top: 32px;
+    right: 36px;
+    z-index: 4;
+  }
+  .corner .no {
+    font-family: var(--display);
+    font-style: italic;
+    font-weight: 300;
+    font-size: var(--t-base);
+    color: var(--bone-warm);
+    opacity: 0.5;
+    letter-spacing: 0.02em;
+  }
+
+  /* Tap zones — only visible on touch / mobile; transparent overlays
+     that let the user tap the left or right half of the image to switch */
+  .tap-zone {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 40%;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    z-index: 3;
+    display: none;
+    align-items: center;
+    color: rgba(237, 225, 196, 0.35);
+    transition: color 0.3s var(--ease-out-quart);
+    padding: 0 14px;
+  }
+  .tap-zone:hover, .tap-zone:active { color: rgba(237, 225, 196, 0.75); }
+  .tap-prev { left: 0; justify-content: flex-start; }
+  .tap-next { right: 0; justify-content: flex-end; }
+  @media (hover: none), (max-width: 900px) {
+    .tap-zone { display: inline-flex; }
+  }
+
+  @media (max-width: 900px) {
+    .grid { grid-template-columns: 1fr; min-height: 0; }
+    .text-col {
+      padding: 32px 24px 28px;
+      order: 2;
+      min-height: 0;
+    }
+    /* CRITICAL: explicit min-height on text-stack so the absolutely-positioned
+       slots don't collapse to 0 and overflow into the pager below. */
+    .text-stack { min-height: 360px; }
+    .image-col {
+      min-height: 420px;
+      order: 1;
+    }
+    .image-slot img {
+      inset: 80px 40px;
+      width: calc(100% - 80px);
+      height: calc(100% - 160px);
+    }
+    .corner { top: 18px; right: 20px; }
+    .line-row { margin-bottom: 28px; }
+    .blurb { margin-top: 24px; }
+    .meta { gap: 0 32px; margin-top: 28px; }
+    .pager { padding-top: 32px; }
+    .arrow {
+      width: 56px;
+      height: 56px;
+    }
+    .arrows { gap: 8px; }
+  }
+  @media (max-width: 480px) {
+    .text-stack { min-height: 380px; }
+    .image-col { min-height: 380px; }
+    .image-slot img {
+      inset: 60px 28px;
+      width: calc(100% - 56px);
+      height: calc(100% - 120px);
+    }
+  }
+</style>

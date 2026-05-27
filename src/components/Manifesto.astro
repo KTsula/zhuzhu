@@ -1,0 +1,37 @@
+---
+import { manifesto } from '../content/copy';
+---
+<section class="zz-manifesto">
+  <div class="inner lng-en">
+    {manifesto.en.paras.map((p) => <p>{p}</p>)}
+  </div>
+  <div class="inner lng-ka">
+    {manifesto.ka.paras.map((p) => <p>{p}</p>)}
+  </div>
+</section>
+
+<style>
+  .zz-manifesto {
+    padding: 120px 24px 120px;
+    background: var(--night);
+  }
+  .inner {
+    max-width: 56ch;
+    margin: 0 auto;
+  }
+  .inner p {
+    font-family: var(--body);
+    font-weight: 350;
+    font-size: var(--t-lg);
+    color: var(--bone);
+    line-height: 1.55;
+    margin: 0 0 28px;
+  }
+  .inner p:last-child { margin-bottom: 0; }
+  html[data-lang="ka"] .inner p { font-family: var(--ka); font-weight: 400; }
+
+  @media (max-width: 720px) {
+    .zz-manifesto { padding: 80px 22px; }
+    .inner p { font-size: var(--t-base); margin-bottom: 24px; }
+  }
+</style>

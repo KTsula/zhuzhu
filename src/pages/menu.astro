@@ -1,136 +1,241 @@
 ---
-import Base from '~/layouts/Base.astro';
-import MenuRow from '~/components/MenuRow.astro';
-import Reveal from '~/components/Reveal.astro';
-import { flavours, categoryLabel } from '~/content/menu';
-import type { Category } from '~/content/menu';
-
-const order: Category[] = ['georgian', 'premium', 'classic', 'non-alcoholic'];
-const groups = order.map((c) => ({
-  key: c,
-  label: categoryLabel[c],
-  items: flavours.filter((f) => f.category === c),
-}));
+import Base from '../layouts/Base.astro';
+import { signatures } from '../content/copy';
 ---
-<Base
-  active="menu"
-  title="Menu — ZhuZhu · ჟუჟუ"
-  description="The full ZhuZhu menu — Georgian signature, premium dessert, classic cocktails, and a full alcohol-free collection."
->
-  <div class="frame">
-    <section class="section">
-      <Reveal>
-        <header class="section-head" style="margin-bottom:60px;">
-          <div>
-            <p class="num"><b>— Menu</b>&nbsp;&nbsp;Twelve cuts</p>
-            <h1 style="margin-top:18px;">
-              The full <em>menu.</em>
-              <span class="ge">გემოები ოთხ ხაზად</span>
-            </h1>
-          </div>
-          <div>
-            <p class="blurb">
-              Filter by line, or read it as a whole. Menus can be tailored to your event —
-              colours, garnishes, themes, ABV — within the limits of food safety and good
-              taste.
-            </p>
-            <nav class="filters" aria-label="Menu filters">
-              <a href="#georgian">Georgian</a>
-              <a href="#premium">Premium</a>
-              <a href="#classic">Classic</a>
-              <a href="#non-alcoholic">Alcohol-free</a>
-            </nav>
-          </div>
-        </header>
-      </Reveal>
+<Base current="menu"
+      title="Menu. ZhuZhu, cocktail desserts."
+      description="Three signature cocktail desserts hand-set in Tbilisi. Churchkhela Cream, Honey Lemon, Red Wine Berry.">
+  <section class="menu-head">
+    <h1 class="display title">
+      <span class="lng-en">The signature three.</span>
+      <span class="lng-ka">სამი ხელწერა.</span>
+    </h1>
+    <p class="sub">
+      <span class="lng-en">Three cubes. Each set by hand in a small Tbilisi atelier. One spread per cocktail dessert.</span>
+      <span class="lng-ka">სამი კუბი. ხელით აწყობილი თბილისის პატარა ატელიეში. თითო კოქტეილ-დესერტი თითო გვერდი.</span>
+    </p>
+  </section>
 
-      {groups.map((g) => (
-        <Reveal>
-          <section class="group" id={g.key} aria-labelledby={`g-${g.key}`}>
-            <header class="group-head">
-              <h2 id={`g-${g.key}`}>{g.label} <span class="count">· {g.items.length}</span></h2>
-            </header>
-            <div class="menu-list">
-              {g.items.map((f, i) => (
-                <MenuRow flavour={f} index={i + 1} />
-              ))}
+  {signatures.map((s, i) => (
+    <article class:list={["spread", i % 2 === 1 && 'right']}>
+      <div class="text-side">
+        <div class="line-row">
+          <span class="line-no">{s.id}</span>
+          <span class="line-name lng-en">{s.line.en}</span>
+          <span class="line-name lng-ka">{s.line.ka}</span>
+        </div>
+        <h2 class="display name">
+          <span class="lng-en">{s.name.en}</span>
+          <span class="lng-ka ka">{s.name.ka}</span>
+        </h2>
+        <p class="blurb">
+          <span class="lng-en">{s.blurb.en}</span>
+          <span class="lng-ka">{s.blurb.ka}</span>
+        </p>
+        <div class="meta">
+          <div class="m">
+            <div class="label">
+              <span class="lng-en">line</span>
+              <span class="lng-ka">სერია</span>
             </div>
-          </section>
-        </Reveal>
-      ))}
-    </section>
-  </div>
+            <div class="v">
+              <span class="lng-en">{s.meta.line.en}</span>
+              <span class="lng-ka">{s.meta.line.ka}</span>
+            </div>
+          </div>
+          <div class="m">
+            <div class="label">
+              <span class="lng-en">price</span>
+              <span class="lng-ka">ფასი</span>
+            </div>
+            <div class="v">
+              <span class="lng-en">₾{s.price} / cube</span>
+              <span class="lng-ka">₾{s.price} / კუბი</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="image-side">
+        <div class="glow" style={`background: radial-gradient(60% 50% at 50% 55%, ${s.accent} 0%, rgba(10,7,6,0) 70%)`}></div>
+        <img src={s.img} alt={s.name.en} onerror="this.style.display='none'" />
+        <div class="corner"><span class="no">№ {s.id}</span></div>
+      </div>
+    </article>
+  ))}
+
+  <section class="closer">
+    <h2 class="display closer-text">
+      <span class="lng-en">A custom fourth.</span>
+      <span class="lng-ka">საკუთარი მეოთხე.</span>
+    </h2>
+    <p class="closer-sub">
+      <span class="lng-en">Direct a signature of your own. A flavour from your menu, your wine, your story.</span>
+      <span class="lng-ka">დააარსე საკუთარი ხელწერა. გემო თქვენი მენიუდან, თქვენი ღვინიდან, თქვენი ისტორიიდან.</span>
+    </p>
+    <a class="cta" href="/order">
+      <span class="lng-en">build a box</span>
+      <span class="lng-ka">ააწყვე ყუთი</span>
+    </a>
+  </section>
 </Base>
 
 <style>
-  h1 {
-    font-family: var(--font-serif);
-    font-weight: 500;
-    font-style: italic;
-    font-size: clamp(52px, 6.4vw, 100px);
-    line-height: 0.94;
-    letter-spacing: -0.018em;
-    color: var(--color-bone);
+  .menu-head {
+    padding: 120px 24px 80px;
+    background: var(--night);
+    max-width: 880px;
+    margin: 0 auto;
+    text-align: center;
   }
-  h1 em { color: var(--color-wine-glow); }
-  h1 .ge {
-    display: block;
-    font-family: var(--font-ka);
-    font-style: italic;
-    color: var(--color-gold-bright);
-    font-size: 0.5em;
-    margin-top: 12px;
+  .menu-head .title {
+    font-size: var(--t-display);
+    margin: 0;
   }
+  .menu-head .sub {
+    font-family: var(--body);
+    font-weight: 350;
+    font-size: var(--t-lg);
+    color: var(--bone-warm);
+    line-height: 1.55;
+    max-width: 46ch;
+    margin: 32px auto 0;
+  }
+  html[data-lang="ka"] .menu-head .sub { font-family: var(--ka); font-weight: 400; }
 
-  .filters {
-    margin-top: 28px;
-    display: flex;
-    gap: 14px;
-    flex-wrap: wrap;
+  .spread {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 640px;
+    background: var(--night);
   }
-  .filters a {
-    font-family: var(--font-serif);
+  .spread.right .text-side  { order: 2; }
+  .spread.right .image-side { order: 1; }
+
+  .text-side {
+    padding: 96px 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .line-row { display: flex; align-items: baseline; gap: 16px; margin-bottom: 40px; }
+  .line-no {
+    font-family: var(--display);
+    font-style: italic;
+    font-weight: 300;
+    font-size: var(--t-lg);
+    color: var(--gold);
+  }
+  .line-name {
+    font-family: var(--body);
+    font-weight: 500;
+    font-size: var(--t-xs);
+    letter-spacing: 0.18em;
     text-transform: uppercase;
-    font-weight: 600;
-    font-size: 12px;
-    letter-spacing: 0.24em;
-    color: var(--color-gold-bright);
-    border: 1px solid var(--gold-line);
-    padding: 8px 14px;
-    border-radius: 999px;
-    transition: all 0.3s ease;
+    color: var(--ash);
   }
-  .filters a:hover {
-    background: var(--color-gold);
-    color: var(--color-night);
-    border-color: var(--color-gold);
+  html[data-lang="ka"] .line-name {
+    font-family: var(--ka);
+    font-style: italic;
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0.04em;
+    font-size: var(--t-sm);
+  }
+  .name {
+    margin: 0;
+    font-size: var(--t-3xl);
+  }
+  .name .ka { font-size: clamp(2rem, 4vw, 3rem); }
+  .blurb {
+    margin: 32px 0 0;
+    font-family: var(--body);
+    font-weight: 350;
+    font-size: var(--t-base);
+    line-height: 1.65;
+    color: var(--bone-warm);
+    max-width: 48ch;
+  }
+  html[data-lang="ka"] .blurb { font-family: var(--ka); font-weight: 400; }
+  .meta {
+    margin-top: 56px;
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    gap: 28px 64px;
+  }
+  .meta .v {
+    margin-top: 8px;
+    font-family: var(--body);
+    font-weight: 400;
+    font-size: var(--t-sm);
+    color: var(--bone);
+  }
+  html[data-lang="ka"] .meta .v { font-family: var(--ka); }
+
+  .image-side {
+    position: relative;
+    overflow: hidden;
+    background: var(--night);
+    min-height: 480px;
+  }
+  .image-side .glow { position: absolute; inset: 0; }
+  .image-side img {
+    position: absolute;
+    inset: 180px;
+    width: calc(100% - 360px);
+    height: calc(100% - 360px);
+    object-fit: contain;
+    z-index: 2;
+  }
+  .image-side .corner {
+    position: absolute;
+    top: 32px;
+    right: 36px;
+    z-index: 4;
+  }
+  .image-side .no {
+    font-family: var(--display);
+    font-style: italic;
+    font-weight: 300;
+    font-size: var(--t-base);
+    color: var(--bone-warm);
+    opacity: 0.5;
   }
 
-  .group + .group { margin-top: 80px; }
-  .group-head {
-    border-top: 1px solid var(--gold-hair);
-    padding-top: 22px;
-    margin-bottom: 18px;
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
+  .closer {
+    text-align: center;
+    padding: 140px 24px;
+    background: var(--night);
+    max-width: 720px;
+    margin: 0 auto;
   }
-  .group-head h2 {
-    font-family: var(--font-serif);
-    font-weight: 500;
-    font-style: italic;
-    font-size: clamp(32px, 3.6vw, 52px);
-    letter-spacing: -0.012em;
-    color: var(--color-bone);
+  .closer-text {
+    font-size: var(--t-3xl);
+    margin: 0;
   }
-  .group-head .count {
-    font-family: var(--font-serif);
-    font-style: italic;
-    color: var(--color-gold-bright);
-    font-size: 0.6em;
+  .closer-sub {
+    font-family: var(--body);
+    font-weight: 350;
+    font-size: var(--t-lg);
+    color: var(--bone-warm);
+    line-height: 1.55;
+    max-width: 44ch;
+    margin: 32px auto 44px;
   }
-  .menu-list {
-    border-top: 1px solid var(--gold-hair);
-    border-bottom: 1px solid var(--gold-hair);
+  html[data-lang="ka"] .closer-sub { font-family: var(--ka); font-weight: 400; }
+
+  @media (max-width: 1024px) {
+    .spread { grid-template-columns: 1fr; }
+    .spread .text-side { order: 2; }
+    .spread .image-side { order: 1; }
+  }
+  @media (max-width: 720px) {
+    .menu-head { padding: 80px 22px 60px; }
+    .menu-head .sub { font-size: var(--t-base); }
+    .text-side { padding: 56px 24px; }
+    .meta { grid-template-columns: 1fr 1fr; gap: 24px 32px; margin-top: 40px; }
+    .image-side { min-height: 360px; }
+    .image-side img { inset: 100px; width: calc(100% - 200px); height: calc(100% - 200px); }
+    .closer { padding: 80px 22px; }
+    .closer-sub { font-size: var(--t-base); margin: 24px auto 32px; }
   }
 </style>

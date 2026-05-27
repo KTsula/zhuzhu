@@ -1,0 +1,33 @@
+---
+interface Props {
+  size?: number;
+  href?: string;
+}
+const { size = 38, href = '/' } = Astro.props;
+---
+<a class="zz-wordmark" href={href} aria-label="ZhuZhu, home">
+  <img class="logo lng-en" src="/logo.png" alt="ZhuZhu" style={`height:${size}px`} />
+  <span class="mark ka lng-ka" style={`font-size:${Math.round(size * 0.7)}px`}>ჟუჟუ</span>
+</a>
+
+<style>
+  .zz-wordmark {
+    display: inline-flex;
+    align-items: center;
+    line-height: 1;
+    color: inherit;
+  }
+  .logo {
+    display: block;
+    width: auto;
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+  .mark {
+    font-family: var(--ka);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--bone);
+    letter-spacing: -0.005em;
+  }
+</style>

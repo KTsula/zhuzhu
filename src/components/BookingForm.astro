@@ -1,103 +1,271 @@
 ---
-import { packages } from '~/content/packages';
+import { booking } from '../content/copy';
+const f = booking.en.fields;
+const fk = booking.ka.fields;
 ---
-<form class="form-card" id="booking-form" novalidate>
-  <noscript>
-    <p style="font-family:var(--font-serif);font-style:italic;color:var(--color-wine-glow);margin:0 0 8px;">
-      JavaScript is off — please email <a href="mailto:shezhuzhundi@gmail.com">shezhuzhundi@gmail.com</a> directly.
-    </p>
-  </noscript>
+<section class="zz-booking" id="book">
+  <div class="grid">
+    <aside class="left">
+      <h2 class="head display">
+        <span class="lng-en">{booking.en.head}</span>
+        <span class="lng-ka">{booking.ka.head}</span>
+      </h2>
+      <p class="sub">
+        <span class="lng-en">{booking.en.sub}</span>
+        <span class="lng-ka">{booking.ka.sub}</span>
+      </p>
+      <a href="mailto:hello@zhuzhu.ge" class="mail">hello@zhuzhu.ge</a>
+    </aside>
 
-  <div class="row">
-    <label for="bf-name">Your name · სახელი</label>
-    <input id="bf-name" name="name" type="text" placeholder="Nino Lashkhi" required />
+    <form class="form" id="zz-booking-form" novalidate>
+      <div class="two">
+        <div class="field">
+          <label class="lng-en">{f.name.label}</label>
+          <label class="lng-ka">{fk.name.label}</label>
+          <input type="text" name="name" required data-ph-en={f.name.ph} data-ph-ka={fk.name.ph} placeholder={f.name.ph} />
+        </div>
+        <div class="field">
+          <label class="lng-en">{f.contact.label}</label>
+          <label class="lng-ka">{fk.contact.label}</label>
+          <input type="text" name="contact" required data-ph-en={f.contact.ph} data-ph-ka={fk.contact.ph} placeholder={f.contact.ph} />
+        </div>
+      </div>
+
+      <div class="two">
+        <div class="field">
+          <label class="lng-en">{f.date.label}</label>
+          <label class="lng-ka">{fk.date.label}</label>
+          <input type="text" name="date" data-ph-en={f.date.ph} data-ph-ka={fk.date.ph} placeholder={f.date.ph} />
+        </div>
+        <div class="field">
+          <label class="lng-en">{f.guests.label}</label>
+          <label class="lng-ka">{fk.guests.label}</label>
+          <input type="text" name="guests" data-ph-en={f.guests.ph} data-ph-ka={fk.guests.ph} placeholder={f.guests.ph} />
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="lng-en">{f.venue.label}</label>
+        <label class="lng-ka">{fk.venue.label}</label>
+        <input type="text" name="venue" data-ph-en={f.venue.ph} data-ph-ka={fk.venue.ph} placeholder={f.venue.ph} />
+      </div>
+
+      <div class="field">
+        <label class="lng-en">{f.note.label}</label>
+        <label class="lng-ka">{fk.note.label}</label>
+        <textarea name="note" data-ph-en={f.note.ph} data-ph-ka={fk.note.ph} placeholder={f.note.ph}></textarea>
+      </div>
+
+      <div class="bottom">
+        <span class="foot">
+          <span class="lng-en">{booking.en.foot}</span>
+          <span class="lng-ka">{booking.ka.foot}</span>
+        </span>
+        <button class="cta submit" type="submit" id="zz-booking-submit">
+          <span class="lng-en">{booking.en.submit}</span>
+          <span class="lng-ka">{booking.ka.submit}</span>
+        </button>
+      </div>
+
+      <div class="result" id="zz-booking-result" data-state="idle"></div>
+    </form>
   </div>
+</section>
 
-  <div class="two">
-    <div class="row">
-      <label for="bf-email">Email</label>
-      <input id="bf-email" name="email" type="email" placeholder="you@…" required />
-    </div>
-    <div class="row">
-      <label for="bf-phone">Phone · ტელ.</label>
-      <input id="bf-phone" name="phone" type="tel" placeholder="+995…" />
-    </div>
-  </div>
+<script is:inline define:vars={{
+  enSubmit: booking.en.submit,
+  enSending: booking.en.sending,
+  enSuccess: booking.en.success,
+  enFailure: booking.en.failure,
+  kaSubmit: booking.ka.submit,
+  kaSending: booking.ka.sending,
+  kaSuccess: booking.ka.success,
+  kaFailure: booking.ka.failure,
+}}>
+  (function () {
+    const form = document.getElementById('zz-booking-form');
+    const btn  = document.getElementById('zz-booking-submit');
+    const out  = document.getElementById('zz-booking-result');
+    if (!form || !btn || !out) return;
 
-  <div class="two">
-    <div class="row">
-      <label for="bf-event">Event type · ივენთი</label>
-      <select id="bf-event" name="event">
-        <option>Wedding</option>
-        <option>Birthday</option>
-        <option>Corporate · brand activation</option>
-        <option>Hotel · bar · venue</option>
-        <option>Festival</option>
-        <option>Sample box only</option>
-        <option>Other</option>
-      </select>
-    </div>
-    <div class="row">
-      <label for="bf-package">Package</label>
-      <select id="bf-package" name="package">
-        {packages.map((p) => (
-          <option value={p.id}>{p.name} — {p.size}</option>
-        ))}
-        <option value="">Not sure yet</option>
-      </select>
-    </div>
-  </div>
+    function updatePlaceholders() {
+      const lang = document.documentElement.getAttribute('data-lang') === 'ka' ? 'ka' : 'en';
+      form.querySelectorAll('[data-ph-en], [data-ph-ka]').forEach((el) => {
+        const ph = el.getAttribute('data-ph-' + lang);
+        if (ph) el.setAttribute('placeholder', ph);
+      });
+    }
+    updatePlaceholders();
+    document.addEventListener('langchange', updatePlaceholders);
 
-  <div class="two">
-    <div class="row">
-      <label for="bf-date">Preferred date</label>
-      <input id="bf-date" name="date" type="text" placeholder="DD / MM / YYYY" />
-    </div>
-    <div class="row">
-      <label for="bf-guests">Guests</label>
-      <input id="bf-guests" name="guests" type="text" placeholder="approx. number" />
-    </div>
-  </div>
+    function t(en, ka) {
+      const lang = document.documentElement.getAttribute('data-lang') === 'ka' ? 'ka' : 'en';
+      return lang === 'ka' ? ka : en;
+    }
 
-  <div class="row">
-    <label for="bf-notes">Notes · შენიშვნა</label>
-    <textarea id="bf-notes" name="notes" placeholder="Theme, colours, allergens, anything else…"></textarea>
-  </div>
-
-  <button class="submit" type="submit" data-default="Send request">Send request</button>
-</form>
-
-<script>
-  // TODO: replace with Resend/Formspree when backend is ready
-  const form = document.getElementById('booking-form') as HTMLFormElement | null;
-  if (form) {
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
       const data = new FormData(form);
-      const get = (k: string) => String(data.get(k) ?? '').trim();
-
-      const subject = `Booking inquiry — ${get('event') || 'Event'} · ${get('name') || 'Guest'}`;
-      const body =
-`Name: ${get('name')}
-Email: ${get('email')}
-Phone: ${get('phone')}
-
-Event: ${get('event')}
-Package: ${get('package')}
-Date: ${get('date')}
-Guests: ${get('guests')}
-
-Notes:
-${get('notes')}
-`;
-      const href = `mailto:shezhuzhundi@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-      window.location.href = href;
-
-      const btn = form.querySelector<HTMLButtonElement>('.submit');
-      if (btn) {
-        btn.disabled = true;
-        btn.textContent = "Sent — we'll reply within 24h ✦";
+      const payload = {
+        name: String(data.get('name') || ''),
+        contact: String(data.get('contact') || ''),
+        date: String(data.get('date') || ''),
+        guests: String(data.get('guests') || ''),
+        venue: String(data.get('venue') || ''),
+        note: String(data.get('note') || ''),
+        lang: document.documentElement.getAttribute('data-lang') || 'en',
+      };
+      btn.disabled = true;
+      btn.textContent = t(enSending, kaSending);
+      out.dataset.state = 'sending';
+      out.textContent = '';
+      try {
+        const res = await fetch('/api/book', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+        if (!res.ok) throw new Error('bad status ' + res.status);
+        out.dataset.state = 'success';
+        out.textContent = t(enSuccess, kaSuccess);
+        form.reset();
+        btn.textContent = t(enSubmit, kaSubmit);
+        btn.disabled = false;
+      } catch {
+        out.dataset.state = 'error';
+        out.textContent = t(enFailure, kaFailure);
+        btn.textContent = t(enSubmit, kaSubmit);
+        btn.disabled = false;
       }
     });
-  }
+  })();
 </script>
+
+<style>
+  .zz-booking {
+    padding: 120px 24px 140px;
+    background: var(--night);
+    scroll-margin-top: 80px;
+  }
+  .grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 96px;
+    align-items: start;
+  }
+  .left .head {
+    font-size: var(--t-2xl);
+    margin: 0;
+  }
+  .left .sub {
+    font-family: var(--body);
+    font-weight: 350;
+    font-size: var(--t-base);
+    color: var(--bone-warm);
+    margin: 28px 0 32px;
+    max-width: 38ch;
+    line-height: 1.6;
+  }
+  html[data-lang="ka"] .left .sub { font-family: var(--ka); font-weight: 400; }
+  .left .mail {
+    font-family: var(--body);
+    font-weight: 500;
+    font-size: var(--t-base);
+    color: var(--bone);
+    border-bottom: 1px solid var(--gold);
+    padding-bottom: 6px;
+    transition: color 0.3s var(--ease-out-quart), border-color 0.3s var(--ease-out-quart);
+  }
+  .left .mail:hover { color: var(--gold-bright); border-color: var(--gold-bright); }
+
+  .form { display: flex; flex-direction: column; gap: 32px; }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+  .field { display: flex; flex-direction: column; gap: 10px; }
+  .field label {
+    font-family: var(--body);
+    font-weight: 500;
+    font-size: var(--t-xs);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ash);
+  }
+  html[data-lang="ka"] .field label {
+    font-family: var(--ka);
+    font-style: italic;
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0.04em;
+    font-size: var(--t-sm);
+  }
+  .field input,
+  .field textarea {
+    width: 100%;
+    padding: 14px 0;
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid rgba(198,152,89,0.3);
+    color: var(--bone);
+    font-family: var(--body);
+    font-weight: 400;
+    font-size: var(--t-base);
+    border-radius: 0;
+    transition: border-color 0.3s var(--ease-out-quart);
+  }
+  html[data-lang="ka"] .field input,
+  html[data-lang="ka"] .field textarea { font-family: var(--ka); }
+  .field input:focus,
+  .field textarea:focus {
+    outline: none;
+    border-bottom-color: var(--gold);
+  }
+  .field textarea {
+    min-height: 100px;
+    resize: vertical;
+  }
+  .field input::placeholder,
+  .field textarea::placeholder { color: var(--ash-dim); }
+
+  .bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    margin-top: 8px;
+  }
+  .foot {
+    font-family: var(--body);
+    font-weight: 350;
+    font-size: var(--t-sm);
+    color: var(--ash);
+    max-width: 36ch;
+  }
+  html[data-lang="ka"] .foot { font-family: var(--ka); font-weight: 400; font-size: var(--t-base); }
+
+  /* Result: full-width tinted background, NO side-stripe border */
+  .result {
+    font-family: var(--body);
+    font-weight: 400;
+    font-size: var(--t-sm);
+    line-height: 1.5;
+    padding: 16px 18px;
+    margin-top: 8px;
+    background: transparent;
+  }
+  html[data-lang="ka"] .result { font-family: var(--ka); }
+  .result[data-state="idle"] { display: none; }
+  .result[data-state="sending"] { color: var(--ash); background: rgba(198,152,89,0.06); }
+  .result[data-state="success"] { color: var(--bone); background: rgba(227,183,109,0.10); }
+  .result[data-state="error"]   { color: var(--bone); background: rgba(183,58,90,0.12); }
+
+  @media (max-width: 900px) {
+    .grid { grid-template-columns: 1fr; gap: 56px; }
+  }
+  @media (max-width: 720px) {
+    .zz-booking { padding: 80px 22px 96px; }
+    .two { grid-template-columns: 1fr; gap: 24px; }
+    .bottom { flex-direction: column-reverse; align-items: stretch; }
+    .submit { width: 100%; }
+  }
+</style>

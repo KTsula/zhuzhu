@@ -1,0 +1,40 @@
+---
+interface Props { size?: 'sm' | 'lg'; }
+const { size = 'sm' } = Astro.props;
+const font = size === 'lg' ? 13 : 11;
+---
+<div class="lang-switch" style={`font-size:${font}px`}>
+  <button data-lang-switch="en" data-active="true" aria-label="English">EN</button>
+  <span class="sep"></span>
+  <button data-lang-switch="ka" aria-label="Georgian">KA</button>
+</div>
+
+<style>
+  .lang-switch {
+    display: inline-flex;
+    align-items: center;
+    font-family: var(--body);
+    font-weight: 600;
+    letter-spacing: 0.16em;
+  }
+  .lang-switch button {
+    background: transparent;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    color: var(--ash-dim);
+    transition: color 0.3s var(--ease-out-quart);
+    font-family: inherit;
+    font-weight: inherit;
+    letter-spacing: inherit;
+    font-size: inherit;
+  }
+  .lang-switch button[data-active="true"] { color: var(--bone); }
+  .lang-switch button:hover { color: var(--bone); }
+  .lang-switch .sep {
+    width: 1px;
+    height: 10px;
+    background: var(--ash-dim);
+    margin: 0 12px;
+  }
+</style>

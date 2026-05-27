@@ -1,0 +1,24 @@
+---
+// First-land hook — 1.5-second wordmark reveal that veils the page on first paint.
+// Uses sessionStorage so it only plays once per visit, not on every navigation.
+---
+<div class="hook-veil" id="zz-hook-veil" aria-hidden="true">
+  <div class="stack">
+    <span class="mark wordmark-glow lng-en">ZhuZhu</span>
+    <span class="mark wordmark-glow lng-ka">ჟუჟუ</span>
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    const seen = sessionStorage.getItem('zz-hook-seen');
+    const veil = document.getElementById('zz-hook-veil');
+    if (!veil) return;
+    if (seen) {
+      veil.style.display = 'none';
+      return;
+    }
+    sessionStorage.setItem('zz-hook-seen', '1');
+    setTimeout(() => { veil.remove(); }, 2000);
+  })();
+</script>
