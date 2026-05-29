@@ -22,18 +22,22 @@
         stroke="#c69859" stroke-opacity="0.32" stroke-width="1"/>
 
   <!-- Tagline, right -->
-  <text x="610" y="265"
+  <text x="610" y="240"
         font-family="Spectral, Georgia, 'Times New Roman', serif"
-        font-style="italic" font-weight="300" font-size="72"
+        font-style="italic" font-weight="300" font-size="64"
         fill="#ede1c4" letter-spacing="-1">Cocktail desserts.</text>
-  <text x="610" y="350"
+  <text x="610" y="315"
         font-family="Spectral, Georgia, 'Times New Roman', serif"
-        font-style="italic" font-weight="300" font-size="56"
-        fill="#e3d3ab">Set by hand,</text>
-  <text x="610" y="412"
+        font-style="italic" font-weight="300" font-size="48"
+        fill="#e3d3ab">You don’t sip,</text>
+  <text x="610" y="370"
         font-family="Spectral, Georgia, 'Times New Roman', serif"
-        font-style="italic" font-weight="300" font-size="56"
-        fill="#e3d3ab">in Tbilisi.</text>
+        font-style="italic" font-weight="300" font-size="48"
+        fill="#e3d3ab">you bite.</text>
+  <text x="610" y="438"
+        font-family="'Noto Serif Georgian', Sylfaen, Georgia, serif"
+        font-style="italic" font-weight="400" font-size="36"
+        fill="#e3b76d">შეჟუჟუნდი</text>
 
   <!-- Footer rule -->
   <line x1="80" y1="555" x2="1120" y2="555"
