@@ -1,5 +1,5 @@
 ---
-import { signatures } from '../content/copy';
+import { sharedLabels, signatures } from '../content/copy';
 ---
 <section class="zz-showcase" id="zz-showcase">
   <div class="grid">
@@ -26,8 +26,8 @@ import { signatures } from '../content/copy';
             <div class="meta">
               <div class="m">
                 <div class="label">
-                  <span class="lng-en">line</span>
-                  <span class="lng-ka">სერია</span>
+                  <span class="lng-en">{sharedLabels.en.line}</span>
+                  <span class="lng-ka">{sharedLabels.ka.line}</span>
                 </div>
                 <div class="v">
                   <span class="lng-en">{s.meta.line.en}</span>
@@ -36,12 +36,12 @@ import { signatures } from '../content/copy';
               </div>
               <div class="m">
                 <div class="label">
-                  <span class="lng-en">price</span>
-                  <span class="lng-ka">ფასი</span>
+                  <span class="lng-en">{sharedLabels.en.price}</span>
+                  <span class="lng-ka">{sharedLabels.ka.price}</span>
                 </div>
                 <div class="v">
-                  <span class="lng-en">₾{s.price} / cube</span>
-                  <span class="lng-ka ka">₾{s.price} / კუბი</span>
+                  <span class="lng-en">₾{s.price} {sharedLabels.en.perCube}</span>
+                  <span class="lng-ka ka">₾{s.price} {sharedLabels.ka.perCube}</span>
                 </div>
               </div>
             </div>

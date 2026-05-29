@@ -1,18 +1,18 @@
 ---
 import Base from '../layouts/Base.astro';
-import { signatures } from '../content/copy';
+import { menuPage, pageMeta, sharedLabels, signatures } from '../content/copy';
 ---
 <Base current="menu"
-      title="Menu. ZhuZhu, cocktail desserts."
-      description="Three signature cocktail desserts hand-set in Tbilisi. Churchkhela Cream, Honey Lemon, Red Wine Berry.">
+      title={pageMeta.menu.en.title}
+      description={pageMeta.menu.en.desc}>
   <section class="menu-head">
     <h1 class="display title">
-      <span class="lng-en">The signature three.</span>
-      <span class="lng-ka">სამი ხელწერა.</span>
+      <span class="lng-en">{menuPage.en.head}</span>
+      <span class="lng-ka">{menuPage.ka.head}</span>
     </h1>
     <p class="sub">
-      <span class="lng-en">Three cubes. Each set by hand in a small Tbilisi atelier. One spread per cocktail dessert.</span>
-      <span class="lng-ka">სამი კუბი. ხელით აწყობილი თბილისის პატარა ატელიეში. თითო კოქტეილ-დესერტი თითო გვერდი.</span>
+      <span class="lng-en">{menuPage.en.sub}</span>
+      <span class="lng-ka">{menuPage.ka.sub}</span>
     </p>
   </section>
 
@@ -35,8 +35,8 @@ import { signatures } from '../content/copy';
         <div class="meta">
           <div class="m">
             <div class="label">
-              <span class="lng-en">line</span>
-              <span class="lng-ka">სერია</span>
+              <span class="lng-en">{sharedLabels.en.line}</span>
+              <span class="lng-ka">{sharedLabels.ka.line}</span>
             </div>
             <div class="v">
               <span class="lng-en">{s.meta.line.en}</span>
@@ -45,12 +45,12 @@ import { signatures } from '../content/copy';
           </div>
           <div class="m">
             <div class="label">
-              <span class="lng-en">price</span>
-              <span class="lng-ka">ფასი</span>
+              <span class="lng-en">{sharedLabels.en.price}</span>
+              <span class="lng-ka">{sharedLabels.ka.price}</span>
             </div>
             <div class="v">
-              <span class="lng-en">₾{s.price} / cube</span>
-              <span class="lng-ka">₾{s.price} / კუბი</span>
+              <span class="lng-en">₾{s.price} {sharedLabels.en.perCube}</span>
+              <span class="lng-ka">₾{s.price} {sharedLabels.ka.perCube}</span>
             </div>
           </div>
         </div>
@@ -65,16 +65,16 @@ import { signatures } from '../content/copy';
 
   <section class="closer">
     <h2 class="display closer-text">
-      <span class="lng-en">A custom fourth.</span>
-      <span class="lng-ka">საკუთარი მეოთხე.</span>
+      <span class="lng-en">{menuPage.en.closerHead}</span>
+      <span class="lng-ka">{menuPage.ka.closerHead}</span>
     </h2>
     <p class="closer-sub">
-      <span class="lng-en">Direct a signature of your own. A flavour from your menu, your wine, your story.</span>
-      <span class="lng-ka">დააარსე საკუთარი ხელწერა. გემო თქვენი მენიუდან, თქვენი ღვინიდან, თქვენი ისტორიიდან.</span>
+      <span class="lng-en">{menuPage.en.closerSub}</span>
+      <span class="lng-ka">{menuPage.ka.closerSub}</span>
     </p>
     <a class="cta" href="/order">
-      <span class="lng-en">build a box</span>
-      <span class="lng-ka">ააწყვე ყუთი</span>
+      <span class="lng-en">{menuPage.en.closerCta}</span>
+      <span class="lng-ka">{menuPage.ka.closerCta}</span>
     </a>
   </section>
 </Base>

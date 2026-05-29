@@ -11,26 +11,26 @@ const { current = 'home' } = Astro.props;
 
   <nav class="links" aria-label="Primary">
     <a href="/menu" class:list={[current === 'menu' && 'active']}>
-      <span class="lng-en">Menu</span><span class="lng-ka">{nav.ka.menu}</span>
+      <span class="lng-en">{nav.en.menu}</span><span class="lng-ka">{nav.ka.menu}</span>
     </a>
     <a href="/order" class:list={[current === 'order' && 'active']}>
-      <span class="lng-en">Order</span><span class="lng-ka">{nav.ka.order}</span>
+      <span class="lng-en">{nav.en.order}</span><span class="lng-ka">{nav.ka.order}</span>
     </a>
     <a href="/about" class:list={[current === 'about' && 'active']}>
-      <span class="lng-en">About</span><span class="lng-ka">{nav.ka.about}</span>
+      <span class="lng-en">{nav.en.about}</span><span class="lng-ka">{nav.ka.about}</span>
     </a>
   </nav>
 
   <div class="right">
     <LangSwitch />
     <a class="reserve" href="/#book">
-      <span class="lng-en">Reserve</span><span class="lng-ka">{nav.ka.reserve}</span>
+      <span class="lng-en">{nav.en.reserve}</span><span class="lng-ka">{nav.ka.reserve}</span>
     </a>
   </div>
 
   <div class="mobile-right">
     <a class="reserve mobile-reserve" href="/#book">
-      <span class="lng-en">Reserve</span><span class="lng-ka">{nav.ka.reserve}</span>
+      <span class="lng-en">{nav.en.reserve}</span><span class="lng-ka">{nav.ka.reserve}</span>
     </a>
     <button class="menu-trigger" aria-label="Open menu" id="zz-menu-trigger">
       <span></span><span></span>
@@ -43,16 +43,16 @@ const { current = 'home' } = Astro.props;
     <button class="drawer-close" aria-label="Close menu" id="zz-menu-close">×</button>
     <nav class="drawer-links">
       <a href="/menu">
-        <span class="lng-en">Menu</span><span class="lng-ka">{nav.ka.menu}</span>
+        <span class="lng-en">{nav.en.menu}</span><span class="lng-ka">{nav.ka.menu}</span>
       </a>
       <a href="/order">
-        <span class="lng-en">Order</span><span class="lng-ka">{nav.ka.order}</span>
+        <span class="lng-en">{nav.en.order}</span><span class="lng-ka">{nav.ka.order}</span>
       </a>
       <a href="/about">
-        <span class="lng-en">About</span><span class="lng-ka">{nav.ka.about}</span>
+        <span class="lng-en">{nav.en.about}</span><span class="lng-ka">{nav.ka.about}</span>
       </a>
       <a class="cta drawer-cta" href="/#book">
-        <span class="lng-en">Reserve a tasting</span><span class="lng-ka">{nav.ka.reserve}</span>
+        <span class="lng-en">{nav.en.reserveTasting}</span><span class="lng-ka">{nav.ka.reserveTasting}</span>
       </a>
     </nav>
     <div class="drawer-lang"><LangSwitch size="lg" /></div>

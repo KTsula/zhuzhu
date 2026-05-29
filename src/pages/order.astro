@@ -2,19 +2,19 @@
 import Base from '../layouts/Base.astro';
 import Packages from '../components/Packages.astro';
 import BookingForm from '../components/BookingForm.astro';
-import { signatures } from '../content/copy';
+import { orderPage, pageMeta, sharedLabels, signatures } from '../content/copy';
 ---
 <Base current="order"
-      title="Order. ZhuZhu, cocktail desserts."
-      description="Order ZhuZhu cocktail desserts for your event. Per-cube pricing, minimum ₾250. Tbilisi delivery.">
+      title={pageMeta.order.en.title}
+      description={pageMeta.order.en.desc}>
   <section class="order-head">
     <h1 class="display title">
-      <span class="lng-en">Three cubes. Your numbers.</span>
-      <span class="lng-ka">სამი კუბი. შენი რაოდენობა.</span>
+      <span class="lng-en">{orderPage.en.head}</span>
+      <span class="lng-ka">{orderPage.ka.head}</span>
     </h1>
     <p class="sub">
-      <span class="lng-en">Per-cube pricing. Minimum order ₾250. Set the day before, delivered chilled within Tbilisi.</span>
-      <span class="lng-ka">კუბზე ფასდება. მინიმუმი ₾250. წინა დღეს ვაყენებთ, თბილისში გაგრილებულად ვაწვდით.</span>
+      <span class="lng-en">{orderPage.en.sub}</span>
+      <span class="lng-ka">{orderPage.ka.sub}</span>
     </p>
   </section>
 
@@ -30,7 +30,11 @@ import { signatures } from '../content/copy';
             <span class="lng-en">{s.name.en}</span>
             <span class="lng-ka">{s.name.ka}</span>
           </div>
-          <div class="price">₾{s.price} <span class="per">/ cube</span></div>
+          <div class="price">
+            ₾{s.price}
+            <span class="per lng-en">{sharedLabels.en.perCube}</span>
+            <span class="per lng-ka">{sharedLabels.ka.perCube}</span>
+          </div>
         </div>
       </div>
     ))}

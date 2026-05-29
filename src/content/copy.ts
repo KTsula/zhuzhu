@@ -1,8 +1,8 @@
 export type Lang = 'en' | 'ka';
 
 export const nav = {
-  en: { menu: 'menu',   order: 'order',   about: 'about', reserve: 'reserve' },
-  ka: { menu: 'მენიუ', order: 'შეკვეთა', about: 'ჩვენ',   reserve: 'შეკვეთა' },
+  en: { menu: 'menu', order: 'order', about: 'about', reserve: 'reserve', reserveTasting: 'reserve a tasting' },
+  ka: { menu: 'მენიუ', order: 'შეკვეთა', about: 'ჩვენ', reserve: 'დაჯავშნა', reserveTasting: 'დეგუსტაციის დაჯავშნა' },
 };
 
 export const hero = {
@@ -12,8 +12,8 @@ export const hero = {
     cta: 'book your event',
   },
   ka: {
-    slogan: 'შეჟუჟუნდი.',
-    sub: 'სამი კუბი. ლუკმად მიწოდებული, ჭიქით არასოდეს.',
+    slogan: 'კოქტეილ-დესერტები. ხელით აწყობილი თბილისში.',
+    sub: 'სამი კუბი. ლუკმად მიწოდებული, არასოდეს — ჭიქით.',
     cta: 'დაჯავშნე ღონისძიება',
   },
 };
@@ -27,9 +27,24 @@ export const manifesto = {
   },
   ka: {
     paras: [
-      'კოქტეილ-დესერტი არ არის შოტი. ის კოქტეილია ლუკმად გაზომილი — ის ჭაჭა, რომელსაც სადილის შემდეგ წრუპავდი, ერთ ლუკმაში დაშერული.',
+      'კოქტეილ-დესერტი არ არის შოტი. ის ლუკმად ქცეული კოქტეილია — ჭაჭა, რომელსაც ხანგრძლივი ვახშმის შემდეგ ნელა დალევდი, ახლა ერთ საკვებ მომენტშია მოქცეული.',
       'სამი დამფუძნებელი. ერთი სამზარეულო. ყოველი კუბი ხელით აწყობილი.',
     ],
+  },
+};
+
+export const sharedLabels = {
+  en: {
+    line: 'line',
+    price: 'price',
+    perCube: '/ cube',
+    language: 'language',
+  },
+  ka: {
+    line: 'სერია',
+    price: 'ფასი',
+    perCube: '/ კუბი',
+    language: 'ენა',
   },
 };
 
@@ -51,7 +66,7 @@ export const signatures: SignatureItem[] = [
     name: { en: 'Churchkhela Cream', ka: 'ჩურჩხელის კრემი' },
     blurb: {
       en: 'A walnut churchkhela, caramelised the day before and broken by hand, folded into Tbilisi double-cream and dark muscovado. The walnut sits on top while the cube is still warm — it keeps the crunch all the way through the bite.',
-      ka: 'ნიგვზის ჩურჩხელა, წინა დღეს კარამელიზებული და ხელით დატეხილი, თბილისური ორმაგი ნაღების და მუსკოვადოს შაქრის შერევით. ნიგოზი კუბის ზედაპირზე, ჯერ კიდევ თბილ ფონზე — კრახი ბოლომდე რჩება.',
+      ka: 'ნიგვზის ჩურჩხელა, წინა დღეს კარამელიზებული და ხელით დატეხილი, თბილისურ ორმაგ ნაღებსა და მუქი მუსკოვადოს შაქარში შერეული. ნიგოზი კუბს ზემოდან ედება, სანამ ჯერ კიდევ თბილია — ხრაშუნი ბოლომდე მიჰყვება თითოეულ ლუკმას.',
     },
     meta: {
       line: { en: 'The Signature Three', ka: 'სამი ხელწერა' },
@@ -66,7 +81,7 @@ export const signatures: SignatureItem[] = [
     name: { en: 'Honey Lemon', ka: 'თაფლი-ლიმონი' },
     blurb: {
       en: 'Mountain honey-water from Kvemo Kartli, slow-warmed with fresh lemon zest and a long-aged Bagrationi chacha. A summer cube — set firmer, meant to be held a second on the tongue. A wedge of lime is laid on top after the cube has cooled.',
-      ka: 'ქვემო ქართლის მთის თაფლი, ლიმონის კანითა და გრძელვადიანი ბაგრატიონის ჭაჭით ნელ-ნელა გათბობილი. საზაფხულო კუბი — უფრო მაგრად დაყენებული, რომ ენაზე ერთი წამი დარჩეს. ლაიმის ნაჭერი თავზე, კუბის გაგრილების შემდეგ.',
+      ka: 'ქვემო ქართლის მთის თაფლიანი წყალი, ახალი ლიმონის ცედრითა და დიდხანს დავარგებული ბაგრატიონის ჭაჭით ნელა შემთბარი. საზაფხულო კუბი — უფრო მყარად დაყენებული, რომ ენაზე ერთი წამით გაჩერდეს. ლაიმის ნაჭერი ზემოდან ედება, როცა კუბი გაცივდება.',
     },
     meta: {
       line: { en: 'The Signature Three', ka: 'სამი ხელწერა' },
@@ -81,7 +96,7 @@ export const signatures: SignatureItem[] = [
     name: { en: 'Red Wine Berry', ka: 'წითელი ღვინო-კენკრა' },
     blurb: {
       en: 'A red-dry Saperavi from Kakheti, reduced six hours with sour cherry, blackberry and a pinch of black pepper. A glass-bottled morello rests on top — the only piece of fruit that survives the cube whole. Wine in three bites.',
-      ka: 'კახური საფერავი მშრალი, ექვს საათში გადადუღებული მაყვალთან, ბალთან და შავი პილპილის წვერთან ერთად. მინის ქილაში დავარგებული მორელო თავზე — ერთადერთი ხილი, რომელიც კუბში მთლიანი რჩება. ღვინო სამ ლუკმაში.',
+      ka: 'კახური მშრალი საფერავი, ექვსი საათის განმავლობაში ალუბალთან, მაყვალთან და შავი პილპილის მწიკვით დაყვანილი. ზემოდან მინის ქილაში დავარგებული მორელო ედება — ერთადერთი ხილი, რომელიც კუბში მთლიანად რჩება. ღვინო სამ ლუკმაში.',
     },
     meta: {
       line: { en: 'The Signature Three', ka: 'სამი ხელწერა' },
@@ -96,6 +111,7 @@ export const packages = {
   en: {
     label: 'order',
     head: 'Three suggested boxes — or build your own.',
+    sectionTitle: 'Suggested boxes.',
     sub: 'The signature three are priced per cube. Minimum order ₾250. We set the cubes the day before and deliver them chilled within Tbilisi.',
     popular: 'most ordered',
     buildCta: 'build your box  →',
@@ -103,11 +119,12 @@ export const packages = {
   },
   ka: {
     label: 'შეკვეთა',
-    head: 'სამი შემოთავაზებული ყუთი — ან ააწყვე საკუთარი.',
-    sub: 'სამი ხელწერა კუბზე ფასდება. მინიმალური შეკვეთა ₾250. კუბებს წინა დღეს ვაყენებთ და თბილისის ფარგლებში გაგრილებულად ვაწვდით.',
-    popular: 'ყველაზე გაყიდვადი',
+    head: 'სამი შემოთავაზებული ყუთი — ან ააწყვე შენი.',
+    sectionTitle: 'შემოთავაზებული ყუთები.',
+    sub: 'სამი ხელწერის ფასი თითო კუბზე ითვლება. მინიმალური შეკვეთა ₾250. კუბებს წინა დღეს ვამზადებთ და თბილისის ფარგლებში გაგრილებულს გიგზავნით.',
+    popular: 'ყველაზე ხშირად შეკვეთილი',
     buildCta: 'ააწყვე ყუთი  →',
-    buildNote: 'არცერთი არ გერგებათ? ააწყვეთ საკუთარი — აირჩიეთ კუბები, განსაზღვრეთ რაოდენობა, ნახეთ ჯამი ცოცხლად.',
+    buildNote: 'არცერთი ვარიანტი არ გერგება? ააწყვე შენი ყუთი — აირჩიე კუბები, განსაზღვრე რაოდენობა და ჯამი მაშინვე ნახე.',
   },
 };
 
@@ -132,7 +149,7 @@ export const packageList: Pkg[] = [
     total: 300,
     blurb: {
       en: 'An intimate room of ten. Honey-led, balanced by a few cream and wine cubes.',
-      ka: 'ათი სტუმრის ინტიმური საღამო. თაფლი-ლიმონი ლიდერობს, კრემითა და ღვინის კუბებით დაბალანსებული.',
+      ka: 'ინტიმური საღამო ათი სტუმრისთვის. თაფლი-ლიმონი ლიდერობს, კრემისა და ღვინის რამდენიმე კუბი კი ბალანსს ქმნის.',
     },
     fit: { en: 'sized for 8–12 guests', ka: '8–12 სტუმარზე' },
     cta: { en: 'order this box', ka: 'შეუკვეთე' },
@@ -145,7 +162,7 @@ export const packageList: Pkg[] = [
     total: 400,
     blurb: {
       en: 'A table of fifteen. Equal weight to each cube — the way we taste them ourselves.',
-      ka: 'თხუთმეტი სტუმრის სუფრა. თითოეულ კუბს თანაბარი წილი — ისე, როგორც თვითონ ვაგემოვნებთ.',
+      ka: 'სუფრა თხუთმეტი სტუმრისთვის. თითოეულ კუბს თანაბარი ადგილი აქვს — ზუსტად ისე, როგორც ჩვენ თვითონ ვაგემოვნებთ.',
     },
     fit: { en: 'sized for 12–18 guests', ka: '12–18 სტუმარზე' },
     cta: { en: 'order this box', ka: 'შეუკვეთე' },
@@ -159,7 +176,7 @@ export const packageList: Pkg[] = [
     total: 650,
     blurb: {
       en: 'Wedding-scale. Service over three hours; passer + ceramic recommended.',
-      ka: 'ქორწილის მასშტაბი. სამ საათიანი მომსახურება; მიმტანი + კერამიკული თეფშები რეკომენდებულია.',
+      ka: 'ქორწილის მასშტაბი. სამსაათიანი მომსახურება; რეკომენდებულია მიმტანი და კერამიკული თეფშები.',
     },
     fit: { en: 'sized for 25–35 guests', ka: '25–35 სტუმარზე' },
     cta: { en: 'order this box', ka: 'შეუკვეთე' },
@@ -186,14 +203,14 @@ export const booking = {
   },
   ka: {
     head: 'დაჯავშნე ღონისძიება',
-    sub: 'მოგვიყევით საღამოს შესახებ. ერთ სამუშაო დღეში გიპასუხებთ — ვადგენთ მენიუს და ფასს.',
+    sub: 'მოგვიყევი საღამოს შესახებ. ერთ სამუშაო დღეში გიპასუხებთ — მენიუსა და ფასის პირველ ვერსიას გამოგიგზავნით.',
     fields: {
-      name:    { label: 'თქვენი სახელი',                    ph: 'მარიამ დავითაშვილი' },
+      name:    { label: 'შენი სახელი',                       ph: 'მარიამ დავითაშვილი' },
       contact: { label: 'ელფოსტა ან ტელეფონი',              ph: 'mariam@stamba.ge' },
       date:    { label: 'როდის არის ღონისძიება?',           ph: '12 · 06 · 2026' },
       venue:   { label: 'სად?',                              ph: 'სტამბა, თბილისი' },
       guests:  { label: 'რამდენი სტუმარი?',                  ph: '24 სტუმარი' },
-      note:    { label: 'სხვა რამე? (არასავალდებულო)',      ph: 'საათი, თემა, ალერგენები, განსაკუთრებული მოთხოვნები…' },
+      note:    { label: 'კიდევ რამე? (არასავალდებულო)',     ph: 'დრო, თემა, ალერგენები, განსაკუთრებული მოთხოვნები…' },
     },
     submit: 'გაგზავნა',
     sending: 'იგზავნება…',
@@ -208,8 +225,10 @@ export const footer = {
     contact: 'contact',
     follow:  'follow',
     legal:   'legal',
+    language: 'language',
     addr: ['ZhuZhu Atelier', 'Tbilisi · Georgia'],
     mail:  'hello@zhuzhu.ge',
+    brandLine: 'Cocktail desserts, set by hand. Tbilisi.',
     tagline: '“You don’t sip — you bite.”',
     socials: [
       { label: 'Instagram', href: 'https://instagram.com/she_zhuzhu_ndi' },
@@ -217,26 +236,105 @@ export const footer = {
       { label: 'Facebook',  href: 'https://www.facebook.com/profile.php?id=61589724820624' },
     ],
     legals: ['Terms', 'Privacy'],
-    rights: '© 2026 ZhuZhu · Hand-set in Tbilisi.',
+    rights: '© 2026 ZhuZhu. Hand-set in Tbilisi.',
     setIn: 'Site set in Spectral & Manrope & Noto Serif Georgian.',
   },
   ka: {
     contact: 'კონტაქტი',
     follow:  'სოციალური',
     legal:   'სამართლებრივი',
+    language: 'ენა',
     addr: ['ჟუჟუ ატელიე', 'თბილისი · საქართველო'],
     mail:  'hello@zhuzhu.ge',
-    tagline: '„შეჟუჟუნდი — არ წრუპავ, ვიკვამ.“',
+    brandLine: 'კოქტეილ-დესერტები, ხელით აწყობილი. თბილისი.',
+    tagline: '„შეჟუჟუნდი — არ სვამ, ლუკმად აგემოვნებ.“',
     socials: [
       { label: 'ინსტაგრამი', href: 'https://instagram.com/she_zhuzhu_ndi' },
       { label: 'ტიკტოკი',    href: 'https://tiktok.com/@she_zhuzhu_ndi' },
       { label: 'ფეისბუქი',    href: 'https://www.facebook.com/profile.php?id=61589724820624' },
     ],
     legals: ['პირობები', 'კონფიდენციალურობა'],
-    rights: '© 2026 ჟუჟუ · ხელნაკეთი თბილისში.',
-    setIn: 'საიტი აწყობილია Spectral-სა და Manrope-სა და Noto Serif Georgian-ში.',
+    rights: '© 2026 ჟუჟუ. ხელით აწყობილი თბილისში.',
+    setIn: 'საიტი აწყობილია Spectral-ით, Manrope-ით და Noto Serif Georgian-ით.',
   },
 };
+
+export const menuPage = {
+  en: {
+    head: 'The signature three.',
+    sub: 'Three cubes. Each set by hand in a small Tbilisi atelier. One spread per cocktail dessert.',
+    closerHead: 'A custom fourth.',
+    closerSub: 'Direct a signature of your own. A flavour from your menu, your wine, your story.',
+    closerCta: 'build a box',
+  },
+  ka: {
+    head: 'სამი ხელწერა.',
+    sub: 'სამი კუბი. თითოეული ხელით აწყობილი თბილისის პატარა ატელიეში. თითო კოქტეილ-დესერტს თავისი გვერდი აქვს.',
+    closerHead: 'შენი მეოთხე ხელწერა.',
+    closerSub: 'შექმენი შენი ხელწერა: გემო შენი მენიუდან, ღვინიდან ან ისტორიიდან.',
+    closerCta: 'ააწყვე ყუთი',
+  },
+};
+
+export const orderPage = {
+  en: {
+    head: 'Three cubes. Your numbers.',
+    sub: 'Per-cube pricing. Minimum order ₾250. Set the day before, delivered chilled within Tbilisi.',
+  },
+  ka: {
+    head: 'სამი კუბი. შენი რაოდენობა.',
+    sub: 'ფასი თითო კუბზე ითვლება. მინიმალური შეკვეთა ₾250. კუბებს წინა დღეს ვამზადებთ და თბილისის ფარგლებში გაგრილებულს გიგზავნით.',
+  },
+};
+
+export const aboutPage = {
+  en: {
+    head: 'Three founders.<br>One kitchen.',
+    origin: [
+      'ZhuZhu began on a winter night, when three friends, a chef, a food chemist and a developer, sat too long over a bottle of Saperavi, arguing about what a cocktail could be if it were not a drink.',
+      'Lado worked on the taste, Anna on the chemistry, Keti on the brand. Three weeks later we had the first cube: a Saperavi set firm, a single sour cherry on top.',
+      'We have been setting them by hand ever since. Weddings, brand evenings, hotel menus, the occasional private dinner that asks us not to mention we came.',
+    ],
+  },
+  ka: {
+    head: 'სამი დამფუძნებელი.<br>ერთი სამზარეულო.',
+    origin: [
+      'ჟუჟუ ერთ ზამთრის საღამოს დაიწყო, როცა სამმა მეგობარმა — შეფმა, საკვების ქიმიკოსმა და დეველოპერმა — საფერავის ბოთლთან დიდხანს იკამათეს, რა შეიძლება იყოს კოქტეილი, თუ ის სასმელი არ არის.',
+      'ლადო გემოზე მუშაობდა, ანა — ქიმიაზე, ქეთი — ბრენდზე. სამი კვირის შემდეგ პირველი კუბი მზად იყო: მყარად დაყენებული საფერავი და ზემოდან ერთი ალუბალი.',
+      'მას შემდეგ კუბებს ხელით ვამზადებთ — ქორწილებისთვის, ბრენდის საღამოებისთვის, სასტუმროების მენიუებისთვის და ხანდახან ისეთი კერძო ვახშმისთვისაც, რომელიც გვთხოვს, არ ვთქვათ, რომ იქ ვიყავით.',
+    ],
+  },
+};
+
+export const founders = [
+  {
+    name: { en: 'Keti', ka: 'ქეთი' },
+    role: { en: 'Site, business, photography', ka: 'საიტი, ბიზნესი, ფოტოგრაფია' },
+    bio: {
+      en: 'The site, the pricing, the lens. Keti runs the brand surface. What the world sees and what it clicks.',
+      ka: 'საიტი, ფასები, ობიექტივი. ქეთი მართავს ბრენდის ხილულ მხარეს — იმას, რასაც სამყარო ხედავს და რაზეც აჭერს.',
+    },
+    accent: 'rgba(196, 140, 70, 0.30)',
+  },
+  {
+    name: { en: 'Anna', ka: 'ანა' },
+    role: { en: 'Food chemistry, compliance, kitchen', ka: 'საკვების ქიმია, სტანდარტები, სამზარეულო' },
+    bio: {
+      en: 'The gelatine, the acid, the law. Anna keeps the cube together and the kitchen on the right side of HACCP.',
+      ka: 'ჟელატინი, მჟავიანობა, წესები. ანა კუბს ფორმას უნარჩუნებს და სამზარეულოს HACCP-ის სტანდარტებთან აწყობს.',
+    },
+    accent: 'rgba(220, 170, 70, 0.32)',
+  },
+  {
+    name: { en: 'Lado', ka: 'ლადო' },
+    role: { en: 'Chef, recipes, production', ka: 'შეფი, რეცეპტები, წარმოება' },
+    bio: {
+      en: 'The recipes, the heat, the taste. Lado owns the food itself: every cube on every tray.',
+      ka: 'რეცეპტები, ტემპერატურა, გემო. ლადო საკვებს მართავს — ყოველი კუბი, ყოველ თეფშზე.',
+    },
+    accent: 'rgba(180, 50, 80, 0.30)',
+  },
+];
 
 export const pageMeta = {
   home: {
@@ -244,5 +342,23 @@ export const pageMeta = {
           desc: 'Cocktail desserts hand-set in Tbilisi. Saperavi, walnut churchkhela, chacha honey-lemon. For weddings, brand activations and after-hours events.' },
     ka: { title: 'ჟუჟუ — კოქტეილ-დესერტები · თბილისის ატელიე',
           desc: 'კოქტეილ-დესერტები ხელით აწყობილი თბილისში. საფერავი, ნიგვზის ჩურჩხელა, ჭაჭა-თაფლი-ლიმონი. ქორწილებისთვის, ღონისძიებებისთვის.' },
+  },
+  menu: {
+    en: { title: 'Menu. ZhuZhu, cocktail desserts.',
+          desc: 'Three signature cocktail desserts hand-set in Tbilisi. Churchkhela Cream, Honey Lemon, Red Wine Berry.' },
+    ka: { title: 'მენიუ. ჟუჟუ, კოქტეილ-დესერტები.',
+          desc: 'სამი საფირმო კოქტეილ-დესერტი, ხელით აწყობილი თბილისში: ჩურჩხელის კრემი, თაფლი-ლიმონი, წითელი ღვინო-კენკრა.' },
+  },
+  order: {
+    en: { title: 'Order. ZhuZhu, cocktail desserts.',
+          desc: 'Order ZhuZhu cocktail desserts for your event. Per-cube pricing, minimum ₾250. Tbilisi delivery.' },
+    ka: { title: 'შეკვეთა. ჟუჟუ, კოქტეილ-დესერტები.',
+          desc: 'შეუკვეთე ჟუჟუს კოქტეილ-დესერტები შენი ღონისძიებისთვის. ფასი თითო კუბზე, მინიმალური შეკვეთა ₾250, მიწოდება თბილისში.' },
+  },
+  about: {
+    en: { title: 'About. ZhuZhu, cocktail desserts.',
+          desc: 'Three founders, one kitchen, two nights a week. The ZhuZhu origin.' },
+    ka: { title: 'ჩვენ შესახებ. ჟუჟუ, კოქტეილ-დესერტები.',
+          desc: 'სამი დამფუძნებელი, ერთი სამზარეულო და ჟუჟუს ისტორია.' },
   },
 };

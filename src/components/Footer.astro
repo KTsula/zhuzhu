@@ -8,14 +8,14 @@ import { footer } from '../content/copy';
     <div class="col col-brand">
       <Wordmark size={28} />
       <p class="tagline">
-        <span class="lng-en">Cocktail desserts, set by hand. Tbilisi.</span>
-        <span class="lng-ka">კოქტეილ-დესერტები, ხელით აწყობილი. თბილისი.</span>
+        <span class="lng-en">{footer.en.brandLine}</span>
+        <span class="lng-ka">{footer.ka.brandLine}</span>
       </p>
     </div>
 
     <div class="col">
       <div class="label">
-        <span class="lng-en">Contact</span>
+        <span class="lng-en">{footer.en.contact}</span>
         <span class="lng-ka">{footer.ka.contact}</span>
       </div>
       <a class="line" href={`mailto:${footer.en.mail}`}>{footer.en.mail}</a>
@@ -23,7 +23,7 @@ import { footer } from '../content/copy';
 
     <div class="col">
       <div class="label">
-        <span class="lng-en">Follow</span>
+        <span class="lng-en">{footer.en.follow}</span>
         <span class="lng-ka">{footer.ka.follow}</span>
       </div>
       {footer.en.socials.map((s, i) => (
@@ -36,8 +36,8 @@ import { footer } from '../content/copy';
 
     <div class="col">
       <div class="label">
-        <span class="lng-en">Language</span>
-        <span class="lng-ka">ენა</span>
+        <span class="lng-en">{footer.en.language}</span>
+        <span class="lng-ka">{footer.ka.language}</span>
       </div>
       <LangSwitch />
     </div>
@@ -45,8 +45,8 @@ import { footer } from '../content/copy';
 
   <div class="bottom">
     <span class="rights">
-      <span class="lng-en">© 2026 ZhuZhu. Hand-set in Tbilisi.</span>
-      <span class="lng-ka">© 2026 ჟუჟუ. ხელნაკეთი თბილისში.</span>
+      <span class="lng-en">{footer.en.rights}</span>
+      <span class="lng-ka">{footer.ka.rights}</span>
     </span>
   </div>
 </footer>

@@ -1,59 +1,17 @@
 ---
 import Base from '../layouts/Base.astro';
-
-const origin = {
-  en: [
-    'ZhuZhu began on a winter night, when three friends, a chef, a food chemist and a developer, sat too long over a bottle of Saperavi, arguing about what a cocktail could be if it were not a drink.',
-    'Lado worked on the taste, Anna on the chemistry, Keti on the brand. Three weeks later we had the first cube: a Saperavi set firm, a single sour cherry on top.',
-    'We have been setting them by hand ever since. Weddings, brand evenings, hotel menus, the occasional private dinner that asks us not to mention we came.',
-  ],
-  ka: [
-    'ჟუჟუ ერთ ზამთრის საღამოს დაიწყო, როცა სამმა მეგობარმა, შეფმა, საკვების ქიმიკოსმა და დეველოპერმა, საფერავის ბოთლზე დიდხანს იკამათეს იმაზე, რა შეიძლება იყოს კოქტეილი, თუ ის არ არის სასმელი.',
-    'ლადო მუშაობდა გემოზე, ანა — ქიმიაზე, ქეთი — ბრენდზე. სამი კვირის შემდეგ მზად იყო პირველი კუბი: მაგრად დაყენებული საფერავი, ერთი ბალის ალუბლით თავზე.',
-    'მას შემდეგ ხელით ვაყენებთ. ქორწილებისთვის, ბრენდის საღამოებისთვის, სასტუმროების მენიუებისთვის და ხანდახან იმ პრივატული სადილისთვის, რომელიც გვთხოვა, არავის ვუთხრათ რომ მოვედით.',
-  ],
-};
-
-const founders = [
-  {
-    name: { en: 'Keti', ka: 'ქეთი' },
-    role: { en: 'Site, business, photography', ka: 'საიტი, ბიზნესი, ფოტოგრაფია' },
-    bio: {
-      en: 'The site, the pricing, the lens. Keti runs the brand surface. What the world sees and what it clicks.',
-      ka: 'საიტი, ფასები, ობიექტივი. ქეთი მართავს ბრენდის ზედაპირს. რასაც სამყარო ხედავს და რასაც აჭერს.',
-    },
-    accent: 'rgba(196, 140, 70, 0.30)',
-  },
-  {
-    name: { en: 'Anna', ka: 'ანა' },
-    role: { en: 'Food chemistry, compliance, kitchen', ka: 'ქიმია, შესაბამისობა, სამზარეულო' },
-    bio: {
-      en: 'The gelatine, the acid, the law. Anna keeps the cube together and the kitchen on the right side of HACCP.',
-      ka: 'ჟელატინი, მჟავა, კანონი. ანა აერთიანებს კუბს და სამზარეულოს ინახავს HACCP-ის სწორ მხარეს.',
-    },
-    accent: 'rgba(220, 170, 70, 0.32)',
-  },
-  {
-    name: { en: 'Lado', ka: 'ლადო' },
-    role: { en: 'Chef, recipes, production', ka: 'შეფი, რეცეპტები, წარმოება' },
-    bio: {
-      en: 'The recipes, the heat, the taste. Lado owns the food itself: every cube on every tray.',
-      ka: 'რეცეპტები, სითბო, გემო. ლადო ფლობს თვით საკვებს: ყოველი თეფშის ყოველი კუბი.',
-    },
-    accent: 'rgba(180, 50, 80, 0.30)',
-  },
-];
+import { aboutPage, founders, pageMeta } from '../content/copy';
 ---
 <Base current="about"
-      title="About. ZhuZhu, cocktail desserts."
-      description="Three founders, one kitchen, two nights a week. The ZhuZhu origin.">
+      title={pageMeta.about.en.title}
+      description={pageMeta.about.en.desc}>
   <section class="origin">
     <h1 class="display title">
-      <span class="lng-en">Three founders.<br>One kitchen.</span>
-      <span class="lng-ka">სამი დამფუძნებელი.<br>ერთი სამზარეულო.</span>
+      <span class="lng-en" set:html={aboutPage.en.head} />
+      <span class="lng-ka" set:html={aboutPage.ka.head} />
     </h1>
-    <div class="paras lng-en">{origin.en.map((p) => <p>{p}</p>)}</div>
-    <div class="paras lng-ka">{origin.ka.map((p) => <p>{p}</p>)}</div>
+    <div class="paras lng-en">{aboutPage.en.origin.map((p) => <p>{p}</p>)}</div>
+    <div class="paras lng-ka">{aboutPage.ka.origin.map((p) => <p>{p}</p>)}</div>
   </section>
 
   <section class="founders-section">
