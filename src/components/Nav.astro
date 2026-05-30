@@ -3,7 +3,7 @@ import LangSwitch from './LangSwitch.astro';
 import Wordmark from './Wordmark.astro';
 import { nav } from '../content/copy';
 
-interface Props { current?: 'menu' | 'order' | 'about' | 'home'; }
+interface Props { current?: 'menu' | 'order' | 'box' | 'about' | 'home'; }
 const { current = 'home' } = Astro.props;
 ---
 <header class="zz-nav">
@@ -15,6 +15,9 @@ const { current = 'home' } = Astro.props;
     </a>
     <a href="/order" class:list={[current === 'order' && 'active']}>
       <span class="lng-en">{nav.en.order}</span><span class="lng-ka">{nav.ka.order}</span>
+    </a>
+    <a href="/box" class:list={[current === 'box' && 'active']}>
+      <span class="lng-en">{nav.en.box}</span><span class="lng-ka">{nav.ka.box}</span>
     </a>
     <a href="/about" class:list={[current === 'about' && 'active']}>
       <span class="lng-en">{nav.en.about}</span><span class="lng-ka">{nav.ka.about}</span>
@@ -47,6 +50,9 @@ const { current = 'home' } = Astro.props;
       </a>
       <a href="/order">
         <span class="lng-en">{nav.en.order}</span><span class="lng-ka">{nav.ka.order}</span>
+      </a>
+      <a href="/box">
+        <span class="lng-en">{nav.en.box}</span><span class="lng-ka">{nav.ka.box}</span>
       </a>
       <a href="/about">
         <span class="lng-en">{nav.en.about}</span><span class="lng-ka">{nav.ka.about}</span>

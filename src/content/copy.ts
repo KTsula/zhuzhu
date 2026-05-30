@@ -1,8 +1,8 @@
 export type Lang = 'en' | 'ka';
 
 export const nav = {
-  en: { menu: 'menu', order: 'order', about: 'about', reserve: 'reserve', reserveTasting: 'reserve a tasting' },
-  ka: { menu: 'მენიუ', order: 'შეკვეთა', about: 'ჩვენ', reserve: 'დაჯავშნა', reserveTasting: 'დეგუსტაციის დაჯავშნა' },
+  en: { menu: 'menu', order: 'order', box: 'box', about: 'about', reserve: 'reserve', reserveTasting: 'reserve a tasting' },
+  ka: { menu: 'მენიუ', order: 'შეკვეთა', box: 'ნაკრები', about: 'ჩვენ', reserve: 'დაჯავშნა', reserveTasting: 'დეგუსტაციის დაჯავშნა' },
 };
 
 export const hero = {
@@ -376,6 +376,44 @@ export const orderPage = {
   },
 };
 
+export const boxPage = {
+  en: {
+    eyebrow: 'a monthly cube',
+    head: 'The mystery box.',
+    sub: 'A new set of flavours at your door, every month. We tell you when it ships — we never tell you what is in it.',
+    price: '₾80',
+    cadence: '/ month',
+    priceNote: '8 cubes · Tbilisi delivery · cancel anytime',
+    cta: 'subscribe',
+    stepsHead: 'How it works.',
+    steps: [
+      { n: '01', name: 'Subscribe', d: '₾80 a month, billed by Paddle. Card or Apple Pay. Cancel anytime in one click.' },
+      { n: '02', name: 'We curate',  d: 'Every month, we set a new line. Saperavi today, sour cherry tomorrow, walnut churchkhela next month — we follow the season and the kitchen.' },
+      { n: '03', name: 'You bite',   d: 'We hand-deliver within Tbilisi during the first week of every month. Allergens are listed on the box; flavours stay a secret until you open it.' },
+    ],
+    finalHead: 'Eight new bites, every month.',
+    finalCta: 'start the subscription',
+    paddleTodo: 'Wire Paddle Billing here: load Paddle.js, call Paddle.Checkout.open({ items: [{ priceId: PRI_XXX, quantity: 1 }] })',
+  },
+  ka: {
+    eyebrow: 'ყოველთვიური ნაკრები',
+    head: 'საიდუმლო ნაკრები.',
+    sub: 'ახალი გემოები შენს კართან, ყოველ თვე. გეტყვით, როდის გამოვაგზავნით — არასოდეს ვამბობთ, რა იქნება შიგნით.',
+    price: '₾80',
+    cadence: '/ თვე',
+    priceNote: '8 კუბი · თბილისში მიწოდება · ნებისმიერ დროს გაუქმდება',
+    cta: 'გამოიწერე',
+    stepsHead: 'როგორ მუშაობს.',
+    steps: [
+      { n: '01', name: 'გამოწერა',  d: '₾80 თვეში, Paddle-ით. ბარათით ან Apple Pay-ით. ერთი დაჭერით გაუქმდება.' },
+      { n: '02', name: 'ჩვენ ვადგენთ', d: 'ყოველ თვე ვაყენებთ ახალ ხაზს. დღეს საფერავი, ხვალ ალუბალი, შემდეგ თვე — ნიგვზის ჩურჩხელა. სეზონს და სამზარეულოს მივყვებით.' },
+      { n: '03', name: 'შენ აგემოვნებ', d: 'თვის პირველ კვირას ხელით ვაწვდით თბილისში. ალერგენები ყუთზე უწერია; გემოები საიდუმლოდ რჩება, სანამ არ გახსნი.' },
+    ],
+    finalHead: 'რვა ახალი ლუკმა, ყოველ თვე.',
+    finalCta: 'დაიწყე გამოწერა',
+  },
+};
+
 export const aboutPage = {
   en: {
     head: 'Three founders.<br>One kitchen.',
@@ -449,5 +487,11 @@ export const pageMeta = {
           desc: 'Three founders, one kitchen, two nights a week. The ZhuZhu origin.' },
     ka: { title: 'ჩვენ შესახებ. ჟუჟუ, კოქტეილ-დესერტები.',
           desc: 'სამი დამფუძნებელი, ერთი სამზარეულო და ჟუჟუს ისტორია.' },
+  },
+  box: {
+    en: { title: 'The mystery box. ZhuZhu, cocktail desserts.',
+          desc: 'A monthly subscription of hand-set cocktail desserts. Eight new flavours, delivered in Tbilisi the first week of every month.' },
+    ka: { title: 'საიდუმლო ნაკრები. ჟუჟუ, კოქტეილ-დესერტები.',
+          desc: 'ყოველთვიური გამოწერა ხელით აწყობილი კოქტეილ-დესერტებისთვის. რვა ახალი გემო თბილისში, თვის პირველ კვირას.' },
   },
 };
