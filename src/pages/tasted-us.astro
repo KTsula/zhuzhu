@@ -1,0 +1,510 @@
+---
+import Base from '../layouts/Base.astro';
+import { tastedUs, pageMeta } from '../content/copy';
+const t = tastedUs;
+---
+<Base title={pageMeta.tastedUs.en.title}
+      description={pageMeta.tastedUs.en.desc}>
+  <section class="hero" id="hero">
+    <span class="eyebrow label">
+      <span class="lng-en">{t.en.eyebrow}</span>
+      <span class="lng-ka">{t.ka.eyebrow}</span>
+    </span>
+
+    <h1 class="display head">
+      <span class="lng-en">{t.en.head}</span>
+      <span class="lng-ka">{t.ka.head}</span>
+    </h1>
+
+    <p class="sub">
+      <span class="lng-en">{t.en.sub}</span>
+      <span class="lng-ka">{t.ka.sub}</span>
+    </p>
+
+    <form class="lead-form" id="lead-form" novalidate>
+      <div class="field">
+        <label class="lng-en">{t.en.emailLabel}</label>
+        <label class="lng-ka">{t.ka.emailLabel}</label>
+        <input type="email" name="email" required autocomplete="email" inputmode="email"
+               data-ph-en={t.en.emailPh} data-ph-ka={t.ka.emailPh}
+               placeholder={t.en.emailPh} />
+      </div>
+
+      <div class="field">
+        <label class="lng-en">{t.en.monthLabel}</label>
+        <label class="lng-ka">{t.ka.monthLabel}</label>
+        <div class="select-wrap">
+          <select name="birthMonth" id="lead-month">
+            <option value="">—</option>
+            {t.en.monthOptions.slice(1).map((m, i) => (
+              <option value={i + 1} data-en={m} data-ka={t.ka.monthOptions[i + 1]}>{m}</option>
+            ))}
+          </select>
+          <span class="select-caret">▾</span>
+        </div>
+        <span class="hint">
+          <span class="lng-en">{t.en.monthHint}</span>
+          <span class="lng-ka">{t.ka.monthHint}</span>
+        </span>
+      </div>
+
+      <button type="submit" class="cta submit" id="lead-submit">
+        <span class="lng-en">{t.en.submit}</span>
+        <span class="lng-ka">{t.ka.submit}</span>
+      </button>
+
+      <p class="micro">
+        <span class="lng-en">{t.en.micro}</span>
+        <span class="lng-ka">{t.ka.micro}</span>
+      </p>
+    </form>
+
+    <div class="success" id="lead-success" hidden>
+      <h2 class="display success-head">
+        <span class="lng-en">{t.en.successHead}</span>
+        <span class="lng-ka">{t.ka.successHead}</span>
+      </h2>
+      <p class="success-sub">
+        <span class="lng-en">{t.en.successSub}</span>
+        <span class="lng-ka">{t.ka.successSub}</span>
+      </p>
+      <div class="share-row">
+        <div class="share-link" id="share-link"></div>
+        <div class="share-actions">
+          <button class="cta-ghost" id="copy-btn" type="button">
+            <span class="lng-en">{t.en.copyBtn}</span>
+            <span class="lng-ka">{t.ka.copyBtn}</span>
+          </button>
+          <button class="cta share-btn" id="share-btn" type="button" hidden>
+            <span class="lng-en">{t.en.shareBtn}</span>
+            <span class="lng-ka">{t.ka.shareBtn}</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <p class="error" id="lead-error" hidden>
+      <span class="lng-en">{t.en.failure}</span>
+      <span class="lng-ka">{t.ka.failure}</span>
+    </p>
+  </section>
+
+  <section class="perks">
+    <h2 class="display perks-head">
+      <span class="lng-en">{t.en.perksHead}</span>
+      <span class="lng-ka">{t.ka.perksHead}</span>
+    </h2>
+
+    <ol class="perk-grid">
+      {t.en.perks.map((p, i) => {
+        const ka = t.ka.perks[i];
+        return (
+          <li class="perk">
+            <span class="n">{p.n}</span>
+            <h3 class="title">
+              <span class="lng-en">{p.title}</span>
+              <span class="lng-ka">{ka.title}</span>
+            </h3>
+            <p class="body">
+              <span class="lng-en">{p.body}</span>
+              <span class="lng-ka">{ka.body}</span>
+            </p>
+            {p.cta && p.href && (
+              <a class="cta-ghost" href={p.href}>
+                <span class="lng-en">{p.cta}</span>
+                <span class="lng-ka">{ka.cta}</span>
+              </a>
+            )}
+            {p.microprint && (
+              <span class="microprint">
+                <span class="lng-en">{p.microprint}</span>
+                <span class="lng-ka">{ka.microprint}</span>
+              </span>
+            )}
+          </li>
+        );
+      })}
+    </ol>
+  </section>
+</Base>
+
+<script is:inline define:vars={{
+  enSubmit: tastedUs.en.submit,
+  enSubmitting: tastedUs.en.submitting,
+  enFailure: tastedUs.en.failure,
+  enCopied: tastedUs.en.copiedBtn,
+  enCopy: tastedUs.en.copyBtn,
+  enShareTitle: tastedUs.en.shareTitle,
+  enShareText: tastedUs.en.shareText,
+  kaSubmit: tastedUs.ka.submit,
+  kaSubmitting: tastedUs.ka.submitting,
+  kaFailure: tastedUs.ka.failure,
+  kaCopied: tastedUs.ka.copiedBtn,
+  kaCopy: tastedUs.ka.copyBtn,
+  kaShareTitle: tastedUs.ka.shareTitle,
+  kaShareText: tastedUs.ka.shareText,
+}}>
+  (function () {
+    var form    = document.getElementById('lead-form');
+    var btn     = document.getElementById('lead-submit');
+    var success = document.getElementById('lead-success');
+    var err     = document.getElementById('lead-error');
+    var copyBtn = document.getElementById('copy-btn');
+    var shareBtn= document.getElementById('share-btn');
+    var linkEl  = document.getElementById('share-link');
+    if (!form || !btn || !success || !err || !copyBtn || !linkEl) return;
+
+    function lang() {
+      return document.documentElement.getAttribute('data-lang') === 'ka' ? 'ka' : 'en';
+    }
+    function t(en, ka) { return lang() === 'ka' ? ka : en; }
+
+    // Pick up ?at=event-name and ?ref=referrer-email
+    var params = new URLSearchParams(window.location.search);
+    var source   = params.get('at')  || 'qr';
+    var refEmail = params.get('ref') || '';
+
+    // Localise placeholders
+    function syncPh() {
+      var L = lang();
+      form.querySelectorAll('[data-ph-en],[data-ph-ka]').forEach(function (el) {
+        var ph = el.getAttribute('data-ph-' + L);
+        if (ph) el.setAttribute('placeholder', ph);
+      });
+    }
+    syncPh();
+    document.addEventListener('langchange', syncPh);
+
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      err.hidden = true;
+      var data = new FormData(form);
+      var email = String(data.get('email') || '').trim().toLowerCase();
+      var birthMonth = data.get('birthMonth') ? Number(data.get('birthMonth')) : null;
+
+      btn.disabled = true;
+      btn.textContent = t(enSubmitting, kaSubmitting);
+
+      try {
+        var res = await fetch('/api/lead', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: email, birthMonth: birthMonth, source: source, refEmail: refEmail, lang: lang() }),
+        });
+        if (!res.ok) throw new Error('bad status ' + res.status);
+
+        // Build share link with their email as ref
+        var shareUrl = window.location.origin + '/?ref=' + encodeURIComponent(email);
+        linkEl.textContent = shareUrl;
+        linkEl.setAttribute('data-url', shareUrl);
+
+        // Show native share button if available
+        if (navigator.share) shareBtn.hidden = false;
+
+        form.hidden = true;
+        success.hidden = false;
+
+        // Drop a cookie/localstorage tag so we can recognise this lead later
+        try { localStorage.setItem('zz-lead', email); } catch (e2) {}
+      } catch (e3) {
+        btn.disabled = false;
+        btn.textContent = t(enSubmit, kaSubmit);
+        err.hidden = false;
+      }
+    });
+
+    copyBtn.addEventListener('click', async function () {
+      var url = linkEl.getAttribute('data-url') || linkEl.textContent || '';
+      try {
+        await navigator.clipboard.writeText(url);
+        var orig = copyBtn.innerHTML;
+        copyBtn.textContent = t(enCopied, kaCopied);
+        setTimeout(function () { copyBtn.innerHTML = orig; }, 2000);
+      } catch (e) {
+        // Fallback: select the link
+        var range = document.createRange();
+        range.selectNode(linkEl);
+        window.getSelection().removeAllRanges();
+        window.getSelection().addRange(range);
+      }
+    });
+
+    shareBtn.addEventListener('click', async function () {
+      var url = linkEl.getAttribute('data-url') || '';
+      if (!navigator.share) return;
+      try {
+        await navigator.share({
+          title: t(enShareTitle, kaShareTitle),
+          text:  t(enShareText,  kaShareText),
+          url:   url,
+        });
+      } catch (e) { /* user cancelled */ }
+    });
+  })();
+</script>
+
+<style>
+  .hero {
+    padding: 96px 24px 80px;
+    background: var(--night);
+    text-align: center;
+    max-width: 640px;
+    margin: 0 auto;
+  }
+  .hero .eyebrow {
+    display: block;
+    color: var(--gold);
+    margin-bottom: 24px;
+  }
+  .hero .head {
+    font-size: var(--t-display);
+    margin: 0;
+  }
+  .hero .sub {
+    font-family: var(--body);
+    font-weight: 350;
+    font-size: var(--t-lg);
+    color: var(--bone-warm);
+    line-height: 1.55;
+    margin: 28px auto 48px;
+    max-width: 42ch;
+  }
+  html[data-lang="ka"] .hero .sub { font-family: var(--ka); font-weight: 400; }
+
+  .lead-form {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    text-align: left;
+    margin: 0 auto;
+  }
+  .field { display: flex; flex-direction: column; gap: 10px; }
+  .field label {
+    font-family: var(--body);
+    font-weight: 500;
+    font-size: var(--t-xs);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ash);
+  }
+  html[data-lang="ka"] .field label {
+    font-family: var(--ka);
+    font-style: italic;
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0.04em;
+    font-size: var(--t-sm);
+  }
+  .field input, .field select {
+    width: 100%;
+    padding: 16px 0;
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid rgba(198,152,89,0.3);
+    color: var(--bone);
+    font-family: var(--body);
+    font-weight: 400;
+    font-size: var(--t-lg);
+    border-radius: 0;
+    transition: border-color 0.3s var(--ease-out-quart);
+    -webkit-appearance: none;
+            appearance: none;
+  }
+  html[data-lang="ka"] .field input,
+  html[data-lang="ka"] .field select { font-family: var(--ka); }
+  .field input::placeholder { color: var(--ash-dim); }
+  .field input:focus, .field select:focus { outline: none; border-bottom-color: var(--gold); }
+
+  .select-wrap { position: relative; }
+  .select-caret {
+    position: absolute;
+    right: 4px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--gold);
+    pointer-events: none;
+    font-size: var(--t-base);
+  }
+  .field .hint {
+    font-family: var(--body);
+    font-weight: 350;
+    font-size: var(--t-xs);
+    color: var(--ash-dim);
+    letter-spacing: 0.02em;
+    margin-top: -2px;
+  }
+  html[data-lang="ka"] .field .hint { font-family: var(--ka); font-weight: 400; font-size: var(--t-sm); }
+
+  .submit {
+    margin-top: 16px;
+    padding: 20px 32px;
+    width: 100%;
+  }
+
+  .micro {
+    font-family: var(--body);
+    font-weight: 350;
+    font-size: var(--t-xs);
+    color: var(--ash);
+    text-align: center;
+    margin: 4px 0 0;
+    line-height: 1.6;
+  }
+  html[data-lang="ka"] .micro { font-family: var(--ka); font-weight: 400; font-size: var(--t-sm); }
+
+  .success {
+    margin-top: 8px;
+    text-align: left;
+    border-top: 1px solid rgba(198,152,89,0.3);
+    padding-top: 40px;
+  }
+  .success-head {
+    font-size: var(--t-2xl);
+    margin: 0;
+    text-align: center;
+  }
+  .success-sub {
+    font-family: var(--body);
+    font-weight: 350;
+    font-size: var(--t-base);
+    color: var(--bone-warm);
+    line-height: 1.65;
+    margin: 24px 0 32px;
+    max-width: 48ch;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  html[data-lang="ka"] .success-sub { font-family: var(--ka); font-weight: 400; }
+
+  .share-row {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    align-items: stretch;
+  }
+  .share-link {
+    font-family: var(--body);
+    font-weight: 400;
+    font-size: var(--t-sm);
+    color: var(--bone);
+    background: var(--graphite);
+    border: 1px solid rgba(198,152,89,0.3);
+    padding: 16px 18px;
+    word-break: break-all;
+    line-height: 1.5;
+  }
+  .share-actions {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .share-actions .cta-ghost,
+  .share-actions .cta { padding: 14px 28px; }
+
+  .error {
+    margin-top: 24px;
+    font-family: var(--body);
+    font-weight: 400;
+    font-size: var(--t-sm);
+    color: var(--wine-glow);
+    background: rgba(183,58,90,0.10);
+    padding: 14px 18px;
+    text-align: center;
+  }
+  html[data-lang="ka"] .error { font-family: var(--ka); }
+
+  .perks {
+    padding: 80px 24px 120px;
+    background: var(--night);
+    max-width: 920px;
+    margin: 0 auto;
+    border-top: 1px solid rgba(198,152,89,0.15);
+  }
+  .perks-head {
+    font-size: var(--t-2xl);
+    margin: 0 0 48px;
+    text-align: center;
+  }
+  .perk-grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 1px;
+    background: rgba(198,152,89,0.18);
+    border-top: 1px solid rgba(198,152,89,0.18);
+    border-bottom: 1px solid rgba(198,152,89,0.18);
+  }
+  .perk {
+    background: var(--night);
+    padding: 32px 28px;
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    gap: 22px;
+    align-items: start;
+  }
+  .perk .n {
+    font-family: var(--display);
+    font-style: italic;
+    font-weight: 300;
+    font-size: var(--t-xl);
+    color: var(--gold);
+    line-height: 1;
+    grid-row: span 4;
+  }
+  .perk .title {
+    grid-column: 2;
+    margin: 0;
+    font-family: var(--body);
+    font-weight: 500;
+    font-size: var(--t-lg);
+    color: var(--bone);
+    letter-spacing: -0.005em;
+  }
+  html[data-lang="ka"] .perk .title { font-family: var(--ka); font-style: italic; font-weight: 500; }
+  .perk .body {
+    grid-column: 2;
+    font-family: var(--body);
+    font-weight: 350;
+    font-size: var(--t-base);
+    color: var(--bone-warm);
+    line-height: 1.65;
+    margin: 12px 0 0;
+    max-width: 58ch;
+  }
+  html[data-lang="ka"] .perk .body { font-family: var(--ka); font-weight: 400; }
+  .perk .cta-ghost { grid-column: 2; margin-top: 14px; align-self: start; }
+  .perk .microprint {
+    grid-column: 2;
+    font-family: var(--body);
+    font-weight: 350;
+    font-size: var(--t-xs);
+    color: var(--ash-dim);
+    margin-top: 12px;
+    line-height: 1.5;
+    letter-spacing: 0.02em;
+  }
+  html[data-lang="ka"] .perk .microprint { font-family: var(--ka); font-weight: 400; }
+
+  @media (max-width: 720px) {
+    .hero { padding: 72px 22px 56px; }
+    .hero .head { font-size: var(--t-3xl); }
+    .hero .sub { font-size: var(--t-base); margin: 24px auto 36px; }
+    .lead-form { gap: 24px; }
+    .field input, .field select { font-size: var(--t-base); padding: 14px 0; }
+    .submit { padding: 18px 24px; font-size: var(--t-sm); }
+    .perks { padding: 56px 22px 88px; }
+    .perks-head { font-size: var(--t-xl); margin-bottom: 32px; }
+    .perk { padding: 24px 18px; grid-template-columns: 40px 1fr; gap: 16px; }
+    .perk .n { font-size: var(--t-lg); }
+    .perk .title { font-size: var(--t-base); }
+    .perk .body { font-size: var(--t-base); margin-top: 10px; }
+    .share-actions .cta, .share-actions .cta-ghost {
+      flex: 1;
+      min-width: 140px;
+      padding: 14px 18px;
+    }
+  }
+</style>
