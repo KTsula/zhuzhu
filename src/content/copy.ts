@@ -37,13 +37,13 @@ export const sharedLabels = {
   en: {
     line: 'line',
     price: 'price',
-    perCube: '/ cube',
+    perSet: '/ set',
     language: 'language',
   },
   ka: {
     line: 'სერია',
     price: 'ფასი',
-    perCube: '/ კუბი',
+    perSet: '/ ნაკრები',
     language: 'ენა',
   },
 };
@@ -62,14 +62,14 @@ export type SignatureItem = {
 export const signatures: SignatureItem[] = [
   {
     id: '01',
-    line: { en: 'The Signature Three', ka: 'სამი ხელწერა' },
+    line: { en: 'Signature · Georgian-inspired', ka: 'ქართული საავტორო გემოები' },
     name: { en: 'Churchkhela Cream', ka: 'ჩურჩხელის კრემი' },
     blurb: {
       en: 'A walnut churchkhela, caramelised the day before and broken by hand, folded into Tbilisi double-cream and dark muscovado. The walnut sits on top while the cube is still warm — it keeps the crunch all the way through the bite.',
       ka: 'ნიგვზის ჩურჩხელა, წინა დღეს კარამელიზებული და ხელით დატეხილი, თბილისურ ორმაგ ნაღებსა და მუქი მუსკოვადოს შაქარში შერეული. ნიგოზი კუბს ზემოდან ედება, სანამ ჯერ კიდევ თბილია — ხრაშუნი ბოლომდე მიჰყვება თითოეულ ლუკმას.',
     },
     meta: {
-      line: { en: 'The Signature Three', ka: 'სამი ხელწერა' },
+      line: { en: 'Signature · Georgian-inspired', ka: 'ქართული საავტორო გემოები' },
     },
     img: '/cubes/walnut-toffee.png',
     accent: 'rgba(196, 140, 70, 0.30)',
@@ -77,14 +77,14 @@ export const signatures: SignatureItem[] = [
   },
   {
     id: '02',
-    line: { en: 'The Signature Three', ka: 'სამი ხელწერა' },
+    line: { en: 'Signature · Georgian-inspired', ka: 'ქართული საავტორო გემოები' },
     name: { en: 'Honey Lemon', ka: 'თაფლი-ლიმონი' },
     blurb: {
       en: 'Mountain honey-water from Kvemo Kartli, slow-warmed with fresh lemon zest and a long-aged Bagrationi chacha. A summer cube — set firmer, meant to be held a second on the tongue. A wedge of lime is laid on top after the cube has cooled.',
       ka: 'ქვემო ქართლის მთის თაფლიანი წყალი, ახალი ლიმონის ცედრითა და დიდხანს დავარგებული ბაგრატიონის ჭაჭით ნელა შემთბარი. საზაფხულო კუბი — უფრო მყარად დაყენებული, რომ ენაზე ერთი წამით გაჩერდეს. ლაიმის ნაჭერი ზემოდან ედება, როცა კუბი გაცივდება.',
     },
     meta: {
-      line: { en: 'The Signature Three', ka: 'სამი ხელწერა' },
+      line: { en: 'Signature · Georgian-inspired', ka: 'ქართული საავტორო გემოები' },
     },
     img: '/cubes/tarragon-lime.png',
     accent: 'rgba(220, 170, 70, 0.32)',
@@ -92,14 +92,14 @@ export const signatures: SignatureItem[] = [
   },
   {
     id: '03',
-    line: { en: 'The Signature Three', ka: 'სამი ხელწერა' },
+    line: { en: 'Signature · Georgian-inspired', ka: 'ქართული საავტორო გემოები' },
     name: { en: 'Red Wine Berry', ka: 'წითელი ღვინო-კენკრა' },
     blurb: {
       en: 'A red-dry Saperavi from Kakheti, reduced six hours with sour cherry, blackberry and a pinch of black pepper. A glass-bottled morello rests on top — the only piece of fruit that survives the cube whole. Wine in three bites.',
       ka: 'კახური მშრალი საფერავი, ექვსი საათის განმავლობაში ალუბალთან, მაყვალთან და შავი პილპილის მწიკვით დაყვანილი. ზემოდან მინის ქილაში დავარგებული მორელო ედება — ერთადერთი ხილი, რომელიც კუბში მთლიანად რჩება. ღვინო სამ ლუკმაში.',
     },
     meta: {
-      line: { en: 'The Signature Three', ka: 'სამი ხელწერა' },
+      line: { en: 'Signature · Georgian-inspired', ka: 'ქართული საავტორო გემოები' },
     },
     img: '/cubes/saperavi-cherry.png',
     accent: 'rgba(180, 50, 80, 0.30)',
