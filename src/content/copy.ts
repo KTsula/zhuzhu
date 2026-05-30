@@ -358,16 +358,10 @@ export const menuPage = {
   en: {
     head: 'Three signatures, and beyond.',
     sub: 'Three Georgian-inspired signatures, hand-set in Tbilisi. Classics beneath them. One cube per bite, eight to a set.',
-    closerHead: 'A signature of your own.',
-    closerSub: 'Direct a flavour from your menu, your wine, your story. We set it the way we set ours.',
-    closerCta: 'book your event',
   },
   ka: {
     head: 'სამი ხელწერა და მეტი.',
     sub: 'სამი ქართული საავტორო გემო, თბილისში ხელით აწყობილი. ქვემოთ — კლასიკა. ერთი ლუკმა, რვა ერთ ნაკრებში.',
-    closerHead: 'შენი საავტორო გემო.',
-    closerSub: 'მიჰყევი მენიუს, ღვინოს ან ისტორიას. ჩვენ იმავე ფორმით ვაყენებთ, როგორც ჩვენიანებს.',
-    closerCta: 'დაჯავშნე ღონისძიება',
   },
 };
 

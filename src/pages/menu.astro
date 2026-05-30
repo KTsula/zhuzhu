@@ -65,21 +65,6 @@ import { menuPage, pageMeta, sharedLabels, signatures } from '../content/copy';
   ))}
 
   <MenuClassics />
-
-  <section class="closer">
-    <h2 class="display closer-text">
-      <span class="lng-en">{menuPage.en.closerHead}</span>
-      <span class="lng-ka">{menuPage.ka.closerHead}</span>
-    </h2>
-    <p class="closer-sub">
-      <span class="lng-en">{menuPage.en.closerSub}</span>
-      <span class="lng-ka">{menuPage.ka.closerSub}</span>
-    </p>
-    <a class="cta" href="/#book">
-      <span class="lng-en">{menuPage.en.closerCta}</span>
-      <span class="lng-ka">{menuPage.ka.closerCta}</span>
-    </a>
-  </section>
 </Base>
 
 <style>
@@ -204,28 +189,6 @@ import { menuPage, pageMeta, sharedLabels, signatures } from '../content/copy';
     opacity: 0.5;
   }
 
-  .closer {
-    text-align: center;
-    padding: 140px 24px;
-    background: var(--night);
-    max-width: 720px;
-    margin: 0 auto;
-  }
-  .closer-text {
-    font-size: var(--t-3xl);
-    margin: 0;
-  }
-  .closer-sub {
-    font-family: var(--body);
-    font-weight: 350;
-    font-size: var(--t-lg);
-    color: var(--bone-warm);
-    line-height: 1.55;
-    max-width: 44ch;
-    margin: 32px auto 44px;
-  }
-  html[data-lang="ka"] .closer-sub { font-family: var(--ka); font-weight: 400; }
-
   @media (max-width: 1024px) {
     .spread { grid-template-columns: 1fr; }
     .spread .text-side { order: 2; }
@@ -238,7 +201,5 @@ import { menuPage, pageMeta, sharedLabels, signatures } from '../content/copy';
     .meta { grid-template-columns: 1fr 1fr; gap: 24px 32px; margin-top: 40px; }
     .image-side { min-height: 360px; }
     .image-side img { inset: 100px; width: calc(100% - 200px); height: calc(100% - 200px); }
-    .closer { padding: 80px 22px; }
-    .closer-sub { font-size: var(--t-base); margin: 24px auto 32px; }
   }
 </style>
