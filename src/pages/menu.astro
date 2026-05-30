@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import MenuClassics from '../components/MenuClassics.astro';
 import { menuPage, pageMeta, sharedLabels, signatures } from '../content/copy';
 ---
 <Base current="menu"
@@ -62,6 +63,8 @@ import { menuPage, pageMeta, sharedLabels, signatures } from '../content/copy';
       </div>
     </article>
   ))}
+
+  <MenuClassics />
 
   <section class="closer">
     <h2 class="display closer-text">

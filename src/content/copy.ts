@@ -107,6 +107,101 @@ export const signatures: SignatureItem[] = [
   },
 ];
 
+export type ClassicSet = {
+  id: string;
+  name: { en: string; ka: string };
+  blurb: { en: string; ka: string };
+  accent: string;
+  price: number; // per-cube; displayed as price × 8 / set
+};
+
+export const classics: ClassicSet[] = [
+  {
+    id: 'c01',
+    name: { en: 'Mojito', ka: 'მოხიტო' },
+    blurb: {
+      en: 'White rum, lime, fresh mint — set crisp and bright.',
+      ka: 'თეთრი რომი, ლაიმი, ახალი პიტნა — მკვეთრად და ცოცხლად აწყობილი.',
+    },
+    accent: 'rgba(120, 180, 130, 0.45)',
+    price: 5,
+  },
+  {
+    id: 'c02',
+    name: { en: 'Aperol Spritz', ka: 'აპეროლ შპრიცი' },
+    blurb: {
+      en: 'Aperol, prosecco, orange — a summer cube with a bitter edge.',
+      ka: 'აპეროლი, პროსეკო, ფორთოხალი — საზაფხულო კუბი მცირე სიმწარით.',
+    },
+    accent: 'rgba(240, 130, 50, 0.45)',
+    price: 6,
+  },
+  {
+    id: 'c03',
+    name: { en: 'Espresso Baileys', ka: 'ესპრესო-ბეილისი' },
+    blurb: {
+      en: 'Single-origin espresso folded into Baileys cream.',
+      ka: 'ერთჯერადი ესპრესო ბეილისის ნაღებში შერეული.',
+    },
+    accent: 'rgba(160, 100, 60, 0.45)',
+    price: 6,
+  },
+  {
+    id: 'c04',
+    name: { en: 'Tarragon Lemonade', ka: 'ტარხუნა-ლიმონათი' },
+    blurb: {
+      en: 'House tarragon syrup, lemon, soda — alcohol-free.',
+      ka: 'ტარხუნის სიროფი, ლიმონი, სოდა — უალკოჰოლო.',
+    },
+    accent: 'rgba(150, 200, 100, 0.45)',
+    price: 4,
+  },
+  {
+    id: 'c05',
+    name: { en: 'Berry Mint', ka: 'კენკრა-პიტნა' },
+    blurb: {
+      en: 'Wild raspberry, blackberry, fresh mint — alcohol-free.',
+      ka: 'ველური ჟოლო, მაყვალი, ახალი პიტნა — უალკოჰოლო.',
+    },
+    accent: 'rgba(200, 60, 100, 0.45)',
+    price: 4,
+  },
+  {
+    id: 'c06',
+    name: { en: 'Pomegranate Citrus', ka: 'ბროწეული-ციტრუსი' },
+    blurb: {
+      en: 'Cold-pressed pomegranate, orange, lime — alcohol-free.',
+      ka: 'ცივად დაწურული ბროწეული, ფორთოხალი, ლაიმი — უალკოჰოლო.',
+    },
+    accent: 'rgba(180, 40, 60, 0.45)',
+    price: 5,
+  },
+];
+
+export const menuClassics = {
+  en: {
+    eyebrow: 'Classics',
+    head: 'Beyond the signatures.',
+    sub: 'Familiar cocktails, set the same way. Same minimum order, same Tbilisi delivery.',
+  },
+  ka: {
+    eyebrow: 'კლასიკა',
+    head: 'სიგნატურის მიღმა.',
+    sub: 'ნაცნობი კოქტეილები, იმავე ფორმით. იგივე მინიმუმი, იგივე თბილისური მიწოდება.',
+  },
+};
+
+export const moreFlavours = {
+  en: {
+    eyebrow: 'and beyond the three',
+    cta: 'See the full menu  →',
+  },
+  ka: {
+    eyebrow: 'სამის მიღმა',
+    cta: 'სრული მენიუ  →',
+  },
+};
+
 export const packages = {
   en: {
     label: 'order',

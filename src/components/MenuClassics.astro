@@ -1,0 +1,151 @@
+---
+import { classics, menuClassics, sharedLabels } from '../content/copy';
+---
+<section class="zz-classics">
+  <header class="head">
+    <span class="eyebrow label">
+      <span class="lng-en">{menuClassics.en.eyebrow}</span>
+      <span class="lng-ka">{menuClassics.ka.eyebrow}</span>
+    </span>
+    <h2 class="display title">
+      <span class="lng-en">{menuClassics.en.head}</span>
+      <span class="lng-ka">{menuClassics.ka.head}</span>
+    </h2>
+    <p class="sub">
+      <span class="lng-en">{menuClassics.en.sub}</span>
+      <span class="lng-ka">{menuClassics.ka.sub}</span>
+    </p>
+  </header>
+
+  <ul class="grid">
+    {classics.map((c) => (
+      <li class="card">
+        <span class="accent" style={`background: ${c.accent.replace('0.45', '0.8')}`}></span>
+        <div class="row top">
+          <span class="id">№ {c.id.replace(/^c/, '')}</span>
+          <span class="price">
+            <span class="lng-en">₾{c.price * 8} {sharedLabels.en.perSet}</span>
+            <span class="lng-ka">₾{c.price * 8} {sharedLabels.ka.perSet}</span>
+          </span>
+        </div>
+        <h3 class="name display">
+          <span class="lng-en">{c.name.en}</span>
+          <span class="lng-ka ka">{c.name.ka}</span>
+        </h3>
+        <p class="blurb">
+          <span class="lng-en">{c.blurb.en}</span>
+          <span class="lng-ka">{c.blurb.ka}</span>
+        </p>
+      </li>
+    ))}
+  </ul>
+</section>
+
+<style>
+  .zz-classics {
+    padding: 100px 24px 80px;
+    background: var(--night);
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .head {
+    text-align: center;
+    max-width: 640px;
+    margin: 0 auto 64px;
+  }
+  .head .eyebrow {
+    display: block;
+    color: var(--gold);
+    margin-bottom: 18px;
+  }
+  .head .title {
+    font-size: var(--t-2xl);
+    margin: 0;
+  }
+  .head .sub {
+    font-family: var(--body);
+    font-weight: 350;
+    font-size: var(--t-base);
+    color: var(--bone-warm);
+    line-height: 1.6;
+    margin: 20px auto 0;
+    max-width: 48ch;
+  }
+  html[data-lang="ka"] .head .sub { font-family: var(--ka); font-weight: 400; }
+
+  .grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: rgba(198,152,89,0.18);
+    border: 1px solid rgba(198,152,89,0.18);
+  }
+  .card {
+    position: relative;
+    background: var(--night);
+    padding: 36px 32px 32px;
+    display: flex;
+    flex-direction: column;
+  }
+  .accent {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 28px;
+    height: 2px;
+  }
+  .row.top {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 24px;
+    font-family: var(--body);
+    font-weight: 500;
+    font-size: var(--t-xs);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ash);
+  }
+  .row.top .price { color: var(--gold-bright); }
+  html[data-lang="ka"] .row.top {
+    font-family: var(--ka);
+    text-transform: none;
+    letter-spacing: 0.04em;
+    font-size: var(--t-sm);
+  }
+  html[data-lang="ka"] .row.top .id {
+    font-family: var(--body);
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-size: var(--t-xs);
+  }
+  .name {
+    margin: 0;
+    font-size: var(--t-xl);
+    line-height: 1.1;
+  }
+  .name .ka { font-size: clamp(1.5rem, 3vw, 1.875rem); }
+  .blurb {
+    margin: 14px 0 0;
+    font-family: var(--body);
+    font-weight: 350;
+    font-size: var(--t-base);
+    line-height: 1.6;
+    color: var(--bone-warm);
+    max-width: 38ch;
+  }
+  html[data-lang="ka"] .blurb { font-family: var(--ka); font-weight: 400; }
+
+  @media (max-width: 720px) {
+    .zz-classics { padding: 64px 22px 56px; }
+    .head { margin-bottom: 40px; }
+    .head .sub { font-size: var(--t-base); }
+    .grid { grid-template-columns: 1fr; }
+    .card { padding: 28px 24px 24px; }
+    .name { font-size: var(--t-lg); }
+    .blurb { font-size: var(--t-base); margin-top: 12px; }
+  }
+</style>
