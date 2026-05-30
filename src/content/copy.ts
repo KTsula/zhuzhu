@@ -356,18 +356,18 @@ export const footer = {
 
 export const menuPage = {
   en: {
-    head: 'The signature three.',
-    sub: 'Three cubes. Each set by hand in a small Tbilisi atelier. One spread per cocktail dessert.',
-    closerHead: 'A custom fourth.',
-    closerSub: 'Direct a signature of your own. A flavour from your menu, your wine, your story.',
-    closerCta: 'build a box',
+    head: 'Three signatures, and beyond.',
+    sub: 'Three Georgian-inspired signatures, hand-set in Tbilisi. Classics beneath them. One cube per bite, eight to a set.',
+    closerHead: 'A signature of your own.',
+    closerSub: 'Direct a flavour from your menu, your wine, your story. We set it the way we set ours.',
+    closerCta: 'book your event',
   },
   ka: {
-    head: 'სამი ხელწერა.',
-    sub: 'სამი კუბი. თითოეული ხელით აწყობილი თბილისის პატარა ატელიეში. თითო კოქტეილ-დესერტს თავისი გვერდი აქვს.',
-    closerHead: 'შენი მეოთხე ხელწერა.',
-    closerSub: 'შექმენი შენი ხელწერა: გემო შენი მენიუდან, ღვინიდან ან ისტორიიდან.',
-    closerCta: 'ააწყვე ყუთი',
+    head: 'სამი ხელწერა და მეტი.',
+    sub: 'სამი ქართული საავტორო გემო, თბილისში ხელით აწყობილი. ქვემოთ — კლასიკა. ერთი ლუკმა, რვა ერთ ნაკრებში.',
+    closerHead: 'შენი საავტორო გემო.',
+    closerSub: 'მიჰყევი მენიუს, ღვინოს ან ისტორიას. ჩვენ იმავე ფორმით ვაყენებთ, როგორც ჩვენიანებს.',
+    closerCta: 'დაჯავშნე ღონისძიება',
   },
 };
 
