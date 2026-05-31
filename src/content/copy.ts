@@ -8,12 +8,10 @@ export const nav = {
 export const hero = {
   en: {
     slogan: 'Cocktail desserts. Set by hand, in Tbilisi.',
-    sub: 'Three cubes. Served in bites, never in glasses.',
     cta: 'book your event',
   },
   ka: {
     slogan: 'კოქტეილ-დესერტები. ხელით აწყობილი თბილისში.',
-    sub: 'სამი კუბი. ლუკმად მიწოდებული, არასოდეს — ჭიქით.',
     cta: 'დაჯავშნე ღონისძიება',
   },
 };
@@ -291,6 +289,7 @@ export const booking = {
     success: 'thank you. we have your brief and will answer within a working day.',
     failure: 'something went wrong. write to hello@zhuzhu.ge directly.',
     foot: 'No automation. A real person reads this.',
+    tasting: 'Planning a large event? We can set up a private tasting first — just mention it in your message.',
   },
   ka: {
     head: 'დაჯავშნე ღონისძიება',
@@ -308,6 +307,7 @@ export const booking = {
     success: 'მადლობა. ბრიფი მივიღეთ და ერთ სამუშაო დღეში გიპასუხებთ.',
     failure: 'რაღაც შეცდომა მოხდა. მოგვწერეთ პირდაპირ hello@zhuzhu.ge.',
     foot: 'ცოცხალი ადამიანი წაიკითხავს.',
+    tasting: 'გეგმავთ დიდ ღონისძიებას? შეგვიძლია წინასწარ კერძო დეგუსტაცია მოვაწყოთ — უბრალოდ მიუთითეთ შეტყობინებაში.',
   },
 };
 
@@ -591,5 +591,26 @@ export const pageMeta = {
           desc: 'You tasted us tonight. Stay close — monthly flavours, birthday perks, and the first word on the box.' },
     ka: { title: 'სია. ჟუჟუ, კოქტეილ-დესერტები.',
           desc: 'ჩვენ დღეს გაგვინსინჯე. დაუკავშირდი ჩვენს სიას — ყოველთვიური გემოები, დაბადების დღის სიურპრიზები და ნაკრების პირველი ცნობები.' },
+  },
+};
+
+export const serve = {
+  en: {
+    eyebrow: 'how we serve',
+    head: 'Two ways to have us.',
+    modes: [
+      { n: '01', title: 'Chilled delivery', body: 'We set the cubes the day before and deliver them chilled within Tbilisi — boxed, labelled with allergens, ready to plate. You arrange them; we keep it simple.' },
+      { n: '02', title: 'Full-event service', body: 'For weddings, brand evenings and larger events, our team comes to you. We bring the cubes, present and serve them, and stay through the night so every guest is looked after.' },
+    ],
+    note: 'Not sure which fits? Tell us about your event in the form below — we will recommend the right one.',
+  },
+  ka: {
+    eyebrow: 'როგორ ვმსახურობთ',
+    head: 'ორი გზა, რომ ჩვენთან იყოთ.',
+    modes: [
+      { n: '01', title: 'გაგრილებული მიწოდება', body: 'კუბებს წინა დღეს ვამზადებთ და თბილისის ფარგლებში გაგრილებულს გიგზავნით — ყუთით, ალერგენების მითითებით და მზად დასაწყობად. დანარჩენს თქვენ აწყობთ; ჩვენ მარტივად ვტოვებთ.' },
+      { n: '02', title: 'სრული მომსახურება ღონისძიებაზე', body: 'ქორწილებზე, ბრენდის საღამოებსა და დიდ ღონისძიებებზე ჩვენი გუნდი თქვენთან მოდის. მოგვაქვს კუბები, ვაწყობთ და ვმასპინძლობთ, საღამოს ბოლომდე ვრჩებით, რომ ყველა სტუმარი მოვლილი იყოს.' },
+    ],
+    note: 'არ ხართ დარწმუნებული, რომელი გერგებათ? მოგვიყევით თქვენი ღონისძიების შესახებ ქვემოთ — შემოგთავაზებთ სწორ ვარიანტს.',
   },
 };

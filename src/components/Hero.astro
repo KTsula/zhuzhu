@@ -7,11 +7,6 @@ import { hero } from '../content/copy';
     <span class="lng-ka">{hero.ka.slogan}</span>
   </h1>
 
-  <p class="sub">
-    <span class="lng-en">{hero.en.sub}</span>
-    <span class="lng-ka">{hero.ka.sub}</span>
-  </p>
-
   <div class="cta-wrap">
     <a class="cta" href="/#book">
       <span class="lng-en">{hero.en.cta}</span>
@@ -32,17 +27,6 @@ import { hero } from '../content/copy';
     font-size: var(--t-display);
     margin: 0;
   }
-  .sub {
-    font-family: var(--body);
-    font-weight: 350;
-    font-size: var(--t-lg);
-    color: var(--bone-warm);
-    line-height: 1.55;
-    max-width: 38ch;
-    margin: 36px auto 0;
-  }
-  html[data-lang="ka"] .sub { font-family: var(--ka); font-weight: 400; }
-
   .cta-wrap {
     margin-top: 56px;
     display: flex;
@@ -51,7 +35,6 @@ import { hero } from '../content/copy';
 
   @media (max-width: 720px) {
     .zz-hero { padding: 96px 22px 88px; }
-    .sub { font-size: var(--t-base); margin-top: 28px; }
     .cta-wrap { margin-top: 44px; }
   }
 </style>

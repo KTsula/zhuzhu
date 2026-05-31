@@ -68,9 +68,9 @@ export const POST: APIRoute = async ({ request }) => {
     ],
   });
 
-  const apiKey = import.meta.env.RESEND_API_KEY;
-  const from   = import.meta.env.LEADS_FROM ?? 'ZhuZhu Leads <leads@zhuzhu.ge>';
-  const to     = import.meta.env.LEADS_TO   ?? 'hello@zhuzhu.ge';
+  const apiKey = process.env.RESEND_API_KEY;
+  const from   = process.env.LEADS_FROM ?? 'ZhuZhu Leads <leads@zhuzhu.ge>';
+  const to     = process.env.LEADS_TO   ?? 'hello@zhuzhu.ge';
 
   if (!apiKey) {
     console.error('[/api/lead] RESEND_API_KEY missing — payload:', text);

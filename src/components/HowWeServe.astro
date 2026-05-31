@@ -1,0 +1,96 @@
+---
+import { serve } from '../content/copy';
+---
+<section class="zz-serve">
+  <header class="serve-head">
+    <span class="label lng-en">{serve.en.eyebrow}</span>
+    <span class="label lng-ka">{serve.ka.eyebrow}</span>
+    <h2 class="display title">
+      <span class="lng-en">{serve.en.head}</span>
+      <span class="lng-ka">{serve.ka.head}</span>
+    </h2>
+  </header>
+
+  <div class="modes">
+    {serve.en.modes.map((m) => (
+      <article class="mode lng-en">
+        <span class="mode-no">{m.n}</span>
+        <h3 class="mode-title">{m.title}</h3>
+        <p class="mode-body">{m.body}</p>
+      </article>
+    ))}
+    {serve.ka.modes.map((m) => (
+      <article class="mode lng-ka">
+        <span class="mode-no">{m.n}</span>
+        <h3 class="mode-title">{m.title}</h3>
+        <p class="mode-body">{m.body}</p>
+      </article>
+    ))}
+  </div>
+
+  <p class="serve-note">
+    <span class="lng-en">{serve.en.note}</span>
+    <span class="lng-ka">{serve.ka.note}</span>
+  </p>
+</section>
+
+<style>
+  .zz-serve {
+    background: var(--night);
+    padding: 120px 40px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .serve-head { max-width: 680px; margin-bottom: 64px; }
+  .serve-head .label { display: block; margin-bottom: 18px; }
+  .serve-head .title { font-size: var(--t-3xl); margin: 0; }
+
+  .modes {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+  }
+  .mode { border-top: 1px solid rgba(198, 152, 89, 0.25); padding-top: 28px; }
+  .mode-no {
+    font-family: var(--display);
+    font-style: italic;
+    font-weight: 300;
+    font-size: var(--t-lg);
+    color: var(--gold);
+  }
+  .mode-title {
+    font-family: var(--display);
+    font-style: italic;
+    font-weight: 300;
+    font-size: var(--t-xl);
+    color: var(--bone);
+    margin: 14px 0 0;
+  }
+  html[data-lang="ka"] .mode-title { font-family: var(--ka); font-weight: 500; }
+  .mode-body {
+    font-family: var(--body);
+    font-weight: 350;
+    font-size: var(--t-base);
+    color: var(--bone-warm);
+    line-height: 1.65;
+    margin: 18px 0 0;
+    max-width: 46ch;
+  }
+  html[data-lang="ka"] .mode-body { font-family: var(--ka); font-weight: 400; }
+
+  .serve-note {
+    margin: 56px 0 0;
+    font-family: var(--body);
+    font-weight: 350;
+    font-size: var(--t-base);
+    color: var(--ash);
+    max-width: 56ch;
+  }
+  html[data-lang="ka"] .serve-note { font-family: var(--ka); font-weight: 400; }
+
+  @media (max-width: 720px) {
+    .zz-serve { padding: 80px 22px; }
+    .serve-head { margin-bottom: 44px; }
+    .modes { grid-template-columns: 1fr; gap: 36px; }
+  }
+</style>

@@ -56,6 +56,11 @@ const fk = booking.ka.fields;
         <textarea name="note" data-ph-en={f.note.ph} data-ph-ka={fk.note.ph} placeholder={f.note.ph}></textarea>
       </div>
 
+      <p class="tasting-note">
+        <span class="lng-en">{booking.en.tasting}</span>
+        <span class="lng-ka">{booking.ka.tasting}</span>
+      </p>
+
       <div class="bottom">
         <span class="foot">
           <span class="lng-en">{booking.en.foot}</span>
@@ -316,6 +321,17 @@ const fk = booking.ka.fields;
     max-width: 36ch;
   }
   html[data-lang="ka"] .foot { font-family: var(--ka); font-weight: 400; font-size: var(--t-base); }
+
+  .tasting-note {
+    font-family: var(--body);
+    font-weight: 350;
+    font-size: var(--t-xs);
+    color: var(--ash-dim);
+    line-height: 1.5;
+    max-width: 52ch;
+    margin: -12px 0 0;
+  }
+  html[data-lang="ka"] .tasting-note { font-family: var(--ka); font-weight: 400; font-size: var(--t-sm); }
 
   .result {
     font-family: var(--body);
