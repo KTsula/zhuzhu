@@ -205,21 +205,17 @@ export const moreFlavours = {
 export const packages = {
   en: {
     label: 'order',
-    head: 'Three suggested boxes — or build your own.',
+    head: 'Three suggested boxes.',
     sectionTitle: 'Suggested boxes.',
     sub: 'The signature three are priced per cube. Minimum order ₾250. We set the cubes the day before and deliver them chilled within Tbilisi.',
     popular: 'most ordered',
-    buildCta: 'build your box  →',
-    buildNote: 'None of these fit? Build your own box — choose the cubes, set the count, see the total live.',
   },
   ka: {
     label: 'შეკვეთა',
-    head: 'სამი შემოთავაზებული ყუთი — ან ააწყვე შენი.',
+    head: 'სამი შემოთავაზებული ყუთი.',
     sectionTitle: 'შემოთავაზებული ყუთები.',
     sub: 'სამი ხელწერის ფასი თითო კუბზე ითვლება. მინიმალური შეკვეთა ₾250. კუბებს წინა დღეს ვამზადებთ და თბილისის ფარგლებში გაგრილებულს გიგზავნით.',
     popular: 'ყველაზე ხშირად შეკვეთილი',
-    buildCta: 'ააწყვე ყუთი  →',
-    buildNote: 'არცერთი ვარიანტი არ გერგება? ააწყვე შენი ყუთი — აირჩიე კუბები, განსაზღვრე რაოდენობა და ჯამი მაშინვე ნახე.',
   },
 };
 

@@ -63,13 +63,6 @@ import { packages, packageList, signatures } from '../content/copy';
       );
     })}
   </div>
-
-  <footer class="foot">
-    <p class="foot-note">
-      <span class="lng-en">{packages.en.buildNote}</span>
-      <span class="lng-ka">{packages.ka.buildNote}</span>
-    </p>
-  </footer>
 </section>
 
 <style>
@@ -167,18 +160,6 @@ import { packages, packageList, signatures } from '../content/copy';
   }
   html[data-lang="ka"] .cube-chip { font-family: var(--ka); }
   .row-cta-wrap { display: flex; }
-
-  .foot { margin-top: 56px; }
-  .foot-note {
-    font-family: var(--body);
-    font-weight: 350;
-    font-size: var(--t-base);
-    color: var(--ash);
-    line-height: 1.65;
-    max-width: 56ch;
-    margin: 0;
-  }
-  html[data-lang="ka"] .foot-note { font-family: var(--ka); font-weight: 400; }
 
   @media (max-width: 720px) {
     .zz-packages { padding: 80px 22px; }
