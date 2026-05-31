@@ -8,12 +8,12 @@
 
   <rect width="91" height="61" fill="#0a0706"/>
 
-  <!-- Brand wordmark at top, inline bilingual -->
+  <!-- Brand wordmark at top, inline bilingual (Georgian first) -->
   <text x="45.5" y="11.5"
         font-family="Spectral, Georgia, serif"
         font-style="italic" font-weight="400" font-size="4"
         fill="#ede1c4" text-anchor="middle">
-    <tspan>ZhuZhu</tspan><tspan fill="#c69859" dx="2" dy="-0.2">·</tspan><tspan dx="2" dy="0.2" font-family="'Noto Serif Georgian', Sylfaen, Georgia, serif" font-size="3.6">ჟუჟუ</tspan>
+    <tspan font-family="'Noto Serif Georgian', Sylfaen, Georgia, serif" font-size="3.6" dy="-0.1">ჟუჟუ</tspan><tspan fill="#c69859" dx="2.5" dy="-0.1">·</tspan><tspan dx="2.5" dy="0.2" letter-spacing="0.08em">ZHUZHU</tspan>
   </text>
 
   <!-- Hero cube (Honey Lemon — tarragon-lime.png) -->

@@ -75,12 +75,12 @@ const front = `<svg xmlns="http://www.w3.org/2000/svg"
   ${fontImport}
   <rect width="91" height="61" fill="${NIGHT}"/>
 
-  <!-- Brand wordmark at top, inline bilingual -->
+  <!-- Brand wordmark at top, inline bilingual (Georgian first) -->
   <text x="45.5" y="11.5"
         font-family="Spectral, Georgia, serif"
         font-style="italic" font-weight="400" font-size="4"
         fill="${BONE}" text-anchor="middle">
-    <tspan>ZhuZhu</tspan><tspan fill="${GOLD}" dx="2" dy="-0.2">·</tspan><tspan dx="2" dy="0.2" font-family="'Noto Serif Georgian', Sylfaen, Georgia, serif" font-size="3.6">ჟუჟუ</tspan>
+    <tspan font-family="'Noto Serif Georgian', Sylfaen, Georgia, serif" font-size="3.6" dy="-0.1">ჟუჟუ</tspan><tspan fill="${GOLD}" dx="2.5" dy="-0.1">·</tspan><tspan dx="2.5" dy="0.2" letter-spacing="0.08em">ZHUZHU</tspan>
   </text>
 
   <!-- Hero cube (Honey Lemon — tarragon-lime.png) -->
@@ -146,14 +146,14 @@ function back({ nameEn = null, nameKa = null, roleEn = null } = {}) {
     ${(roleEn ?? 'Co-founder').toUpperCase()}
   </text>`;
   } else {
-    // Generic card: inline "ZhuZhu · ჟუჟუ" + tagline (unchanged from v3).
+    // Generic card: inline "ჟუჟუ · ZHUZHU" (Georgian first) + tagline.
     nameBlock = `
-  <!-- Bilingual brand wordmark inline -->
+  <!-- Bilingual brand wordmark inline (Georgian first) -->
   <text x="40" y="22"
         font-family="Spectral, Georgia, serif"
         font-style="italic" font-weight="400" font-size="6"
         fill="${BONE}">
-    <tspan>ZhuZhu</tspan><tspan fill="${GOLD}" dx="2.5" dy="-0.3">·</tspan><tspan dx="2.5" dy="0.3" font-family="'Noto Serif Georgian', Sylfaen, Georgia, serif" font-size="5.4">ჟუჟუ</tspan>
+    <tspan font-family="'Noto Serif Georgian', Sylfaen, Georgia, serif" font-size="5.4" dy="-0.1">ჟუჟუ</tspan><tspan fill="${GOLD}" dx="3" dy="-0.2">·</tspan><tspan dx="3" dy="0.3" letter-spacing="0.08em">ZHUZHU</tspan>
   </text>
   <!-- Tagline in tracked caps -->
   <text x="40" y="29"
