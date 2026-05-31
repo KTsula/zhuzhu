@@ -4,9 +4,9 @@
 // Outputs:
 //   public/cards/front.svg              — same front on every card
 //   public/cards/back-generic.svg       — generic (brand)
-//   public/cards/back-keti.svg          — Keti · ქეთი / Co-founder
-//   public/cards/back-anna.svg          — Anna · ანა / Co-founder
-//   public/cards/back-lado.svg          — Lado · ლადო / Co-founder
+//   public/cards/back-keti.svg          — Keti Sulamanidze · ქეთი სულამანიძე
+//   public/cards/back-anna.svg          — Anna Chigladze · ანა ჭიღლაძე
+//   public/cards/back-lado.svg          — Vladimer Rusetsky · ვლადიმერ რუსეცკი
 //
 // Spec:
 //   Trim: 85 x 55 mm (European business-card standard)
@@ -21,7 +21,7 @@
 //
 // Recommended finishes:
 //   - 400 gsm matte black uncoated stock, OR silk-laminated black
-//   - Gold foil stamp on: hairlines, role caps, gold tagline
+//   - Gold foil stamp on hairlines, role caps, "შეჟუჟუნდი", the middle dot
 //   - Keep QR ink-printed (foil reflects → camera fails to scan)
 
 import QRCode from 'qrcode';
@@ -47,15 +47,12 @@ const qrPngBuf = await QRCode.toBuffer('https://zhuzhu.ge/', {
 });
 const qrUri = `data:image/png;base64,${qrPngBuf.toString('base64')}`;
 
-// Font import — embedded so the rendered preview pulls Google Fonts.
-// For final print, convert text → outlines in your design app.
 const fontImport = `
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;1,300;1,400&amp;family=Noto+Serif+Georgian:wght@400;500&amp;family=Manrope:wght@500;600&amp;display=swap');
   </style>
 `;
 
-// Cropmarks at the 3-mm trim — visual aids only.
 const cropmarks = `
   <g stroke="${GOLD}" stroke-width="0.05" opacity="0.3" fill="none">
     <line x1="0" y1="3" x2="2" y2="3"/>     <line x1="3" y1="0" x2="3" y2="2"/>
@@ -65,9 +62,12 @@ const cropmarks = `
   </g>
 `;
 
+// Tiny logo signature for the back corner
+const logoMark = `<image href="${logoUri}" x="78" y="49" width="9" height="9" preserveAspectRatio="xMidYMid meet" opacity="0.85"/>`;
+
 // ───── FRONT ──────────────────────────────────────────────────────
-// Top: small logo (brand signature)
-// Middle: cube (hero)
+// Top: "ZhuZhu · ჟუჟუ" wordmark text (no logo image — moved to back)
+// Middle: cube (the hero)
 // Below cube: "Cocktails, in bites." + gold em-dash + "შეჟუჟუნდი"
 const front = `<svg xmlns="http://www.w3.org/2000/svg"
      width="91mm" height="61mm"
@@ -75,11 +75,16 @@ const front = `<svg xmlns="http://www.w3.org/2000/svg"
   ${fontImport}
   <rect width="91" height="61" fill="${NIGHT}"/>
 
-  <!-- Logo at top -->
-  <image href="${logoUri}" x="38" y="4.5" width="15" height="15" preserveAspectRatio="xMidYMid meet"/>
+  <!-- Brand wordmark at top, inline bilingual -->
+  <text x="45.5" y="11.5"
+        font-family="Spectral, Georgia, serif"
+        font-style="italic" font-weight="400" font-size="4"
+        fill="${BONE}" text-anchor="middle">
+    <tspan>ZhuZhu</tspan><tspan fill="${GOLD}" dx="2" dy="-0.2">·</tspan><tspan dx="2" dy="0.2" font-family="'Noto Serif Georgian', Sylfaen, Georgia, serif" font-size="3.6">ჟუჟუ</tspan>
+  </text>
 
   <!-- Hero cube (Honey Lemon — tarragon-lime.png) -->
-  <image href="${cubeUri}" x="36" y="18" width="19" height="19" preserveAspectRatio="xMidYMid meet"/>
+  <image href="${cubeUri}" x="35" y="16" width="21" height="21" preserveAspectRatio="xMidYMid meet"/>
 
   <!-- English tagline -->
   <text x="45.5" y="44"
@@ -105,18 +110,60 @@ const front = `<svg xmlns="http://www.w3.org/2000/svg"
 </svg>`;
 
 // ───── BACK ───────────────────────────────────────────────────────
-// Left column (8–32): QR centred vertically + "SCAN" caption
+// Left column (9–32): QR + "SCAN" caption
 // Right column (38–85):
-//   English name (italic Spectral)
-//   Georgian name (italic Noto Serif Georgian)
-//   "CO-FOUNDER" / "COCKTAIL DESSERTS" tracked caps
-//   Contact stack
-//   Hairline + "TBILISI · 2024" footer
+//   Generic: "ZhuZhu · ჟუჟუ" inline + "COCKTAIL DESSERTS"
+//   Founder: Georgian full name (italic Noto Serif Georgian) ABOVE
+//            English full name (italic Spectral, smaller) + "CO-FOUNDER"
+//   Contact stack below
+//   Tiny logo bottom-right corner as brand signature
 function back({ nameEn = null, nameKa = null, roleEn = null } = {}) {
-  // Generic card uses the wordmark in the name slot.
-  const headEn  = nameEn ?? 'ZhuZhu';
-  const headKa  = nameKa ?? 'ჟუჟუ';
-  const role    = (roleEn ?? 'Cocktail desserts').toUpperCase();
+  let nameBlock;
+
+  if (nameEn && nameKa) {
+    // Founder card: Georgian on top, English below, smaller font.
+    nameBlock = `
+  <!-- Georgian full name (above) -->
+  <text x="40" y="20"
+        font-family="'Noto Serif Georgian', Sylfaen, Georgia, serif"
+        font-style="italic" font-weight="400" font-size="4.6"
+        fill="${BONE}">
+    ${nameKa}
+  </text>
+  <!-- English full name (below, smaller) -->
+  <text x="40" y="25.5"
+        font-family="Spectral, Georgia, serif"
+        font-style="italic" font-weight="300" font-size="3.8"
+        fill="${BONE_WARM}">
+    ${nameEn}
+  </text>
+  <!-- Role -->
+  <text x="40" y="31"
+        font-family="Manrope, sans-serif"
+        font-weight="500" font-size="2.3"
+        fill="${GOLD}"
+        letter-spacing="0.32">
+    ${(roleEn ?? 'Co-founder').toUpperCase()}
+  </text>`;
+  } else {
+    // Generic card: inline "ZhuZhu · ჟუჟუ" + tagline (unchanged from v3).
+    nameBlock = `
+  <!-- Bilingual brand wordmark inline -->
+  <text x="40" y="22"
+        font-family="Spectral, Georgia, serif"
+        font-style="italic" font-weight="400" font-size="6"
+        fill="${BONE}">
+    <tspan>ZhuZhu</tspan><tspan fill="${GOLD}" dx="2.5" dy="-0.3">·</tspan><tspan dx="2.5" dy="0.3" font-family="'Noto Serif Georgian', Sylfaen, Georgia, serif" font-size="5.4">ჟუჟუ</tspan>
+  </text>
+  <!-- Tagline in tracked caps -->
+  <text x="40" y="29"
+        font-family="Manrope, sans-serif"
+        font-weight="500" font-size="2.3"
+        fill="${GOLD}"
+        letter-spacing="0.32">
+    COCKTAIL DESSERTS
+  </text>`;
+  }
 
   return `<svg xmlns="http://www.w3.org/2000/svg"
      width="91mm" height="61mm"
@@ -124,7 +171,7 @@ function back({ nameEn = null, nameKa = null, roleEn = null } = {}) {
   ${fontImport}
   <rect width="91" height="61" fill="${NIGHT}"/>
 
-  <!-- QR (homepage), bone on night, centred vertically -->
+  <!-- QR (homepage), bone on night -->
   <image href="${qrUri}" x="9" y="19" width="23" height="23"/>
   <text x="20.5" y="47"
         font-family="Manrope, sans-serif"
@@ -134,41 +181,29 @@ function back({ nameEn = null, nameKa = null, roleEn = null } = {}) {
     SCAN
   </text>
 
-  <!-- Bilingual name: "<EN> · <KA>" with gold middle dot -->
-  <text x="40" y="22"
-        font-family="Spectral, Georgia, serif"
-        font-style="italic" font-weight="400" font-size="6"
-        fill="${BONE}">
-    <tspan>${headEn}</tspan><tspan fill="${GOLD}" dx="2.5" dy="-0.3">·</tspan><tspan dx="2.5" dy="0.3" font-family="'Noto Serif Georgian', Sylfaen, Georgia, serif" font-size="5.4">${headKa}</tspan>
-  </text>
-
-  <!-- Role / tagline in tracked caps -->
-  <text x="40" y="29"
-        font-family="Manrope, sans-serif"
-        font-weight="500" font-size="2.3"
-        fill="${GOLD}"
-        letter-spacing="0.32">
-    ${role}
-  </text>
+  ${nameBlock}
 
   <!-- Contact stack -->
   <g font-family="Spectral, Georgia, serif"
      font-style="italic" font-weight="300"
      font-size="3.2" fill="${BONE_WARM}">
-    <text x="40" y="38">hello@zhuzhu.ge</text>
-    <text x="40" y="43">+995 XXX XX XX XX</text>
-    <text x="40" y="48">@she_zhuzhu_ndi</text>
+    <text x="40" y="40">hello@zhuzhu.ge</text>
+    <text x="40" y="45">+995 XXX XX XX XX</text>
+    <text x="40" y="50">@she_zhuzhu_ndi</text>
   </g>
+
+  <!-- Logo signature in the bottom-right corner -->
+  ${logoMark}
 
   ${cropmarks}
 </svg>`;
 }
 
 const backs = [
-  { variant: 'generic', nameEn: null,   nameKa: null,    roleEn: null         },
-  { variant: 'keti',    nameEn: 'Keti', nameKa: 'ქეთი', roleEn: 'Co-founder' },
-  { variant: 'anna',    nameEn: 'Anna', nameKa: 'ანა',  roleEn: 'Co-founder' },
-  { variant: 'lado',    nameEn: 'Lado', nameKa: 'ლადო', roleEn: 'Co-founder' },
+  { variant: 'generic', nameEn: null,                  nameKa: null,                       roleEn: null         },
+  { variant: 'keti',    nameEn: 'Keti Sulamanidze',    nameKa: 'ქეთი სულამანიძე',    roleEn: 'Co-founder' },
+  { variant: 'anna',    nameEn: 'Anna Chigladze',      nameKa: 'ანა ჭიღლაძე',        roleEn: 'Co-founder' },
+  { variant: 'lado',    nameEn: 'Vladimer Rusetsky',   nameKa: 'ვლადიმერ რუსეცკი',   roleEn: 'Co-founder' },
 ];
 
 fs.mkdirSync('public/cards', { recursive: true });
