@@ -24,7 +24,7 @@
         font-family="Spectral, Georgia, serif"
         font-style="italic" font-weight="400" font-size="6"
         fill="#ede1c4">
-    <tspan font-family="'Noto Serif Georgian', Sylfaen, Georgia, serif" font-size="5.4" dy="-0.1">ჟუჟუ</tspan><tspan fill="#c69859" dx="3" dy="-0.2">·</tspan><tspan dx="3" dy="0.3" letter-spacing="0.08em">ZHUZHU</tspan>
+    <tspan font-family="'Noto Serif Georgian', Sylfaen, Georgia, serif" font-size="5.4" dy="-0.1">ჟუჟუ</tspan><tspan fill="#c69859" dx="3" dy="-0.2">·</tspan><tspan dx="3" dy="0.3">ZhuZhu</tspan>
   </text>
   <!-- Tagline in tracked caps -->
   <text x="40" y="29"

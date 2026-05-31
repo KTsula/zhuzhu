@@ -80,7 +80,7 @@ const front = `<svg xmlns="http://www.w3.org/2000/svg"
         font-family="Spectral, Georgia, serif"
         font-style="italic" font-weight="400" font-size="4"
         fill="${BONE}" text-anchor="middle">
-    <tspan font-family="'Noto Serif Georgian', Sylfaen, Georgia, serif" font-size="3.6" dy="-0.1">ჟუჟუ</tspan><tspan fill="${GOLD}" dx="2.5" dy="-0.1">·</tspan><tspan dx="2.5" dy="0.2" letter-spacing="0.08em">ZHUZHU</tspan>
+    <tspan font-family="'Noto Serif Georgian', Sylfaen, Georgia, serif" font-size="3.6" dy="-0.1">ჟუჟუ</tspan><tspan fill="${GOLD}" dx="2.5" dy="-0.1">·</tspan><tspan dx="2.5" dy="0.2">ZhuZhu</tspan>
   </text>
 
   <!-- Hero cube (Honey Lemon — tarragon-lime.png) -->
@@ -153,7 +153,7 @@ function back({ nameEn = null, nameKa = null, roleEn = null } = {}) {
         font-family="Spectral, Georgia, serif"
         font-style="italic" font-weight="400" font-size="6"
         fill="${BONE}">
-    <tspan font-family="'Noto Serif Georgian', Sylfaen, Georgia, serif" font-size="5.4" dy="-0.1">ჟუჟუ</tspan><tspan fill="${GOLD}" dx="3" dy="-0.2">·</tspan><tspan dx="3" dy="0.3" letter-spacing="0.08em">ZHUZHU</tspan>
+    <tspan font-family="'Noto Serif Georgian', Sylfaen, Georgia, serif" font-size="5.4" dy="-0.1">ჟუჟუ</tspan><tspan fill="${GOLD}" dx="3" dy="-0.2">·</tspan><tspan dx="3" dy="0.3">ZhuZhu</tspan>
   </text>
   <!-- Tagline in tracked caps -->
   <text x="40" y="29"
