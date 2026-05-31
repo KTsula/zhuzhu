@@ -63,7 +63,7 @@ export const signatures: SignatureItem[] = [
   {
     id: '01',
     line: { en: 'Signature · Georgian-inspired', ka: 'ქართული საავტორო გემოები' },
-    name: { en: 'Churchkhela Cream', ka: 'ჩურჩხელის კრემი' },
+    name: { en: 'Cream Kiss', ka: 'კრემ-კოცნა' },
     blurb: {
       en: 'A walnut churchkhela, caramelised the day before and broken by hand, folded into Tbilisi double-cream and dark muscovado. The walnut sits on top while the cube is still warm — it keeps the crunch all the way through the bite.',
       ka: 'ნიგვზის ჩურჩხელა, წინა დღეს კარამელიზებული და ხელით დატეხილი, თბილისურ ორმაგ ნაღებსა და მუქი მუსკოვადოს შაქარში შერეული. ნიგოზი კუბს ზემოდან ედება, სანამ ჯერ კიდევ თბილია — ხრაშუნი ბოლომდე მიჰყვება თითოეულ ლუკმას.',
@@ -71,7 +71,7 @@ export const signatures: SignatureItem[] = [
     meta: {
       line: { en: 'Signature · Georgian-inspired', ka: 'ქართული საავტორო გემოები' },
     },
-    img: '/cubes/churchkhela-cream.png',
+    img: '/cubes/cream-kiss.png',
     accent: 'rgba(196, 140, 70, 0.30)',
     price: 14,
   },
@@ -568,9 +568,9 @@ export const pageMeta = {
   },
   menu: {
     en: { title: 'Menu. ZhuZhu, cocktail desserts.',
-          desc: 'Three signature cocktail desserts hand-set in Tbilisi. Churchkhela Cream, Honey Chacha, Kinza Garden.' },
+          desc: 'Three signature cocktail desserts hand-set in Tbilisi. Cream Kiss, Honey Chacha, Kinza Garden.' },
     ka: { title: 'მენიუ. ჟუჟუ, კოქტეილ-დესერტები.',
-          desc: 'სამი საფირმო კოქტეილ-დესერტი, ხელით აწყობილი თბილისში: ჩურჩხელის კრემი, თაფლის ჭაჭა, ქინძის ბაღი.' },
+          desc: 'სამი საფირმო კოქტეილ-დესერტი, ხელით აწყობილი თბილისში: კრემ-კოცნა, თაფლის ჭაჭა, ქინძის ბაღი.' },
   },
   order: {
     en: { title: 'Order. ZhuZhu, cocktail desserts.',
