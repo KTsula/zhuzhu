@@ -1,0 +1,137 @@
+---
+// Preview page for the signature stand cards. Not linked from nav/sitemap —
+// just a local viewing surface during design iteration. Safe to delete
+// when the cards are finalised and at the printer.
+
+const cards = [
+  { key: 'honey-chacha', label: 'Honey Chacha · თაფლის ჭაჭა' },
+  { key: 'cream-kiss',   label: 'Cream Kiss · კრემის კოცნა' },
+  { key: 'kinza-garden', label: 'Kinza Garden · ქინძის ბაღი' },
+];
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ZhuZhu — Signature stand card preview</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600&family=Spectral:ital,wght@0,300;1,300;1,400&family=Noto+Serif+Georgian:wght@400&display=swap" />
+    <style>
+      :root {
+        --night: #0a0706;
+        --graphite: #14100d;
+        --bone: #ede1c4;
+        --bone-warm: #e3d3ab;
+        --ash: #b3a48a;
+        --gold: #c69859;
+      }
+      * { box-sizing: border-box; }
+      html, body {
+        margin: 0; padding: 0;
+        background: var(--graphite);
+        color: var(--bone);
+        font-family: Manrope, sans-serif;
+        min-height: 100vh;
+      }
+      .page { max-width: 960px; margin: 0 auto; padding: 56px 24px 80px; }
+      header { text-align: center; margin-bottom: 56px; }
+      h1 {
+        font-family: Spectral, Georgia, serif;
+        font-style: italic; font-weight: 300;
+        font-size: clamp(28px, 4vw, 40px);
+        margin: 0;
+        letter-spacing: -0.01em;
+      }
+      .meta { margin-top: 16px; color: var(--ash); font-size: 14px; letter-spacing: 0.04em; }
+      .cards { display: flex; flex-direction: column; gap: 56px; }
+      .card-wrap { display: flex; flex-direction: column; gap: 14px; align-items: center; width: 100%; }
+      .card-stage {
+        position: relative;
+        width: 100%;
+        max-width: 720px;
+        aspect-ratio: 100 / 90;
+        box-shadow:
+          0 24px 70px rgba(0, 0, 0, 0.55),
+          0 4px 14px rgba(0, 0, 0, 0.65),
+          0 0 0 1px rgba(198, 152, 89, 0.10);
+        background: var(--night);
+      }
+      .card {
+        position: absolute; inset: 0;
+        width: 100%; height: 100%;
+        display: block;
+        object-fit: contain;
+      }
+      /* The insertion zone is the bottom 25 mm of a 90 mm card → 25/90 ≈ 27.78%. */
+      .insert-zone {
+        position: absolute;
+        left: 0; right: 0; bottom: 0;
+        height: 27.78%;
+        background-image: repeating-linear-gradient(
+          135deg,
+          rgba(198, 152, 89, 0.06) 0 6px,
+          rgba(198, 152, 89, 0) 6px 14px
+        );
+        border-top: 1px dashed rgba(198, 152, 89, 0.30);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        pointer-events: none;
+      }
+      .insert-label {
+        font-family: Manrope, sans-serif;
+        font-weight: 500;
+        font-size: 10px;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: rgba(179, 164, 138, 0.55);
+      }
+      .label {
+        font-family: Manrope, sans-serif;
+        font-weight: 500; font-size: 12px;
+        letter-spacing: 0.18em; text-transform: uppercase;
+        color: var(--gold);
+      }
+      .scale-note {
+        text-align: center; margin-top: 48px;
+        color: var(--ash); font-size: 13px; line-height: 1.6;
+        max-width: 60ch; margin-left: auto; margin-right: auto;
+      }
+      .scale-note em { font-family: Spectral, Georgia, serif; font-weight: 300; font-style: italic; }
+      @media (max-width: 720px) {
+        .page { padding: 36px 16px 60px; }
+        .cards { gap: 32px; }
+        header { margin-bottom: 36px; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <header>
+        <h1>Signature stand cards</h1>
+        <p class="meta">100 × 90 mm · top 65 mm visible · bottom 25 mm sits inside the wooden block</p>
+      </header>
+
+      <div class="cards">
+        {cards.map((c) => (
+          <figure class="card-wrap" style="margin:0">
+            <div class="card-stage">
+              <img class="card" src={`/products/card-${c.key}.png`} alt={c.label} />
+              <div class="insert-zone" aria-hidden="true">
+                <span class="insert-label">inside the wooden block — invisible</span>
+              </div>
+            </div>
+            <figcaption class="label">{c.label}</figcaption>
+          </figure>
+        ))}
+      </div>
+
+      <p class="scale-note">
+        Each card is 100 × 90 mm. The bottom <em>25 mm</em> sits inside
+        the wooden block and is never seen — every piece of typography
+        lives in the top 65 mm. The faint hatched band on the preview
+        marks that hidden zone.
+      </p>
+    </div>
+  </body>
+</html>
