@@ -35,7 +35,7 @@ const fk = booking.ka.fields;
         <div class="field">
           <label class="lng-en">{f.date.label}</label>
           <label class="lng-ka">{fk.date.label}</label>
-          <input type="text" name="date" data-ph-en={f.date.ph} data-ph-ka={fk.date.ph} placeholder={f.date.ph} />
+          <input type="text" name="date" id="zz-booking-date" autocomplete="off" data-ph-en={f.date.ph} data-ph-ka={fk.date.ph} placeholder={f.date.ph} />
         </div>
         <div class="field">
           <label class="lng-en">{f.guests.label}</label>
@@ -141,6 +141,80 @@ const fk = booking.ka.fields;
   })();
 </script>
 
+<script>
+  import flatpickr from 'flatpickr';
+  import { Georgian } from 'flatpickr/dist/l10n/ka.js';
+  import 'flatpickr/dist/flatpickr.css';
+
+  (function () {
+    const input = document.getElementById('zz-booking-date');
+    if (!input) return;
+
+    const build = () => {
+      const ka = document.documentElement.getAttribute('data-lang') === 'ka';
+      return flatpickr(input, {
+        dateFormat: 'j F Y',
+        minDate: 'today',
+        disableMobile: true,
+        monthSelectorType: 'static',
+        locale: ka ? Georgian : 'default',
+        onReady: (_dates, _str, fp) => fp.calendarContainer.classList.add('zz-cal'),
+      });
+    };
+
+    let fp = build();
+    document.addEventListener('langchange', () => {
+      const picked = fp.selectedDates[0];
+      fp.destroy();
+      fp = build();
+      if (picked) fp.setDate(picked, true);
+    });
+  })();
+</script>
+
+<style is:global>
+  /* Flatpickr calendar — themed to the ZhuZhu palette. The popup is appended
+     to <body>, so these rules are global, scoped via the .zz-cal class added on ready. */
+  .zz-cal.flatpickr-calendar {
+    background: var(--graphite);
+    border: 1px solid rgba(198, 152, 89, 0.3);
+    border-radius: 0;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
+    font-family: var(--body);
+  }
+  .zz-cal.flatpickr-calendar.arrowTop::before,
+  .zz-cal.flatpickr-calendar.arrowTop::after,
+  .zz-cal.flatpickr-calendar.arrowBottom::before,
+  .zz-cal.flatpickr-calendar.arrowBottom::after { display: none; }
+
+  .zz-cal .flatpickr-months,
+  .zz-cal .flatpickr-month { background: transparent; color: var(--bone); fill: var(--bone); }
+  .zz-cal .flatpickr-current-month input.cur-year { color: var(--bone); }
+  .zz-cal .flatpickr-monthDropdown-months { background: var(--graphite); color: var(--bone); font-weight: 500; }
+  .zz-cal .flatpickr-prev-month svg,
+  .zz-cal .flatpickr-next-month svg { fill: var(--ash); }
+  .zz-cal .flatpickr-prev-month:hover svg,
+  .zz-cal .flatpickr-next-month:hover svg { fill: var(--gold-bright); }
+
+  .zz-cal span.flatpickr-weekday { background: transparent; color: var(--ash); font-weight: 600; }
+  .zz-cal .flatpickr-day { color: var(--bone); border-radius: 0; border: 1px solid transparent; }
+  .zz-cal .flatpickr-day:hover { background: rgba(198, 152, 89, 0.15); border-color: transparent; }
+  .zz-cal .flatpickr-day.today { border-color: var(--gold); }
+  .zz-cal .flatpickr-day.selected,
+  .zz-cal .flatpickr-day.selected:hover {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: var(--night);
+    font-weight: 600;
+  }
+  .zz-cal .flatpickr-day.flatpickr-disabled,
+  .zz-cal .flatpickr-day.prevMonthDay,
+  .zz-cal .flatpickr-day.nextMonthDay { color: var(--ash-dim); }
+  .zz-cal .flatpickr-day.flatpickr-disabled { color: rgba(131, 117, 96, 0.35); }
+  .zz-cal .numInputWrapper span.arrowUp::after { border-bottom-color: var(--ash); }
+  .zz-cal .numInputWrapper span.arrowDown::after { border-top-color: var(--ash); }
+</style>
+
 <style>
   .zz-booking {
     padding: 120px 24px 140px;
@@ -243,7 +317,6 @@ const fk = booking.ka.fields;
   }
   html[data-lang="ka"] .foot { font-family: var(--ka); font-weight: 400; font-size: var(--t-base); }
 
-  /* Result: full-width tinted background, NO side-stripe border */
   .result {
     font-family: var(--body);
     font-weight: 400;
