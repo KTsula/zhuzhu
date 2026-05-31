@@ -35,13 +35,13 @@ export const sharedLabels = {
   en: {
     line: 'line',
     price: 'price',
-    perSet: '/ set',
+    perSet: '/ serving',
     language: 'language',
   },
   ka: {
     line: 'სერია',
     price: 'ფასი',
-    perSet: '/ ნაკრები',
+    perSet: '/ ულუფა',
     language: 'ენა',
   },
 };
@@ -110,7 +110,7 @@ export type ClassicSet = {
   name: { en: string; ka: string };
   blurb: { en: string; ka: string };
   accent: string;
-  price: number; // per-cube; displayed as price × 8 / set
+  price: number; // per-cube base; serving = price × 8
 };
 
 export const classics: ClassicSet[] = [
@@ -191,86 +191,14 @@ export const menuClassics = {
 
 export const moreFlavours = {
   en: {
-    eyebrow: 'and beyond the three',
+    eyebrow: 'and beyond the signatures',
     cta: 'See the full menu  →',
   },
   ka: {
-    eyebrow: 'სამის მიღმა',
+    eyebrow: 'ხელწერების მიღმა',
     cta: 'სრული მენიუ  →',
   },
 };
-
-export const packages = {
-  en: {
-    label: 'order',
-    head: 'Three suggested boxes.',
-    sectionTitle: 'Suggested boxes.',
-    sub: 'The signature three are priced per cube. Minimum order ₾250. We set the cubes the day before and deliver them chilled within Tbilisi.',
-    popular: 'most ordered',
-  },
-  ka: {
-    label: 'შეკვეთა',
-    head: 'სამი შემოთავაზებული ყუთი.',
-    sectionTitle: 'შემოთავაზებული ყუთები.',
-    sub: 'სამი ხელწერის ფასი თითო კუბზე ითვლება. მინიმალური შეკვეთა ₾250. კუბებს წინა დღეს ვამზადებთ და თბილისის ფარგლებში გაგრილებულს გიგზავნით.',
-    popular: 'ყველაზე ხშირად შეკვეთილი',
-  },
-};
-
-export type Pkg = {
-  tag: string;
-  name: { en: string; ka: string };
-  counts: Record<string, number>;
-  cubes: number;
-  total: number;
-  blurb: { en: string; ka: string };
-  fit: { en: string; ka: string };
-  cta: { en: string; ka: string };
-  popular?: boolean;
-};
-
-export const packageList: Pkg[] = [
-  {
-    tag: '01',
-    name: { en: 'The Small Plate', ka: 'პატარა თეფში' },
-    counts: { '01': 15, '02': 5, '03': 5 },
-    cubes: 25,
-    total: 300,
-    blurb: {
-      en: 'An intimate room of ten. Honey-led, balanced by a few cream and kinza cubes.',
-      ka: 'ინტიმური საღამო ათი სტუმრისთვის. თაფლის ჭაჭა ლიდერობს, კრემისა და ქინძის რამდენიმე კუბი კი ბალანსს ქმნის.',
-    },
-    fit: { en: 'sized for 8–12 guests', ka: '8–12 სტუმარზე' },
-    cta: { en: 'order this box', ka: 'შეუკვეთე' },
-  },
-  {
-    tag: '02',
-    name: { en: 'The Even Three', ka: 'სამის რიგი' },
-    counts: { '01': 10, '02': 10, '03': 10 },
-    cubes: 30,
-    total: 400,
-    blurb: {
-      en: 'A table of fifteen. Equal weight to each cube — the way we taste them ourselves.',
-      ka: 'სუფრა თხუთმეტი სტუმრისთვის. თითოეულ კუბს თანაბარი ადგილი აქვს — ზუსტად ისე, როგორც ჩვენ თვითონ ვაგემოვნებთ.',
-    },
-    fit: { en: 'sized for 12–18 guests', ka: '12–18 სტუმარზე' },
-    cta: { en: 'order this box', ka: 'შეუკვეთე' },
-    popular: true,
-  },
-  {
-    tag: '03',
-    name: { en: 'The Long Spread', ka: 'გრძელი ტრაპეზი' },
-    counts: { '01': 20, '02': 15, '03': 15 },
-    cubes: 50,
-    total: 650,
-    blurb: {
-      en: 'Wedding-scale. Service over three hours; passer + ceramic recommended.',
-      ka: 'ქორწილის მასშტაბი. სამსაათიანი მომსახურება; რეკომენდებულია მიმტანი და კერამიკული თეფშები.',
-    },
-    fit: { en: 'sized for 25–35 guests', ka: '25–35 სტუმარზე' },
-    cta: { en: 'order this box', ka: 'შეუკვეთე' },
-  },
-];
 
 export const booking = {
   en: {
@@ -352,23 +280,23 @@ export const footer = {
 
 export const menuPage = {
   en: {
-    head: 'Three signatures, and beyond.',
-    sub: 'Three Georgian-inspired signatures, hand-set in Tbilisi. Classics beneath them. One cube per bite, eight to a set.',
+    head: 'Our signatures, and beyond.',
+    sub: 'Georgian-inspired signatures, hand-set in Tbilisi, with classics beneath them. Every serving, eight bites.',
   },
   ka: {
-    head: 'სამი ხელწერა და მეტი.',
-    sub: 'სამი ქართული საავტორო გემო, თბილისში ხელით აწყობილი. ქვემოთ — კლასიკა. ერთი ლუკმა, რვა ერთ ნაკრებში.',
+    head: 'ჩვენი ხელწერები და მეტი.',
+    sub: 'ქართული საავტორო გემოები, თბილისში ხელით აწყობილი. ქვემოთ — კლასიკა. ყოველი ულუფა — რვა ლუკმა.',
   },
 };
 
 export const orderPage = {
   en: {
-    head: 'Three cubes. Your numbers.',
-    sub: 'Per-cube pricing. Minimum order ₾250. Set the day before, delivered chilled within Tbilisi.',
+    head: 'Your plates. Your numbers.',
+    sub: 'Per-serving pricing. Minimum order ₾250. Set the day before, delivered chilled within Tbilisi.',
   },
   ka: {
-    head: 'სამი კუბი. შენი რაოდენობა.',
-    sub: 'ფასი თითო კუბზე ითვლება. მინიმალური შეკვეთა ₾250. კუბებს წინა დღეს ვამზადებთ და თბილისის ფარგლებში გაგრილებულს გიგზავნით.',
+    head: 'შენი ულუფები. შენი რაოდენობა.',
+    sub: 'ფასი თითო ულუფაზე ითვლება. მინიმალური შეკვეთა ₾250. წინა დღეს ვამზადებთ და თბილისის ფარგლებში გაგრილებულს გიგზავნით.',
   },
 };
 
