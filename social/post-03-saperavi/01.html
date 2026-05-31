@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>ZhuZhu · Saperavi · 01</title>
+<link rel="stylesheet" href="../shared.css"/>
+<style>
+  /* Hero — full-bleed cube with editorial title overlay, wine glow. */
+  .body { padding: 0; }
+  .stage { position: absolute; inset: 0; display: flex; flex-direction: column; padding: 130px 96px 100px; z-index: 3; }
+  .glow-wine { position: absolute; inset: 0; background: radial-gradient(60% 50% at 50% 72%, rgba(183,58,90,0.30), transparent 65%); z-index: 0; pointer-events: none; }
+  .top { display: flex; justify-content: space-between; align-items: flex-start; position: relative; z-index: 2; }
+
+  .cube-hero { position: absolute; left: 0; right: 0; bottom: 12%; display: flex; justify-content: center; z-index: 1; }
+  .cube-hero .cube { width: 68%; aspect-ratio: 5/4; background-image: url("../assets/saperavi-cherry.png"); background-size: contain; background-position: center; background-repeat: no-repeat; filter: drop-shadow(0 30px 60px rgba(0,0,0,0.55)) saturate(1.06); }
+
+  .head { margin-top: 30px; font-family: var(--display); font-size: 144px; line-height: 0.92; letter-spacing: -0.026em; color: var(--bone); position: relative; z-index: 2; }
+  .head .it { font-style: italic; font-weight: 300; color: var(--bone-warm); display: block; }
+  .head .reg { font-weight: 400; display: block; }
+  .stop { color: var(--wine-glow); }
+  .ka-sub { margin-top: 28px; font-family: var(--ka); font-style: italic; font-weight: 500; font-size: 44px; color: var(--wine-glow); position: relative; z-index: 2; line-height: 1; }
+
+  .foot { margin-top: auto; display: flex; justify-content: space-between; align-items: flex-end; position: relative; z-index: 4; }
+  .foot .left { display: flex; flex-direction: column; gap: 8px; }
+  .foot .l { font-family: var(--body); font-size: 12px; text-transform: uppercase; letter-spacing: 0.28em; color: var(--ash); font-weight: 600; }
+  .foot .v { font-family: var(--display); font-style: italic; font-weight: 300; font-size: 24px; color: var(--bone-warm); }
+  .foot .right { font-family: var(--display); font-style: italic; font-weight: 300; font-size: 20px; color: var(--ash); }
+</style>
+</head>
+<body>
+<div class="slide">
+  <div class="glow-wine"></div>
+  <div class="frame"></div>
+  <div class="stage">
+    <div class="top">
+      <span class="eyebrow">spotlight</span>
+    </div>
+    <h1 class="head"><span class="it">Khvanchkara.</span><span class="reg">One berry<span class="stop">.</span></span></h1>
+    <p class="ka-sub ka">წითელი ღვინო-კენკრა.</p>
+    <div class="cube-hero"><div class="cube"></div></div>
+    <div class="foot">
+      <div class="left"><span class="l">cube</span><span class="v">Red Wine Berry</span></div>
+      <span class="right">swipe →</span>
+    </div>
+  </div>
+</div>
+</body>
+</html>

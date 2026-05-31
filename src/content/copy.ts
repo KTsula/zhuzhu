@@ -71,7 +71,7 @@ export const signatures: SignatureItem[] = [
     meta: {
       line: { en: 'Signature · Georgian-inspired', ka: 'ქართული საავტორო გემოები' },
     },
-    img: '/cubes/walnut-toffee.png',
+    img: '/cubes/churchkhela-cream.png',
     accent: 'rgba(196, 140, 70, 0.30)',
     price: 14,
   },
@@ -86,24 +86,24 @@ export const signatures: SignatureItem[] = [
     meta: {
       line: { en: 'Signature · Georgian-inspired', ka: 'ქართული საავტორო გემოები' },
     },
-    img: '/cubes/tarragon-lime.png',
+    img: '/cubes/honey-lemon.png',
     accent: 'rgba(220, 170, 70, 0.32)',
     price: 10,
   },
   {
     id: '03',
     line: { en: 'Signature · Georgian-inspired', ka: 'ქართული საავტორო გემოები' },
-    name: { en: 'Red Wine Berry', ka: 'წითელი ღვინო-კენკრა' },
+    name: { en: 'Kinza Garden', ka: 'ქინძის ბაღი' },
     blurb: {
-      en: 'A red-dry Saperavi from Kakheti, reduced six hours with sour cherry, blackberry and a pinch of black pepper. A glass-bottled morello rests on top — the only piece of fruit that survives the cube whole. Wine in three bites.',
-      ka: 'კახური მშრალი საფერავი, ექვსი საათის განმავლობაში ალუბალთან, მაყვალთან და შავი პილპილის მწიკვით დაყვანილი. ზემოდან მინის ქილაში დავარგებული მორელო ედება — ერთადერთი ხილი, რომელიც კუბში მთლიანად რჩება. ღვინო სამ ლუკმაში.',
+      en: 'Garden cilantro, cut the morning we set the cube, steeped into a juniper-forward gin with house limoncello and fresh-pressed lemon. A clear, herbal cube — green on the tongue, citrus on the finish, just enough bite from the gin. A single kinza leaf is pressed on top once it has cooled.',
+      ka: 'ბაღის ქინძი, კუბის აწყობის დილით მოჭრილი, ღვიის არომატის მქონე ჯინში, სახლის ლიმონჩელოსა და ახლად დაწურულ ლიმონში ჩაყენებული. გამჭვირვალე, ბალახოვანი კუბი — მწვანე ენაზე, ციტრუსი დასასრულზე, ჯინის ოდნავი სიმწვავით. ერთი ქინძის ფოთოლი ზემოდან ედება, როცა გაცივდება.',
     },
     meta: {
       line: { en: 'Signature · Georgian-inspired', ka: 'ქართული საავტორო გემოები' },
     },
-    img: '/cubes/saperavi-cherry.png',
-    accent: 'rgba(180, 50, 80, 0.30)',
-    price: 16,
+    img: '/cubes/kinza-garden.png',
+    accent: 'rgba(130, 185, 110, 0.32)',
+    price: 12,
   },
 ];
 
@@ -243,8 +243,8 @@ export const packageList: Pkg[] = [
     cubes: 25,
     total: 300,
     blurb: {
-      en: 'An intimate room of ten. Honey-led, balanced by a few cream and wine cubes.',
-      ka: 'ინტიმური საღამო ათი სტუმრისთვის. თაფლი-ლიმონი ლიდერობს, კრემისა და ღვინის რამდენიმე კუბი კი ბალანსს ქმნის.',
+      en: 'An intimate room of ten. Honey-led, balanced by a few cream and kinza cubes.',
+      ka: 'ინტიმური საღამო ათი სტუმრისთვის. თაფლი-ლიმონი ლიდერობს, კრემისა და ქინძის რამდენიმე კუბი კი ბალანსს ქმნის.',
     },
     fit: { en: 'sized for 8–12 guests', ka: '8–12 სტუმარზე' },
     cta: { en: 'order this box', ka: 'შეუკვეთე' },
@@ -485,12 +485,11 @@ export const boxPage = {
     stepsHead: 'How it works.',
     steps: [
       { n: '01', name: 'Subscribe', d: '₾80 a month, billed by Paddle. Card or Apple Pay. Cancel anytime in one click.' },
-      { n: '02', name: 'We curate',  d: 'Every month, we set a new line. Saperavi today, sour cherry tomorrow, walnut churchkhela next month — we follow the season and the kitchen.' },
+      { n: '02', name: 'We curate',  d: 'Every month, we set a new line. Kinza today, sour cherry tomorrow, walnut churchkhela next month — we follow the season and the kitchen.' },
       { n: '03', name: 'You bite',   d: 'We hand-deliver within Tbilisi during the first week of every month. Allergens are listed on the box; flavours stay a secret until you open it.' },
     ],
     finalHead: 'Eight new bites, every month.',
     finalCta: 'start the subscription',
-    paddleTodo: 'Wire Paddle Billing here: load Paddle.js, call Paddle.Checkout.open({ items: [{ priceId: PRI_XXX, quantity: 1 }] })',
   },
   ka: {
     eyebrow: 'ყოველთვიური ნაკრები',
@@ -503,7 +502,7 @@ export const boxPage = {
     stepsHead: 'როგორ მუშაობს.',
     steps: [
       { n: '01', name: 'გამოწერა',  d: '₾80 თვეში, Paddle-ით. ბარათით ან Apple Pay-ით. ერთი დაჭერით გაუქმდება.' },
-      { n: '02', name: 'ჩვენ ვადგენთ', d: 'ყოველ თვე ვაყენებთ ახალ ხაზს. დღეს საფერავი, ხვალ ალუბალი, შემდეგ თვე — ნიგვზის ჩურჩხელა. სეზონს და სამზარეულოს მივყვებით.' },
+      { n: '02', name: 'ჩვენ ვადგენთ', d: 'ყოველ თვე ვაყენებთ ახალ ხაზს. დღეს ქინძი, ხვალ ალუბალი, შემდეგ თვე — ნიგვზის ჩურჩხელა. სეზონს და სამზარეულოს მივყვებით.' },
       { n: '03', name: 'შენ აგემოვნებ', d: 'თვის პირველ კვირას ხელით ვაწვდით თბილისში. ალერგენები ყუთზე უწერია; გემოები საიდუმლოდ რჩება, სანამ არ გახსნი.' },
     ],
     finalHead: 'რვა ახალი ლუკმა, ყოველ თვე.',
@@ -563,15 +562,15 @@ export const founders = [
 export const pageMeta = {
   home: {
     en: { title: 'ZhuZhu — Cocktail desserts · Tbilisi atelier',
-          desc: 'Cocktail desserts hand-set in Tbilisi. Saperavi, walnut churchkhela, chacha honey-lemon. For weddings, brand activations and after-hours events.' },
+          desc: 'Cocktail desserts hand-set in Tbilisi. Walnut churchkhela, chacha honey-lemon, kinza gin. For weddings, brand activations and after-hours events.' },
     ka: { title: 'ჟუჟუ — კოქტეილ-დესერტები · თბილისის ატელიე',
-          desc: 'კოქტეილ-დესერტები ხელით აწყობილი თბილისში. საფერავი, ნიგვზის ჩურჩხელა, ჭაჭა-თაფლი-ლიმონი. ქორწილებისთვის, ღონისძიებებისთვის.' },
+          desc: 'კოქტეილ-დესერტები ხელით აწყობილი თბილისში. ნიგვზის ჩურჩხელა, ჭაჭა-თაფლი-ლიმონი, ქინძა-ჯინი. ქორწილებისთვის, ღონისძიებებისთვის.' },
   },
   menu: {
     en: { title: 'Menu. ZhuZhu, cocktail desserts.',
-          desc: 'Three signature cocktail desserts hand-set in Tbilisi. Churchkhela Cream, Honey Lemon, Red Wine Berry.' },
+          desc: 'Three signature cocktail desserts hand-set in Tbilisi. Churchkhela Cream, Honey Lemon, Kinza Garden.' },
     ka: { title: 'მენიუ. ჟუჟუ, კოქტეილ-დესერტები.',
-          desc: 'სამი საფირმო კოქტეილ-დესერტი, ხელით აწყობილი თბილისში: ჩურჩხელის კრემი, თაფლი-ლიმონი, წითელი ღვინო-კენკრა.' },
+          desc: 'სამი საფირმო კოქტეილ-დესერტი, ხელით აწყობილი თბილისში: ჩურჩხელის კრემი, თაფლი-ლიმონი, ქინძის ბაღი.' },
   },
   order: {
     en: { title: 'Order. ZhuZhu, cocktail desserts.',

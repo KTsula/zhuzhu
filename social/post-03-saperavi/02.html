@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>ZhuZhu · Saperavi · 02</title>
+<link rel="stylesheet" href="../shared.css"/>
+<style>
+  /* Recipe — bilingual quoted blurb, English left, verbatim Georgian right. */
+  .body { padding: 130px 96px 100px; }
+  .top { display: flex; justify-content: space-between; align-items: flex-start; }
+  .head { margin-top: 30px; font-family: var(--display); font-size: 76px; line-height: 1.0; letter-spacing: -0.022em; color: var(--bone); }
+  .head .it { font-style: italic; font-weight: 300; color: var(--bone-warm); }
+  .stop { color: var(--wine-glow); }
+  .sub { margin-top: 12px; font-family: var(--display); font-style: italic; font-weight: 300; font-size: 22px; color: var(--ash); }
+
+  .panes { margin-top: 56px; display: grid; grid-template-columns: 1fr 1fr; gap: 36px; align-items: start; }
+  .pane { padding: 28px 30px; border: 1px solid rgba(227,183,109,0.20); border-radius: 8px; background: rgba(20,16,13,0.45); }
+  .pane.wine { border-color: rgba(183,58,90,0.32); background: rgba(40,12,20,0.35); }
+  .pane h3 { font-family: var(--body); font-size: 11px; text-transform: uppercase; letter-spacing: 0.32em; color: var(--gold); font-weight: 600; margin-bottom: 16px; }
+  .pane.wine h3 { color: var(--wine-glow); }
+  .pane p.en { font-family: var(--display); font-style: italic; font-weight: 300; font-size: 19px; line-height: 1.55; color: var(--bone); }
+  .pane p.en em { color: var(--gold-bright); }
+  .pane p.ka { font-family: var(--ka); font-style: italic; font-weight: 500; font-size: 16px; line-height: 1.6; color: var(--bone); }
+
+  .stats { margin-top: 36px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .stat { padding: 18px 14px; border-top: 1px solid rgba(227,183,109,0.24); }
+  .stat .n { font-family: var(--display); font-style: italic; font-weight: 300; font-size: 40px; color: var(--gold-bright); line-height: 1; }
+  .stat .l { display: block; margin-top: 8px; font-family: var(--body); font-size: 10px; text-transform: uppercase; letter-spacing: 0.28em; color: var(--ash); font-weight: 600; }
+
+  .foot { margin-top: auto; padding-top: 22px; display: flex; justify-content: space-between; align-items: center; }
+  .foot .l { font-family: var(--body); font-size: 11px; text-transform: uppercase; letter-spacing: 0.32em; color: var(--ash); font-weight: 600; }
+  .foot .v { font-family: var(--display); font-style: italic; font-weight: 300; font-size: 20px; color: var(--bone-warm); }
+</style>
+</head>
+<body>
+<div class="slide">
+  <div class="frame"></div>
+  <div class="body">
+    <div class="top"><span class="eyebrow">the cube</span></div>
+    <h1 class="head"><span class="it">One berry,</span> by hand<span class="stop">.</span></h1>
+    <p class="sub">Khvanchkara, set firm.</p>
+
+    <div class="panes">
+      <div class="pane">
+        <h3>EN</h3>
+        <p class="en">Khvanchkara, set firm by hand. <em>One whole frozen berry</em> placed in each cube — the only piece of fruit you'll taste whole.</p>
+      </div>
+      <div class="pane wine">
+        <h3>KA</h3>
+        <p class="ka ka">სამი დამფუძნებელი. ერთი სამზარეულო. ყოველი კუბი ხელით აწყობილი.</p>
+      </div>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><span class="n">1</span><span class="l">berry per cube</span></div>
+      <div class="stat"><span class="n">3</span><span class="l">bites per cube</span></div>
+      <div class="stat"><span class="n">24h</span><span class="l">set the day before</span></div>
+      <div class="stat"><span class="n">1</span><span class="l">kitchen, Tbilisi</span></div>
+    </div>
+
+    <div class="foot"><span class="l">Red Wine Berry</span><span class="v">Hand-set the day before.</span></div>
+  </div>
+</div>
+</body>
+</html>

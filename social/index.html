@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>ZhuZhu · Social Posts · Preview</title>
+<link rel="stylesheet" href="shared.css"/>
+<style>
+  html, body { background: #050403; min-height: 100vh; }
+  .wrap { max-width: 1400px; margin: 0 auto; padding: 56px 40px 80px; }
+  .title-block { display: flex; align-items: flex-end; justify-content: space-between; gap: 32px; margin-bottom: 48px; padding-bottom: 28px; border-bottom: 1px solid rgba(227,183,109,0.22); }
+  .title-block h1 { font-family: var(--display); font-style: italic; font-weight: 300; font-size: 56px; color: var(--bone); letter-spacing: -0.018em; }
+  .title-block h1 em { color: var(--gold-bright); }
+  .title-block .meta { font-family: var(--body); font-size: 12px; text-transform: uppercase; letter-spacing: 0.32em; color: var(--ash); font-weight: 600; text-align: right; }
+
+  .post { margin-bottom: 80px; }
+  .post-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 24px; }
+  .post-head .lhs { display: flex; align-items: baseline; gap: 18px; }
+  .post-head h2 { font-family: var(--display); font-style: italic; font-weight: 300; font-size: 38px; color: var(--bone); letter-spacing: -0.012em; }
+  .post-head h2 em { color: var(--gold-bright); }
+  .post-head .num { font-family: var(--body); font-size: 12px; text-transform: uppercase; letter-spacing: 0.32em; color: var(--gold); font-weight: 600; }
+  .post-head .ka { font-family: var(--ka); font-style: italic; font-weight: 500; font-size: 22px; color: var(--gold); }
+  .post-head .info { font-family: var(--body); font-size: 12px; text-transform: uppercase; letter-spacing: 0.28em; color: var(--ash); font-weight: 600; }
+
+  .row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  .card { position: relative; aspect-ratio: 1080/1350; border-radius: 6px; overflow: hidden; border: 1px solid rgba(227,183,109,0.10); background: var(--night); }
+  .card iframe { position: absolute; top: 0; left: 0; width: 1080px; height: 1350px; transform-origin: top left; border: 0; pointer-events: none; }
+  .card .label { position: absolute; top: 10px; left: 10px; z-index: 10; padding: 4px 10px; background: rgba(10,7,6,0.7); color: var(--gold-bright); font-family: var(--display); font-style: italic; font-size: 13px; border-radius: 3px; }
+  .card .open { position: absolute; bottom: 10px; right: 10px; z-index: 10; padding: 6px 12px; background: rgba(10,7,6,0.7); color: var(--bone); font-family: var(--body); font-size: 10px; text-transform: uppercase; letter-spacing: 0.24em; font-weight: 600; border-radius: 3px; text-decoration: none; }
+  .card a.full { position: absolute; inset: 0; z-index: 8; }
+
+  .help { margin-top: 64px; padding: 28px 32px; border: 1px solid rgba(227,183,109,0.22); border-radius: 8px; background: rgba(20,16,13,0.5); }
+  .help h3 { font-family: var(--body); font-size: 12px; text-transform: uppercase; letter-spacing: 0.32em; color: var(--gold); font-weight: 600; margin-bottom: 10px; }
+  .help p { font-family: var(--display); font-style: italic; font-weight: 300; font-size: 18px; color: var(--bone-warm); line-height: 1.55; max-width: 70ch; }
+  .help code { font-family: ui-monospace, monospace; font-style: normal; background: rgba(227,183,109,0.10); padding: 2px 7px; border-radius: 3px; color: var(--gold-bright); font-size: 14px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="title-block">
+    <h1><em>ZhuZhu</em> · social posts</h1>
+    <div class="meta">12 slides · 3 carousels · 1080×1350</div>
+  </div>
+
+  <div class="post">
+    <div class="post-head">
+      <div class="lhs">
+        <h2>Brand · <em>ჟუჟუ</em></h2>
+        <span class="ka ka">შეჟუჟუნდი.</span>
+      </div>
+      <span class="info">cover · manifesto · slogan · cta</span>
+    </div>
+    <div class="row" data-post="post-01-brand"></div>
+  </div>
+
+  <div class="post">
+    <div class="post-head">
+      <div class="lhs">
+        <h2>The <em>signature three</em></h2>
+        <span class="ka ka">სამი ხელწერა</span>
+      </div>
+      <span class="info">menu · churchkhela · honey · saperavi</span>
+    </div>
+    <div class="row" data-post="post-02-signature"></div>
+  </div>
+
+  <div class="post">
+    <div class="post-head">
+      <div class="lhs">
+        <h2>Spotlight · <em>Saperavi</em></h2>
+        <span class="ka ka">წითელი ღვინო-კენკრა</span>
+      </div>
+      <span class="info">hero · recipe · pull quote · order</span>
+    </div>
+    <div class="row" data-post="post-03-saperavi"></div>
+  </div>
+
+  <div class="help">
+    <h3>export to PNG</h3>
+    <p>To export every slide as a 1080×1350 PNG ready for Instagram, run <code>node export.mjs</code> from this folder. The script uses puppeteer to screenshot each HTML and writes results to <code>./out/</code>.</p>
+  </div>
+</div>
+
+<script>
+  const slides = ['01.html', '02.html', '03.html', '04.html'];
+  document.querySelectorAll('.row').forEach(row => {
+    const post = row.dataset.post;
+    slides.forEach((s, i) => {
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML = `
+        <div class="label">0${i+1}</div>
+        <iframe src="${post}/${s}" loading="lazy"></iframe>
+        <a class="full" href="${post}/${s}" target="_blank"></a>
+        <a class="open" href="${post}/${s}" target="_blank">open ↗</a>
+      `;
+      row.appendChild(card);
+    });
+  });
+
+  // Scale iframes to fit cards.
+  function scaleAll() {
+    document.querySelectorAll('.card').forEach(card => {
+      const iframe = card.querySelector('iframe');
+      const cw = card.clientWidth;
+      const scale = cw / 1080;
+      iframe.style.transform = `scale(${scale})`;
+      card.style.height = (1350 * scale) + 'px';
+    });
+  }
+  window.addEventListener('load', () => setTimeout(scaleAll, 100));
+  window.addEventListener('resize', scaleAll);
+</script>
+</body>
+</html>

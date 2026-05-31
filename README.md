@@ -1,9 +1,9 @@
 # ZhuZhu — ჟუჟუ
 
-Marketing site for **ZhuZhu**, a premium jelly cocktail shots event-catering brand
+Marketing site for **ZhuZhu**, a premium cocktail-dessert event-catering brand
 based in Tbilisi, Georgia. Domain: [zhuzhu.ge](https://zhuzhu.ge).
 
-Astro 5 (static) · TypeScript · Tailwind v4 (CSS-first via `@tailwindcss/vite`) · zero-JS by default.
+Astro 5 · TypeScript · hand-written scoped CSS · bilingual (EN/KA) · near-zero JS.
 
 ## Setup
 
@@ -26,126 +26,101 @@ npm run preview      # serve dist/
 
 ## Deploy
 
-The output is static HTML/CSS in `dist/`. Host-agnostic.
+Deployed on **Vercel** (`@astrojs/vercel` adapter). Push to the connected repo
+and Vercel builds with `npm run build`. The two `/api/*` routes run as
+serverless functions; everything else is prerendered static HTML.
 
-### Netlify
+The custom domain `zhuzhu.ge` is set under the project's **Domains** settings.
 
-1. Connect the repo on Netlify.
-2. Build command: `npm run build`
-3. Publish directory: `dist`
-4. Set the domain `zhuzhu.ge` under **Domain management**.
+## Single sources of truth
 
-### Cloudflare Pages
+Two files hold everything that's likely to change. Edit them and every page and
+component updates automatically — there are no copies elsewhere.
 
-1. *Create application → Connect to Git → select this repo.*
-2. Framework preset: **Astro**.
-3. Build command: `npm run build`
-4. Output directory: `dist`
-5. Add the custom domain `zhuzhu.ge`.
+- **Content & pricing — `src/content/copy.ts`.** All bilingual copy plus the
+  signature flavours, classics, packages, founders and per-page SEO metadata.
+  Prices live here as numbers (e.g. a signature's per-cube `price`, a package
+  `total`) and are formatted at render time, so changing a price in `copy.ts`
+  updates the menu, the order page and every box that references it.
+- **Branding — `src/styles/global.css`.** The `:root` block is the only place
+  colours, font families and the type scale are defined. Components reference
+  them as `var(--gold)`, `var(--display)`, `var(--t-2xl)`, etc.
 
-### Vercel
+There is no CMS — edit the files and rebuild.
 
-1. *Add New Project → import this repo.*
-2. Framework preset auto-detects **Astro**.
-3. Build command and output dir are auto-filled.
+## Forms
 
-## Assets
+Both forms POST JSON to a serverless route that validates the payload, escapes
+it, and emails the team via [Resend](https://resend.com):
 
-The hero section autoplays a muted, looped video at `/hero.mp4`. Until you drop
-the real file in `public/hero.mp4` a CSS-gradient poster card shows in its place.
+- `src/components/BookingForm.astro` → `POST /api/book` (`src/pages/api/book.ts`)
+- `src/pages/tasted-us.astro` lead capture → `POST /api/lead` (`src/pages/api/lead.ts`)
 
-Convert from `.mkv`:
+Shared escaping, JSON-response and email-template helpers live in
+`src/lib/notify.ts`. The routes read these environment variables (set them in
+Vercel):
 
-```bash
-ffmpeg -i input.mkv -c:v libx264 -crf 23 -an -vf "scale=1920:-2" public/hero.mp4
-# optional smaller webm:
-ffmpeg -i input.mkv -c:v libvpx-vp9 -b:v 0 -crf 32 -an -vf "scale=1600:-2" public/hero.webm
+```
+RESEND_API_KEY      # required to actually send; without it the form still
+                    # succeeds for the user and the payload is logged
+BOOKING_FROM        # optional, defaults to "ZhuZhu Bookings <bookings@zhuzhu.ge>"
+BOOKING_TO          # optional, defaults to "hello@zhuzhu.ge"
+LEADS_FROM          # optional, defaults to "ZhuZhu Leads <leads@zhuzhu.ge>"
+LEADS_TO            # optional, defaults to "hello@zhuzhu.ge"
 ```
 
-The OG card lives at `public/og.svg` — render it to `og.jpg` before launch
-(most social platforms prefer raster):
+Lead persistence (Supabase) and box checkout (Paddle) are not yet wired —
+see the inline `TODO` notes in `src/pages/api/lead.ts` and `src/pages/box.astro`.
 
-```bash
-npx svgexport public/og.svg public/og.jpg 1200:630 jpg 90%
-```
+## Design language
 
-Then flip the default `ogImage` in `src/layouts/Base.astro` from `/og.svg` → `/og.jpg`.
+- Palette: night `#0a0706` ground, bone `#ede1c4` text, gold `#c69859` accent,
+  wine `#8a1f3c`.
+- Type: **Spectral** (display, italic) + **Manrope** (body/UI) + **Noto Serif
+  Georgian** (Georgian), all self-hosted via `@fontsource`.
+- Editorial dark layouts, an italic-accent serif display face, and a first-land
+  veil intro.
+- All scroll-reveal is driven by a single `IntersectionObserver` in
+  `src/layouts/Base.astro`; the signature carousel uses `motion`.
+- Respects `prefers-reduced-motion` throughout.
 
-## Wiring a real form backend
-
-`src/components/BookingForm.astro` currently opens a pre-filled
-`mailto:hello@zhuzhu.ge` and disables the submit button with a success message.
-
-To swap in a real backend later:
-
-- **Resend** — add an `[POST] /api/book` endpoint (switch the adapter in
-  `astro.config.mjs` to `@astrojs/node` or run the form as a serverless function
-  on Vercel/Cloudflare). Replace the `mailto:` handler in BookingForm with a
-  `fetch('/api/book', { method: 'POST', body: JSON.stringify(payload) })`.
-- **Formspree** — set the form `action="https://formspree.io/f/yourcode"` and
-  drop the JS handler.
-
-The submit handler is marked `// TODO: replace with Resend/Formspree when backend is ready`.
-
-## Content
-
-Typed content lives under `src/content/`:
-
-- `menu.ts` — twelve flavours, categories, allergens
-- `packages.ts` — three packages, four-step process
-
-No CMS yet — edit those files, rebuild.
-
-## Design reference
-
-This implementation uses the Claude Design handoff bundle at
-[`https://api.anthropic.com/v1/design/h/mQwBySCj1MdEBCVME2rxkg`](https://api.anthropic.com/v1/design/h/mQwBySCj1MdEBCVME2rxkg)
-as the source of truth for typography, palette, spacing and motion language:
-
-- Cream parchment `#faf3e1` ground, Saperavi wine `#6b1226`, Chacha gold `#b88a3a`,
-  deep ink `#1a120c`
-- Cormorant Garamond + Noto Serif Georgian + Jost (bilingual)
-- Editorial layouts, italic-accent serif inside upright headlines, horizontal
-  marquee ticker, hover-nudge menu rows, film grain overlay
-- All scroll-reveal driven by a single IntersectionObserver
-- Respects `prefers-reduced-motion`
+Language is switched client-side (`src/scripts/lang.ts`) by toggling
+`html[data-lang]`; CSS shows the matching `.lng-en` / `.lng-ka` spans.
 
 ## Project structure
 
 ```
-public/
-  favicon.svg
-  og.svg
-  robots.txt
-  hero.mp4              (drop your loop here)
+public/                  static assets (logo, og.png, favicon, cube images)
 src/
-  components/
-    Nav.astro
-    Hero.astro
-    FlavourTicker.astro
-    MenuRow.astro
-    PackageCard.astro
-    ProcessStep.astro
-    BookingForm.astro
-    Footer.astro
-    GrainOverlay.astro
-    Reveal.astro
+  components/            Nav, Hero, SignatureShowcase, Packages, MenuClassics,
+                         MoreFlavours, Manifesto, BookingForm, Footer, Wordmark,
+                         LangSwitch, HookVeil
   content/
-    menu.ts
-    packages.ts
+    copy.ts              ← content + pricing source of truth
+  lib/
+    notify.ts            shared helpers for the /api form routes
   layouts/
-    Base.astro
+    Base.astro           <head>, nav, footer, reveal observer
   pages/
-    index.astro       /  ←  landing
-    menu.astro        /menu
-    packages.astro    /packages
-    book.astro        /book
-    about.astro       /about
+    index.astro          /            landing
+    menu.astro           /menu
+    order.astro          /order
+    box.astro            /box         monthly subscription
+    about.astro          /about
+    tasted-us.astro      /tasted-us   post-event list signup
+    book.astro           → 301 /#book
+    packages.astro       → 301 /order
+    api/book.ts          POST booking → Resend
+    api/lead.ts          POST lead    → Resend
+  scripts/
+    lang.ts              language toggle
   styles/
-    global.css
-astro.config.mjs
-tailwind via @tailwindcss/vite (CSS-first @theme block)
+    global.css           ← branding source of truth + reset
 ```
+
+> Print-design surfaces (business cards, stand poster, product cards) and the
+> Remotion marketing pipeline live under `scripts/`, `social/` and `marketing/`
+> and are git-ignored — local-only, never deployed.
 
 ## License
 

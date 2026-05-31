@@ -1,5 +1,6 @@
 import type { APIRoute } from 'astro';
 import { Resend } from 'resend';
+import { buildEmail, json } from '../../lib/notify';
 
 export const prerender = false;
 
@@ -11,22 +12,14 @@ type Body = {
   lang?: string;
 };
 
-const escape = (s: string) =>
-  s.replace(/[&<>"']/g, (c) =>
-    ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]!)
-  );
-
-const j = (body: unknown, status = 200) =>
-  new Response(JSON.stringify(body), { status, headers: { 'Content-Type': 'application/json' } });
-
 export const POST: APIRoute = async ({ request }) => {
   let body: Body;
   try { body = await request.json(); }
-  catch { return j({ ok: false, error: 'bad-json' }, 400); }
+  catch { return json({ ok: false, error: 'bad-json' }, 400); }
 
   const email = (body.email || '').trim().slice(0, 200).toLowerCase();
   if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    return j({ ok: false, error: 'bad-email' }, 422);
+    return json({ ok: false, error: 'bad-email' }, 422);
   }
 
   const birthMonthRaw = body.birthMonth;
@@ -64,30 +57,16 @@ export const POST: APIRoute = async ({ request }) => {
   //   );
 
   const month = birthMonth ? new Date(2000, birthMonth - 1, 1).toLocaleString('en-US', { month: 'long' }) : '—';
-  const lines = [
-    ['Email',        email],
-    ['Source',       source || '—'],
-    ['Birth month',  month],
-    ['Referrer',     refEmail || '—'],
-    ['Lang',         lang],
-  ] as const;
-
-  const text = lines.map(([k, v]) => `${k}: ${v}`).join('\n');
-  const html = `
-    <div style="font-family: Spectral, Georgia, serif; color: #14100d; font-size: 16px; line-height: 1.6;">
-      <h2 style="font-style: italic; font-weight: 400; font-size: 22px; margin: 0 0 18px; color: #8a1f3c;">
-        New lead — ${escape(email)}
-      </h2>
-      <table style="border-collapse: collapse; width: 100%;">
-        ${lines.map(([k, v]) => `
-          <tr>
-            <td style="padding: 6px 12px 6px 0; color: #c69859; font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; vertical-align: top; width: 120px;">${k}</td>
-            <td style="padding: 6px 0;">${escape(v) || '<span style="color:#999">—</span>'}</td>
-          </tr>
-        `).join('')}
-      </table>
-    </div>
-  `;
+  const { text, html } = buildEmail({
+    title: `New lead — ${email}`,
+    rows: [
+      ['Email',       email],
+      ['Source',      source || '—'],
+      ['Birth month', month],
+      ['Referrer',    refEmail || '—'],
+      ['Lang',        lang],
+    ],
+  });
 
   const apiKey = import.meta.env.RESEND_API_KEY;
   const from   = import.meta.env.LEADS_FROM ?? 'ZhuZhu Leads <leads@zhuzhu.ge>';
@@ -96,7 +75,7 @@ export const POST: APIRoute = async ({ request }) => {
   if (!apiKey) {
     console.error('[/api/lead] RESEND_API_KEY missing — payload:', text);
     // Don't fail the user; they're trying to give us their email.
-    return j({ ok: true, queued: false });
+    return json({ ok: true, queued: false });
   }
 
   const resend = new Resend(apiKey);
@@ -109,11 +88,11 @@ export const POST: APIRoute = async ({ request }) => {
     });
     if (error) {
       console.error('[/api/lead] resend error:', error);
-      return j({ ok: true, queued: false });
+      return json({ ok: true, queued: false });
     }
-    return j({ ok: true, queued: true });
+    return json({ ok: true, queued: true });
   } catch (err) {
     console.error('[/api/lead] threw:', err);
-    return j({ ok: true, queued: false });
+    return json({ ok: true, queued: false });
   }
 };

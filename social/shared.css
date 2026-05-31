@@ -1,0 +1,302 @@
+/* ZhuZhu social posts — dark "After-hours" edition.
+   Each slide renders at 1080×1350 (Instagram 4:5 portrait). */
+
+@import url('https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600&family=Noto+Serif+Georgian:wght@400;500&display=swap');
+
+:root {
+  --night:        #0a0706;
+  --graphite:     #14100d;
+  --graphite-2:   #1a1612;
+  --bone:         #ede1c4;
+  --bone-warm:    #e3d3ab;
+  --ash:          #b3a48a;
+  --ash-dim:      #837560;
+  --gold:         #c69859;
+  --gold-bright:  #e3b76d;
+  --wine:         #8a1f3c;
+  --wine-glow:    #b73a5a;
+
+  --display: "Spectral", "Noto Serif Georgian", Georgia, serif;
+  --body:    "Manrope", "Noto Serif Georgian", system-ui, sans-serif;
+  --ka:      "Noto Serif Georgian", "Spectral", Georgia, serif;
+
+  /* easing */
+  --e-quart: cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: #000;
+  color: var(--bone);
+  font-family: var(--body);
+  -webkit-font-smoothing: antialiased;
+  font-feature-settings: "kern" 1, "liga" 1;
+}
+
+/* ── Stage: a single 1080×1350 card ──────────────────────────── */
+.slide {
+  position: relative;
+  width: 1080px;
+  height: 1350px;
+  background: var(--night);
+  color: var(--bone);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* candle-light leak — top-right warm wash */
+.slide::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(60% 50% at 88% 8%, rgba(227,183,109,0.20), transparent 70%),
+    radial-gradient(70% 60% at 95% 0%, rgba(198,152,89,0.14), transparent 65%),
+    radial-gradient(90% 80% at 10% 110%, rgba(138,31,60,0.10), transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* film grain — subtle */
+.slide::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='1.4' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.92  0 0 0 0 0.85  0 0 0 0 0.7  0 0 0 0.5 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.35'/></svg>");
+  mix-blend-mode: overlay;
+  opacity: 0.45;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Inner hairline frame — like the reference */
+.frame {
+  position: absolute;
+  inset: 64px;
+  border: 1px solid rgba(227,183,109,0.32);
+  border-radius: 14px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Content layer above grain and frame */
+.body {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 110px 110px 96px;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Type ────────────────────────────────────────────────────── */
+.display {
+  font-family: var(--display);
+  font-weight: 400;
+  font-style: normal;
+  line-height: 0.98;
+  letter-spacing: -0.018em;
+  color: var(--bone);
+  font-feature-settings: "liga" 1, "dlig" 1, "swsh" 1;
+}
+.display .it,
+.display em { font-style: italic; font-weight: 300; }
+
+.display-xl { font-size: 120px; }
+.display-l  { font-size: 96px; }
+.display-m  { font-size: 76px; }
+.display-s  { font-size: 56px; }
+
+.ka { font-family: var(--ka); font-style: italic; font-weight: 500; letter-spacing: -0.005em; }
+.ka.display { line-height: 1.04; }
+
+.eyebrow {
+  font-family: var(--body);
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.32em;
+  color: var(--gold);
+}
+
+.body-text {
+  font-family: var(--body);
+  font-weight: 350;
+  font-size: 22px;
+  line-height: 1.6;
+  letter-spacing: 0.012em;
+  color: var(--bone-warm);
+  max-width: 56ch;
+}
+
+.body-text.ka {
+  font-family: var(--ka);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 21px;
+  line-height: 1.65;
+}
+
+.caption {
+  font-family: var(--body);
+  font-size: 13px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.28em;
+  color: var(--ash);
+}
+
+/* ── Hairline rules ─────────────────────────────────────────── */
+.rule {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+}
+.rule::before, .rule::after {
+  content: "";
+  height: 1px;
+  width: 70px;
+  background: rgba(227,183,109,0.55);
+}
+.rule.dot::before, .rule.dot::after {
+  background:
+    radial-gradient(circle at 0% 50%, var(--gold-bright) 0 3px, transparent 3px),
+    linear-gradient(to right, transparent 6px, rgba(227,183,109,0.55) 6px);
+}
+.rule.dot::after {
+  background:
+    radial-gradient(circle at 100% 50%, var(--gold-bright) 0 3px, transparent 3px),
+    linear-gradient(to right, rgba(227,183,109,0.55) calc(100% - 6px), transparent calc(100% - 6px));
+}
+
+.hairline { height: 1px; width: 100%; background: rgba(227,183,109,0.28); border: 0; }
+
+/* dot terminator (mirrors logo's signature) */
+.dotline {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+.dotline .d {
+  width: 6px; height: 6px;
+  background: var(--gold);
+  border-radius: 50%;
+  flex: 0 0 6px;
+}
+.dotline .l {
+  height: 1px;
+  background: rgba(227,183,109,0.45);
+  flex: 1;
+}
+
+/* ── Cube product image ─────────────────────────────────────── */
+/* Cubes are transparent PNGs (~500–740px wide, aspect ~1.23). We
+   shrink to 60% inside a 5/4 container so the cube floats with
+   breathing room — no upscaling, no zoomed-in feel. */
+.cube {
+  width: 100%;
+  aspect-ratio: 5 / 4;
+  background-size: 60% auto;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: drop-shadow(0 22px 38px rgba(0,0,0,0.55)) saturate(1.06);
+}
+.cube.saperavi { background-image: url("assets/saperavi-cherry.png"); }
+.cube.walnut   { background-image: url("assets/walnut-toffee.png"); }
+.cube.lime     { background-image: url("assets/tarragon-lime.png"); }
+
+.cube-wrap {
+  position: relative;
+  width: 100%;
+  margin-top: auto;
+}
+.cube-wrap .glow {
+  position: absolute;
+  left: 50%;
+  bottom: 18%;
+  transform: translateX(-50%);
+  width: 56%;
+  height: 22%;
+  background: radial-gradient(ellipse at center, rgba(227,183,109,0.22), transparent 70%);
+  filter: blur(10px);
+  z-index: -1;
+}
+
+/* ── Logo / mark ────────────────────────────────────────────── */
+/* The transparent PNG has ~20% whitespace padding around the mark,
+   so containers are bumped relative to the old dark-bg variant. */
+.mark {
+  width: 460px;
+  height: 460px;
+  background: url("assets/logo-transparent.png") center/contain no-repeat;
+}
+.mark-sm { width: 110px; height: 110px; background: url("assets/logo-transparent.png") center/contain no-repeat; }
+
+/* ── Footer slug — small mark + handle ──────────────────────── */
+.slug {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: var(--ash);
+  font-size: 14px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+.slug .mark-sm { width: 36px; height: 36px; }
+
+/* ── Preview grid ───────────────────────────────────────────── */
+.preview {
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+  padding: 48px;
+  background: #050403;
+  min-height: 100vh;
+}
+.preview h1 {
+  font-family: var(--display);
+  font-style: italic;
+  font-weight: 300;
+  font-size: 36px;
+  color: var(--bone);
+  margin-bottom: 8px;
+}
+.preview h2 {
+  font-family: var(--body);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.24em;
+  color: var(--gold);
+  font-size: 13px;
+}
+.preview .row {
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  padding-bottom: 16px;
+}
+.preview .row .slide {
+  transform: scale(0.32);
+  transform-origin: top left;
+  flex: 0 0 calc(1080px * 0.32);
+  width: 1080px;
+  height: 1350px;
+  margin-right: calc(-1080px * 0.68);
+  margin-bottom: calc(-1350px * 0.68);
+}
+.preview .row-wrap {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.preview .thumb {
+  width: calc(1080px * 0.32);
+  height: calc(1350px * 0.32);
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 4px;
+}
