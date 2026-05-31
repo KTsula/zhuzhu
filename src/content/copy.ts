@@ -88,7 +88,7 @@ export const signatures: SignatureItem[] = [
     },
     img: '/cubes/honey-chacha.png',
     accent: 'rgba(220, 170, 70, 0.32)',
-    price: 10,
+    price: 13,
   },
   {
     id: '03',
