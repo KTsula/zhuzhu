@@ -34,7 +34,7 @@ const ASH         = '#b3a48a';
 const GOLD        = '#c69859';
 const GOLD_BRIGHT = '#e3b76d';
 
-const cubeUri = `data:image/png;base64,${fs.readFileSync('public/cubes/honey-lemon.png').toString('base64')}`;
+const cubeUri = `data:image/png;base64,${fs.readFileSync('public/cubes/honey-chacha.png').toString('base64')}`;
 const logoUri = `data:image/png;base64,${fs.readFileSync('public/logo-transparent.png').toString('base64')}`;
 
 // Inverted QR (bone modules on night) → homepage
@@ -83,7 +83,7 @@ const front = `<svg xmlns="http://www.w3.org/2000/svg"
     <tspan font-family="'Noto Serif Georgian', Sylfaen, Georgia, serif" font-size="3.6" dy="-0.1">ჟუჟუ</tspan><tspan fill="${GOLD}" dx="2.5" dy="-0.1">·</tspan><tspan dx="2.5" dy="0.2">ZhuZhu</tspan>
   </text>
 
-  <!-- Hero cube (Honey Lemon — honey-lemon.png) -->
+  <!-- Hero cube (Honey Chacha — honey-chacha.png) -->
   <image href="${cubeUri}" x="35" y="16" width="21" height="21" preserveAspectRatio="xMidYMid meet"/>
 
   <!-- English tagline -->

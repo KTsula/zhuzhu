@@ -78,7 +78,7 @@ export const signatures: SignatureItem[] = [
   {
     id: '02',
     line: { en: 'Signature · Georgian-inspired', ka: 'ქართული საავტორო გემოები' },
-    name: { en: 'Honey Lemon', ka: 'თაფლი-ლიმონი' },
+    name: { en: 'Honey Chacha', ka: 'თაფლის ჭაჭა' },
     blurb: {
       en: 'Mountain honey-water from Kvemo Kartli, slow-warmed with fresh lemon zest and a long-aged Bagrationi chacha. A summer cube — set firmer, meant to be held a second on the tongue. A wedge of lime is laid on top after the cube has cooled.',
       ka: 'ქვემო ქართლის მთის თაფლიანი წყალი, ახალი ლიმონის ცედრითა და დიდხანს დავარგებული ბაგრატიონის ჭაჭით ნელა შემთბარი. საზაფხულო კუბი — უფრო მყარად დაყენებული, რომ ენაზე ერთი წამით გაჩერდეს. ლაიმის ნაჭერი ზემოდან ედება, როცა კუბი გაცივდება.',
@@ -86,7 +86,7 @@ export const signatures: SignatureItem[] = [
     meta: {
       line: { en: 'Signature · Georgian-inspired', ka: 'ქართული საავტორო გემოები' },
     },
-    img: '/cubes/honey-lemon.png',
+    img: '/cubes/honey-chacha.png',
     accent: 'rgba(220, 170, 70, 0.32)',
     price: 10,
   },
@@ -244,7 +244,7 @@ export const packageList: Pkg[] = [
     total: 300,
     blurb: {
       en: 'An intimate room of ten. Honey-led, balanced by a few cream and kinza cubes.',
-      ka: 'ინტიმური საღამო ათი სტუმრისთვის. თაფლი-ლიმონი ლიდერობს, კრემისა და ქინძის რამდენიმე კუბი კი ბალანსს ქმნის.',
+      ka: 'ინტიმური საღამო ათი სტუმრისთვის. თაფლის ჭაჭა ლიდერობს, კრემისა და ქინძის რამდენიმე კუბი კი ბალანსს ქმნის.',
     },
     fit: { en: 'sized for 8–12 guests', ka: '8–12 სტუმარზე' },
     cta: { en: 'order this box', ka: 'შეუკვეთე' },
@@ -562,15 +562,15 @@ export const founders = [
 export const pageMeta = {
   home: {
     en: { title: 'ZhuZhu — Cocktail desserts · Tbilisi atelier',
-          desc: 'Cocktail desserts hand-set in Tbilisi. Walnut churchkhela, chacha honey-lemon, kinza gin. For weddings, brand activations and after-hours events.' },
+          desc: 'Cocktail desserts hand-set in Tbilisi. Walnut churchkhela, honey chacha, kinza gin. For weddings, brand activations and after-hours events.' },
     ka: { title: 'ჟუჟუ — კოქტეილ-დესერტები · თბილისის ატელიე',
-          desc: 'კოქტეილ-დესერტები ხელით აწყობილი თბილისში. ნიგვზის ჩურჩხელა, ჭაჭა-თაფლი-ლიმონი, ქინძა-ჯინი. ქორწილებისთვის, ღონისძიებებისთვის.' },
+          desc: 'კოქტეილ-დესერტები ხელით აწყობილი თბილისში. ნიგვზის ჩურჩხელა, თაფლის ჭაჭა, ქინძა-ჯინი. ქორწილებისთვის, ღონისძიებებისთვის.' },
   },
   menu: {
     en: { title: 'Menu. ZhuZhu, cocktail desserts.',
-          desc: 'Three signature cocktail desserts hand-set in Tbilisi. Churchkhela Cream, Honey Lemon, Kinza Garden.' },
+          desc: 'Three signature cocktail desserts hand-set in Tbilisi. Churchkhela Cream, Honey Chacha, Kinza Garden.' },
     ka: { title: 'მენიუ. ჟუჟუ, კოქტეილ-დესერტები.',
-          desc: 'სამი საფირმო კოქტეილ-დესერტი, ხელით აწყობილი თბილისში: ჩურჩხელის კრემი, თაფლი-ლიმონი, ქინძის ბაღი.' },
+          desc: 'სამი საფირმო კოქტეილ-დესერტი, ხელით აწყობილი თბილისში: ჩურჩხელის კრემი, თაფლის ჭაჭა, ქინძის ბაღი.' },
   },
   order: {
     en: { title: 'Order. ZhuZhu, cocktail desserts.',
