@@ -15,3 +15,13 @@ dist/
 # Local-only marketing pipeline (Remotion). Per Zutka convention — see
 # decisions.md 2026-05-02 ("Marketing folders are git-ignored by default").
 marketing/
+
+# Local-only print-design surfaces (signature cards, stand poster).
+# Generated SVG/PNG + the preview pages — kept on disk for export, never deployed.
+public/products/
+public/posters/
+scripts/gen-product-cards.mjs
+scripts/gen-stand-poster.mjs
+src/pages/cards-preview.astro
+src/pages/products-preview.astro
+src/pages/poster-preview.astro
