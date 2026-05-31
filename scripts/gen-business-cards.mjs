@@ -3,10 +3,10 @@
 //
 // Outputs:
 //   public/cards/front.svg              — same front on every card
-//   public/cards/back-generic.svg       — generic (no founder name)
-//   public/cards/back-keti.svg          — Keti / Co-founder
-//   public/cards/back-anna.svg          — Anna / Co-founder
-//   public/cards/back-lado.svg          — Lado / Co-founder
+//   public/cards/back-generic.svg       — generic (brand)
+//   public/cards/back-keti.svg          — Keti · ქეთი / Co-founder
+//   public/cards/back-anna.svg          — Anna · ანა / Co-founder
+//   public/cards/back-lado.svg          — Lado · ლადო / Co-founder
 //
 // Spec:
 //   Trim: 85 x 55 mm (European business-card standard)
@@ -19,14 +19,13 @@
 //   3. Export as PDF (CMYK, embed all)
 //   4. Send to printer with 3 mm bleed
 //
-// Recommended finishes (talk to the printer):
+// Recommended finishes:
 //   - 400 gsm matte black uncoated stock, OR silk-laminated black
-//   - Gold foil stamp on: shape outline, cube highlight, hairlines, wordmark
+//   - Gold foil stamp on: hairlines, role caps, gold tagline
 //   - Keep QR ink-printed (foil reflects → camera fails to scan)
 
 import QRCode from 'qrcode';
 import fs from 'node:fs';
-import path from 'node:path';
 
 const NIGHT       = '#0a0706';
 const BONE        = '#ede1c4';
@@ -36,8 +35,9 @@ const GOLD        = '#c69859';
 const GOLD_BRIGHT = '#e3b76d';
 
 const cubeUri = `data:image/png;base64,${fs.readFileSync('public/cubes/tarragon-lime.png').toString('base64')}`;
+const logoUri = `data:image/png;base64,${fs.readFileSync('public/logo-transparent.png').toString('base64')}`;
 
-// Inverted QR (bone modules on night) for the homepage
+// Inverted QR (bone modules on night) → homepage
 const qrPngBuf = await QRCode.toBuffer('https://zhuzhu.ge/', {
   type: 'png',
   errorCorrectionLevel: 'H',
@@ -48,15 +48,14 @@ const qrPngBuf = await QRCode.toBuffer('https://zhuzhu.ge/', {
 const qrUri = `data:image/png;base64,${qrPngBuf.toString('base64')}`;
 
 // Font import — embedded so the rendered preview pulls Google Fonts.
-// (For final print, convert text → outlines in your design app.)
+// For final print, convert text → outlines in your design app.
 const fontImport = `
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;1,300;1,400&amp;family=Noto+Serif+Georgian:wght@400&amp;family=Manrope:wght@500;600&amp;display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;1,300;1,400&amp;family=Noto+Serif+Georgian:wght@400;500&amp;family=Manrope:wght@500;600&amp;display=swap');
   </style>
 `;
 
-// Cropmarks at the trim (3 mm from each edge). Faint, not for production —
-// printers add their own marks. These are visual aids only.
+// Cropmarks at the 3-mm trim — visual aids only.
 const cropmarks = `
   <g stroke="${GOLD}" stroke-width="0.05" opacity="0.3" fill="none">
     <line x1="0" y1="3" x2="2" y2="3"/>     <line x1="3" y1="0" x2="3" y2="2"/>
@@ -67,66 +66,57 @@ const cropmarks = `
 `;
 
 // ───── FRONT ──────────────────────────────────────────────────────
-// Composition (within 3–88 × 3–58 trim):
-//   cube centred upper portion at ~10–32 vertical
-//   "Cocktails, in bites." italic Spectral ~38–42
-//   "შეჟუჟუნდი" italic Georgian, gold-bright ~44–48
-//   "zhuzhu.ge" tiny wordmark ~52–56
+// Top: small logo (brand signature)
+// Middle: cube (hero)
+// Below cube: "Cocktails, in bites." + gold em-dash + "შეჟუჟუნდი"
 const front = `<svg xmlns="http://www.w3.org/2000/svg"
      width="91mm" height="61mm"
      viewBox="0 0 91 61">
   ${fontImport}
   <rect width="91" height="61" fill="${NIGHT}"/>
 
+  <!-- Logo at top -->
+  <image href="${logoUri}" x="38" y="4.5" width="15" height="15" preserveAspectRatio="xMidYMid meet"/>
+
   <!-- Hero cube (Honey Lemon — tarragon-lime.png) -->
-  <image href="${cubeUri}" x="33" y="6" width="25" height="25" preserveAspectRatio="xMidYMid meet"/>
+  <image href="${cubeUri}" x="36" y="18" width="19" height="19" preserveAspectRatio="xMidYMid meet"/>
 
   <!-- English tagline -->
-  <text x="45.5" y="40"
+  <text x="45.5" y="44"
         font-family="Spectral, Georgia, 'Times New Roman', serif"
-        font-style="italic" font-weight="300" font-size="5"
+        font-style="italic" font-weight="300" font-size="4.5"
         fill="${BONE}" text-anchor="middle"
         letter-spacing="-0.05">
     Cocktails, in bites.
   </text>
 
-  <!-- Gold em-dash separator (subtle) -->
-  <line x1="40" y1="44" x2="51" y2="44" stroke="${GOLD}" stroke-width="0.15" opacity="0.55"/>
+  <!-- Gold em-dash separator -->
+  <line x1="41" y1="47.5" x2="50" y2="47.5" stroke="${GOLD}" stroke-width="0.15" opacity="0.55"/>
 
   <!-- Georgian companion -->
-  <text x="45.5" y="49"
+  <text x="45.5" y="53"
         font-family="'Noto Serif Georgian', Sylfaen, Georgia, serif"
-        font-weight="400" font-size="4"
+        font-weight="400" font-size="3.6"
         fill="${GOLD_BRIGHT}" text-anchor="middle">
     შეჟუჟუნდი
-  </text>
-
-  <!-- Wordmark + domain at the very bottom -->
-  <text x="45.5" y="56"
-        font-family="Spectral, Georgia, serif"
-        font-style="italic" font-weight="300" font-size="3"
-        fill="${BONE_WARM}" text-anchor="middle"
-        letter-spacing="0.05">
-    zhuzhu.ge
   </text>
 
   ${cropmarks}
 </svg>`;
 
 // ───── BACK ───────────────────────────────────────────────────────
-// Left column (3–32): QR centred vertically.
-// Right column (38–85): name + role + contact stack, left-aligned.
-// Bottom rule + "TBILISI · 2024" footer.
-function back({ name = null, role = null } = {}) {
-  // Generic card has no founder name; use the brand wordmark in that slot.
-  const headLine    = name ?? 'zhuzhu';
-  const headStyle   = name ? 'font-weight="400"' : 'font-weight="300"';
-  const subLine     = role ?? 'Cocktail desserts.';
-  const subColor    = role ? GOLD : ASH;
-  const subStyle    = role
-    ? `font-family="Manrope, sans-serif" font-weight="500" font-size="2.4" letter-spacing="0.32"`
-    : `font-family="Spectral, Georgia, serif" font-style="italic" font-weight="300" font-size="3"`;
-  const subText     = role ? role.toUpperCase() : subLine;
+// Left column (8–32): QR centred vertically + "SCAN" caption
+// Right column (38–85):
+//   English name (italic Spectral)
+//   Georgian name (italic Noto Serif Georgian)
+//   "CO-FOUNDER" / "COCKTAIL DESSERTS" tracked caps
+//   Contact stack
+//   Hairline + "TBILISI · 2024" footer
+function back({ nameEn = null, nameKa = null, roleEn = null } = {}) {
+  // Generic card uses the wordmark in the name slot.
+  const headEn  = nameEn ?? 'zhuzhu';
+  const headKa  = nameKa ?? 'ჟუჟუ';
+  const role    = (roleEn ?? 'Cocktail desserts').toUpperCase();
 
   return `<svg xmlns="http://www.w3.org/2000/svg"
      width="91mm" height="61mm"
@@ -134,9 +124,9 @@ function back({ name = null, role = null } = {}) {
   ${fontImport}
   <rect width="91" height="61" fill="${NIGHT}"/>
 
-  <!-- QR (homepage), bone on night, with the logo mark already centred -->
-  <image href="${qrUri}" x="9" y="15.5" width="24" height="24"/>
-  <text x="21" y="44.5"
+  <!-- QR (homepage), bone on night -->
+  <image href="${qrUri}" x="9" y="14" width="23" height="23"/>
+  <text x="20.5" y="42"
         font-family="Manrope, sans-serif"
         font-weight="500" font-size="2"
         fill="${ASH}" text-anchor="middle"
@@ -144,33 +134,43 @@ function back({ name = null, role = null } = {}) {
     SCAN
   </text>
 
-  <!-- Name / wordmark -->
-  <text x="40" y="18.5"
+  <!-- English name / wordmark -->
+  <text x="40" y="17"
         font-family="Spectral, Georgia, serif"
-        font-style="italic" ${headStyle} font-size="6.5"
+        font-style="italic" font-weight="400" font-size="6"
         fill="${BONE}">
-    ${headLine}
+    ${headEn}
   </text>
 
-  <!-- Role (or tagline on generic) -->
-  <text x="40" y="${role ? 23 : 23.5}"
-        ${subStyle}
-        fill="${subColor}">
-    ${subText}
+  <!-- Georgian name -->
+  <text x="40" y="22.5"
+        font-family="'Noto Serif Georgian', Sylfaen, Georgia, serif"
+        font-style="italic" font-weight="400" font-size="5"
+        fill="${BONE_WARM}">
+    ${headKa}
+  </text>
+
+  <!-- Role / tagline in tracked caps -->
+  <text x="40" y="28"
+        font-family="Manrope, sans-serif"
+        font-weight="500" font-size="2.3"
+        fill="${GOLD}"
+        letter-spacing="0.32">
+    ${role}
   </text>
 
   <!-- Contact stack -->
   <g font-family="Spectral, Georgia, serif"
      font-style="italic" font-weight="300"
      font-size="3.2" fill="${BONE_WARM}">
-    <text x="40" y="32">hello@zhuzhu.ge</text>
-    <text x="40" y="37">+995 XXX XX XX XX</text>
-    <text x="40" y="42">@she_zhuzhu_ndi</text>
+    <text x="40" y="36">hello@zhuzhu.ge</text>
+    <text x="40" y="41">+995 XXX XX XX XX</text>
+    <text x="40" y="46">@she_zhuzhu_ndi</text>
   </g>
 
-  <!-- Bottom hairline + city/year -->
-  <line x1="40" y1="49" x2="85" y2="49" stroke="${GOLD}" stroke-width="0.15" opacity="0.4"/>
-  <text x="40" y="55"
+  <!-- Footer hairline + city/year -->
+  <line x1="40" y1="51" x2="85" y2="51" stroke="${GOLD}" stroke-width="0.15" opacity="0.4"/>
+  <text x="40" y="56"
         font-family="Manrope, sans-serif"
         font-weight="500" font-size="2.4"
         fill="${GOLD}"
@@ -183,10 +183,10 @@ function back({ name = null, role = null } = {}) {
 }
 
 const backs = [
-  { variant: 'generic', name: null,   role: null },
-  { variant: 'keti',    name: 'Keti', role: 'Co-founder' },
-  { variant: 'anna',    name: 'Anna', role: 'Co-founder' },
-  { variant: 'lado',    name: 'Lado', role: 'Co-founder' },
+  { variant: 'generic', nameEn: null,   nameKa: null,    roleEn: null         },
+  { variant: 'keti',    nameEn: 'Keti', nameKa: 'ქეთი', roleEn: 'Co-founder' },
+  { variant: 'anna',    nameEn: 'Anna', nameKa: 'ანა',  roleEn: 'Co-founder' },
+  { variant: 'lado',    nameEn: 'Lado', nameKa: 'ლადო', roleEn: 'Co-founder' },
 ];
 
 fs.mkdirSync('public/cards', { recursive: true });
@@ -198,8 +198,3 @@ for (const b of backs) {
 console.log('OK Generated:');
 console.log('  public/cards/front.svg');
 backs.forEach((b) => console.log(`  public/cards/back-${b.variant}.svg`));
-console.log();
-console.log('Next: rasterize to PNG previews with');
-console.log('  for f in public/cards/*.svg; do');
-console.log('    npx svgexport "$f" "${f%.svg}.png" 2048: png 100%');
-console.log('  done');
