@@ -114,7 +114,7 @@ const front = `<svg xmlns="http://www.w3.org/2000/svg"
 //   Hairline + "TBILISI · 2024" footer
 function back({ nameEn = null, nameKa = null, roleEn = null } = {}) {
   // Generic card uses the wordmark in the name slot.
-  const headEn  = nameEn ?? 'zhuzhu';
+  const headEn  = nameEn ?? 'ZhuZhu';
   const headKa  = nameKa ?? 'ჟუჟუ';
   const role    = (roleEn ?? 'Cocktail desserts').toUpperCase();
 
@@ -124,9 +124,9 @@ function back({ nameEn = null, nameKa = null, roleEn = null } = {}) {
   ${fontImport}
   <rect width="91" height="61" fill="${NIGHT}"/>
 
-  <!-- QR (homepage), bone on night -->
-  <image href="${qrUri}" x="9" y="14" width="23" height="23"/>
-  <text x="20.5" y="42"
+  <!-- QR (homepage), bone on night, centred vertically -->
+  <image href="${qrUri}" x="9" y="19" width="23" height="23"/>
+  <text x="20.5" y="47"
         font-family="Manrope, sans-serif"
         font-weight="500" font-size="2"
         fill="${ASH}" text-anchor="middle"
@@ -134,24 +134,16 @@ function back({ nameEn = null, nameKa = null, roleEn = null } = {}) {
     SCAN
   </text>
 
-  <!-- English name / wordmark -->
-  <text x="40" y="17"
+  <!-- Bilingual name: "<EN> · <KA>" with gold middle dot -->
+  <text x="40" y="22"
         font-family="Spectral, Georgia, serif"
         font-style="italic" font-weight="400" font-size="6"
         fill="${BONE}">
-    ${headEn}
-  </text>
-
-  <!-- Georgian name -->
-  <text x="40" y="22.5"
-        font-family="'Noto Serif Georgian', Sylfaen, Georgia, serif"
-        font-style="italic" font-weight="400" font-size="5"
-        fill="${BONE_WARM}">
-    ${headKa}
+    <tspan>${headEn}</tspan><tspan fill="${GOLD}" dx="2.5" dy="-0.3">·</tspan><tspan dx="2.5" dy="0.3" font-family="'Noto Serif Georgian', Sylfaen, Georgia, serif" font-size="5.4">${headKa}</tspan>
   </text>
 
   <!-- Role / tagline in tracked caps -->
-  <text x="40" y="28"
+  <text x="40" y="29"
         font-family="Manrope, sans-serif"
         font-weight="500" font-size="2.3"
         fill="${GOLD}"
@@ -163,20 +155,10 @@ function back({ nameEn = null, nameKa = null, roleEn = null } = {}) {
   <g font-family="Spectral, Georgia, serif"
      font-style="italic" font-weight="300"
      font-size="3.2" fill="${BONE_WARM}">
-    <text x="40" y="36">hello@zhuzhu.ge</text>
-    <text x="40" y="41">+995 XXX XX XX XX</text>
-    <text x="40" y="46">@she_zhuzhu_ndi</text>
+    <text x="40" y="38">hello@zhuzhu.ge</text>
+    <text x="40" y="43">+995 XXX XX XX XX</text>
+    <text x="40" y="48">@she_zhuzhu_ndi</text>
   </g>
-
-  <!-- Footer hairline + city/year -->
-  <line x1="40" y1="51" x2="85" y2="51" stroke="${GOLD}" stroke-width="0.15" opacity="0.4"/>
-  <text x="40" y="56"
-        font-family="Manrope, sans-serif"
-        font-weight="500" font-size="2.4"
-        fill="${GOLD}"
-        letter-spacing="0.36">
-    TBILISI · 2024
-  </text>
 
   ${cropmarks}
 </svg>`;
