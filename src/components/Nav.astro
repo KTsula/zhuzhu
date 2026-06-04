@@ -205,4 +205,14 @@ const { current = 'home' } = Astro.props;
     letter-spacing: 0.04em;
     font-size: var(--t-base) !important;
   }
-  .drawer-lang { ma
+  .drawer-lang { margin-top: auto; }
+
+  @media (max-width: 860px) {
+    .zz-nav {
+      grid-template-columns: 1fr auto;
+      padding: 18px 22px;
+    }
+    .links, .right { display: none; }
+    .mobile-right { display: inline-flex; }
+  }
+</style>

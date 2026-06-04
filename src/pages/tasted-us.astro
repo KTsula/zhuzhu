@@ -1,6 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
-import { tastedUs, footer, pageMeta } from '../content/copy';
+import { tastedUs, footer, whatsapp, pageMeta } from '../content/copy';
 const t = tastedUs;
 ---
 <Base title={pageMeta.tastedUs.en.title}
@@ -108,6 +108,23 @@ const t = tastedUs;
             </a>
           ))}
         </div>
+
+        <span class="label connect-label reach">
+          <span class="lng-en">{t.en.reachLabel}</span>
+          <span class="lng-ka">{t.ka.reachLabel}</span>
+        </span>
+        <div class="contact-btns">
+          <a class="contact-btn wa" href={whatsapp.href} target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">
+              <path d="M19.05 4.91A9.82 9.82 0 0 0 12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.91-7.01ZM12.05 20.15h-.01a8.2 8.2 0 0 1-4.18-1.15l-.3-.18-3.11.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.39c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.7 8.24-8.24 8.24Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.25-.64.81-.78.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.51.11-.11.25-.29.37-.43.13-.14.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.35-.77-1.85-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.23.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28Z"/>
+            </svg>
+            <span>{t.en.waBtn}</span>
+          </a>
+          <a class="contact-btn" href="mailto:hello@zhuzhu.ge">
+            <span class="lng-en">{t.en.emailBtn}</span>
+            <span class="lng-ka">{t.ka.emailBtn}</span>
+          </a>
+        </div>
       </div>
 
       <div class="connect-block">
@@ -129,6 +146,11 @@ const t = tastedUs;
             <span class="lng-ka">{t.ka.homeCta}</span>
           </a>
         </div>
+        <button class="cta share-self" id="share-self" type="button">
+          <span class="lng-en">{t.en.shareSelf}</span>
+          <span class="lng-ka">{t.ka.shareSelf}</span>
+        </button>
+        <span class="share-self-fallback" id="share-self-fallback" hidden></span>
       </div>
     </div>
   </section>
@@ -283,6 +305,42 @@ const t = tastedUs;
           url:   url,
         });
       } catch (e) { /* user cancelled */ }
+    });
+  })();
+</script>
+
+<script is:inline define:vars={{
+  enPitchTitle: tastedUs.en.sharePitchTitle,
+  enPitchText:  tastedUs.en.sharePitchText,
+  enCopied:     tastedUs.en.copiedBtn,
+  enSelf:       tastedUs.en.shareSelf,
+  kaPitchTitle: tastedUs.ka.sharePitchTitle,
+  kaPitchText:  tastedUs.ka.sharePitchText,
+  kaCopied:     tastedUs.ka.copiedBtn,
+  kaSelf:       tastedUs.ka.shareSelf,
+}}>
+  (function () {
+    var btn = document.getElementById('share-self');
+    var fb  = document.getElementById('share-self-fallback');
+    if (!btn) return;
+    function lang() { return document.documentElement.getAttribute('data-lang') === 'ka' ? 'ka' : 'en'; }
+    function t(en, ka) { return lang() === 'ka' ? ka : en; }
+    var url = window.location.origin + '/';
+
+    btn.addEventListener('click', async function () {
+      var title = t(enPitchTitle, kaPitchTitle);
+      var text  = t(enPitchText, kaPitchText);
+      if (navigator.share) {
+        try { await navigator.share({ title: title, text: text, url: url }); return; }
+        catch (e) { /* cancelled or unsupported */ }
+      }
+      try {
+        await navigator.clipboard.writeText(text + ' ' + url);
+        btn.textContent = t(enCopied, kaCopied);
+        setTimeout(function () { btn.textContent = t(enSelf, kaSelf); }, 2000);
+      } catch (e2) {
+        if (fb) { fb.hidden = false; fb.textContent = text + ' ' + url; }
+      }
     });
   })();
 </script>
@@ -509,6 +567,38 @@ const t = tastedUs;
   }
   html[data-lang="ka"] .connect-body { font-family: var(--ka); font-weight: 400; }
   .connect-links { display: flex; flex-wrap: wrap; gap: 16px 32px; }
+
+  .connect-label.reach { margin-top: 28px; }
+  .contact-btns { display: flex; flex-wrap: wrap; gap: 12px; }
+  .contact-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--body);
+    font-weight: 600;
+    font-size: var(--t-xs);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--bone);
+    border: 1px solid rgba(198,152,89,0.4);
+    padding: 11px 18px;
+    transition: color 0.3s var(--ease-out-quart), border-color 0.3s var(--ease-out-quart);
+  }
+  .contact-btn:hover { color: var(--gold-bright); border-color: var(--gold-bright); }
+  .contact-btn.wa { background: var(--gold); color: var(--night); border-color: var(--gold); }
+  .contact-btn.wa:hover { background: var(--gold-bright); border-color: var(--gold-bright); color: var(--night); }
+  html[data-lang="ka"] .contact-btn { font-family: var(--ka); text-transform: none; letter-spacing: 0.04em; font-size: var(--t-sm); }
+
+  .share-self { margin-top: 24px; padding: 14px 28px; }
+  .share-self-fallback {
+    display: block;
+    margin-top: 12px;
+    font-family: var(--body);
+    font-size: var(--t-xs);
+    color: var(--ash);
+    word-break: break-word;
+    line-height: 1.5;
+  }
 
   @media (max-width: 720px) {
     .connect { padding: 48px 22px 8px; }

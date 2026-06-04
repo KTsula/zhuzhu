@@ -108,7 +108,7 @@ export const POST: APIRoute = async ({ request }) => {
       ['Email',  email],
       ['Date',   date],
       ['Guests', guests],
-      ['Venue',  venue],
+      ['Address', venue],
       ['Lang',   lang],
     ],
     note,

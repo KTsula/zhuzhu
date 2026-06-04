@@ -118,4 +118,18 @@ src/
     tasted-us.astro      /tasted-us   post-event list signup
     book.astro           → 301 /#book
     packages.astro       → 301 /order
-    ap
+    api/book.ts          POST booking → Resend
+    api/lead.ts          POST lead    → Resend
+  scripts/
+    lang.ts              language toggle
+  styles/
+    global.css           ← branding source of truth + reset
+```
+
+> Print-design surfaces (business cards, stand poster, product cards) and the
+> Remotion marketing pipeline live under `scripts/`, `social/` and `marketing/`
+> and are git-ignored — local-only, never deployed.
+
+## License
+
+Private — © ZhuZhu / ჟუჟუ
