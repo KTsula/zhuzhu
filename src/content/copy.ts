@@ -483,7 +483,7 @@ export const aboutPage = {
   en: {
     head: 'Three founders.<br>One kitchen.',
     origin: [
-      'ZhuZhu started with a craving. Keti, studying in the United States — a stretch at Cornell — first met the jello shot at a party there and couldn’t stop thinking about it: a whole cocktail, reduced to a single bite.',
+      'ZhuZhu started with a craving. Keti, studying in the United States for a while, first met the jello shot at a party there and couldn’t stop thinking about it: a whole cocktail, reduced to a single bite.',
       'Back home she called two friends. Anna — a chemistry obsessive who cleaned up at the school chem olympiads and knows exactly why a cube holds or weeps. Lado — a chef working the line in a Tbilisi hotel kitchen. Their strengths fit together a little too well.',
       'Georgia made sense for it: an alcohol-loving country, a young and international crowd, and a generation ready for the idea. So we started experimenting — this time with Georgian flavours — and quietly surprised ourselves with how good it got.',
       'We’ve been perfecting the recipes ever since, chasing inspiration wherever we find it (which is mostly code for tasting a great many cocktails lately). Every cube is still set by hand.',
@@ -492,7 +492,7 @@ export const aboutPage = {
   ka: {
     head: 'სამი დამფუძნებელი.<br>ერთი სამზარეულო.',
     origin: [
-      'ჟუჟუ ერთი სურვილით დაიწყო. ქეთი ამერიკაში სწავლობდა — ცოტა ხანს კორნელშიც — როცა წვეულებაზე პირველად გასინჯა ჯელო-შოტი და თავიდან ვეღარ ამოიგდო: მთელი კოქტეილი, ერთ ლუკმად ქცეული.',
+      'ჟუჟუ ერთი სურვილით დაიწყო. ქეთი ცოტა ხანს ამერიკაში სწავლობდა, როცა წვეულებაზე პირველად გასინჯა ჯელო-შოტი და თავიდან ვეღარ ამოიგდო: მთელი კოქტეილი, ერთ ლუკმად ქცეული.',
       'საქართველოში დაბრუნებულმა ორ მეგობარს დაურეკა. ანა — ქიმიაზე შეყვარებული, სკოლის ქიმიის ოლიმპიადების გამორჩეული მონაწილე, რომელმაც ზუსტად იცის, რატომ იჭერს კუბი ფორმას ან რატომ იწყებს „ტირილს“. ლადო — შეფი თბილისის სასტუმროს სამზარეულოდან. მათი ძლიერი მხარეები ერთმანეთს ზედმეტად კარგად დაემთხვა.',
       'საქართველო ამისთვის ბუნებრივი ადგილი აღმოჩნდა: ქვეყანა, რომელსაც ალკოჰოლი უყვარს, ახალგაზრდა და საერთაშორისო აუდიტორია და თაობა, რომელიც ასეთი იდეისთვის მზად იყო. ასე დავიწყეთ ექსპერიმენტები — ამჯერად ქართული გემოებით — და შედეგმა ჩვენც ჩუმად გაგვაკვირვა.',
       'მას შემდეგ რეცეპტებს ვხვეწავთ და შთაგონებას ყველგან ვეძებთ (რაც, ძირითადად, ბოლო დროს ბევრი კარგი კოქტეილის გასინჯვას ნიშნავს). თითოეული კუბი დღემდე ხელით იწყობა.',
