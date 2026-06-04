@@ -24,8 +24,8 @@ import { classics, menuClassics, sharedLabels } from '../content/copy';
         <div class="row top">
           <span class="id">№ {c.id.replace(/^c/, '')}</span>
           <span class="price">
-            <span class="lng-en">₾{c.price * 8} {sharedLabels.en.perSet}</span>
-            <span class="lng-ka">₾{c.price * 8} {sharedLabels.ka.perSet}</span>
+            <span class="lng-en">₾{c.price * 8} {sharedLabels.en.perSet}<span class="set-note">{sharedLabels.en.setIs}</span></span>
+            <span class="lng-ka">₾{c.price * 8} {sharedLabels.ka.perSet}<span class="set-note">{sharedLabels.ka.setIs}</span></span>
           </span>
         </div>
         <h3 class="name display">
@@ -110,6 +110,13 @@ import { classics, menuClassics, sharedLabels } from '../content/copy';
     color: var(--ash);
   }
   .row.top .price { color: var(--gold-bright); }
+  .set-note {
+    display: block;
+    margin-top: 6px;
+    color: var(--ash);
+    font-size: var(--t-xs);
+    letter-spacing: 0.08em;
+  }
   html[data-lang="ka"] .row.top {
     font-family: var(--ka);
     text-transform: none;

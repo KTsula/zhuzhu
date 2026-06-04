@@ -345,7 +345,7 @@ export const tastedUs = {
       {
         n: '01',
         title: 'The mystery box — coming soon.',
-        body: 'Eight new cubes at your door every month. We’re setting up subscriptions now — join the waitlist for first access and a founding-member price.',
+        body: 'Nine new cubes at your door every month. We’re setting up subscriptions now — join the waitlist for first access and a founding-member price.',
         cta: 'join the waitlist  →',
         href: '/box',
       },
@@ -404,7 +404,7 @@ export const tastedUs = {
       {
         n: '01',
         title: 'საიდუმლო ყუთი — მალე.',
-        body: 'ყოველ თვე რვა ახალი კუბი პირდაპირ შენს კართან. გამოწერას ახლა ვამზადებთ — ჩაეწერე სიაში, რომ პირველმა მიიღო წვდომა და დამფუძნებლის ფასი.',
+        body: 'ყოველ თვე ცხრა ახალი კუბი პირდაპირ შენს კართან. გამოწერას ახლა ვამზადებთ — ჩაეწერე სიაში, რომ პირველმა მიიღო წვდომა და დამფუძნებლის ფასი.',
         cta: 'ჩაეწერე სიაში  →',
         href: '/box',
       },
@@ -433,10 +433,10 @@ export const boxPage = {
   en: {
     eyebrow: 'coming soon',
     head: 'The mystery box.',
-    sub: 'A new set of cubes at your door, every month — eight bites, new flavours, never the same twice. We are setting up monthly subscriptions now. Join the waitlist and you will be the first in when it opens.',
+    sub: 'A new set of cubes at your door, every month — nine bites, new flavours, never the same twice. We are setting up monthly subscriptions now. Join the waitlist and you will be the first in when it opens.',
     price: '₾80',
     cadence: '/ month',
-    priceNote: '8 cubes · Tbilisi delivery · planned pricing',
+    priceNote: '9 cubes · Tbilisi delivery · planned pricing',
     // Waitlist (subscriptions not live yet)
     emailLabel: 'your email',
     emailPh: 'you@example.com',
@@ -451,16 +451,16 @@ export const boxPage = {
       { n: '02', name: 'We curate',  d: 'Every month, we set a new line. Kinza today, sour cherry tomorrow, walnut churchkhela next month — we follow the season and the kitchen.' },
       { n: '03', name: 'You bite',   d: 'We hand-deliver within Tbilisi during the first week of every month. Allergens are listed on the box; flavours stay a secret until you open it.' },
     ],
-    finalHead: 'Eight new bites, every month — soon.',
+    finalHead: 'Nine new bites, every month — soon.',
     finalCta: 'join the waitlist',
   },
   ka: {
     eyebrow: 'მალე',
     head: 'საიდუმლო ყუთი.',
-    sub: 'ყოველ თვე ახალი ნაკრები შენს კართან — რვა ლუკმა, ახალი გემოები და არასდროს ერთი და იგივე. ყოველთვიურ გამოწერას ახლა ვამზადებთ. ჩაეწერე სიაში და გახსნისთანავე პირველებს შორის იქნები.',
+    sub: 'ყოველ თვე ახალი ნაკრები შენს კართან — ცხრა ლუკმა, ახალი გემოები და არასდროს ერთი და იგივე. ყოველთვიურ გამოწერას ახლა ვამზადებთ. ჩაეწერე სიაში და გახსნისთანავე პირველებს შორის იქნები.',
     price: '₾80',
     cadence: '/ თვეში',
-    priceNote: '8 კუბი · მიწოდება თბილისში · დაგეგმილი ფასი',
+    priceNote: '9 კუბი · მიწოდება თბილისში · დაგეგმილი ფასი',
     emailLabel: 'შენი ელფოსტა',
     emailPh: 'you@example.com',
     cta: 'ჩაეწერე სიაში',
@@ -474,7 +474,7 @@ export const boxPage = {
       { n: '02', name: 'ჩვენ გემოებს ვარჩევთ', d: 'ყოველ თვე ახალ ხაზს ვაწყობთ. დღეს ქინძი, ხვალ ალუბალი, შემდეგ თვეში — ნიგვზის ჩურჩხელა. სეზონსა და სამზარეულოს მივყვებით.' },
       { n: '03', name: 'შენ აგემოვნებ', d: 'ყოველი თვის პირველ კვირაში ყუთს თბილისში ხელით მოგაწვდით. ალერგენები ყუთზე იქნება მითითებული; გემოები კი საიდუმლოდ დარჩება, სანამ არ გახსნი.' },
     ],
-    finalHead: 'რვა ახალი ლუკმა ყოველ თვე — მალე.',
+    finalHead: 'ცხრა ახალი ლუკმა ყოველ თვე — მალე.',
     finalCta: 'ჩაეწერე სიაში',
   },
 };
@@ -557,9 +557,9 @@ export const pageMeta = {
   },
   box: {
     en: { title: 'The mystery box. ZhuZhu, cocktail desserts.',
-          desc: 'A monthly subscription of hand-set cocktail desserts. Eight new flavours, delivered in Tbilisi the first week of every month.' },
+          desc: 'A monthly subscription of hand-set cocktail desserts. Nine new flavours, delivered in Tbilisi the first week of every month.' },
     ka: { title: 'საიდუმლო ყუთი. ჟუჟუ, კოქტეილ-დესერტები.',
-          desc: 'ხელით აწყობილი კოქტეილ-დესერტების ყოველთვიური გამოწერა. რვა ახალი გემო თბილისში, თვის პირველ კვირაში.' },
+          desc: 'ხელით აწყობილი კოქტეილ-დესერტების ყოველთვიური გამოწერა. ცხრა ახალი გემო თბილისში, თვის პირველ კვირაში.' },
   },
   tastedUs: {
     en: { title: 'The list. ZhuZhu, cocktail desserts.',
