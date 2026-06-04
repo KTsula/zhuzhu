@@ -1,5 +1,5 @@
 ---
-import { booking } from '../content/copy';
+import { booking, whatsapp } from '../content/copy';
 const f = booking.en.fields;
 const fk = booking.ka.fields;
 ---
@@ -14,7 +14,26 @@ const fk = booking.ka.fields;
         <span class="lng-en">{booking.en.sub}</span>
         <span class="lng-ka">{booking.ka.sub}</span>
       </p>
+      <p class="min-order">
+        <span class="lng-en">{booking.en.minOrder}</span>
+        <span class="lng-ka">{booking.ka.minOrder}</span>
+      </p>
       <a href="mailto:hello@zhuzhu.ge" class="mail">hello@zhuzhu.ge</a>
+
+      <div class="wa">
+        <span class="wa-lead">
+          <span class="lng-en">{booking.en.whatsappLead}</span>
+          <span class="lng-ka">{booking.ka.whatsappLead}</span>
+        </span>
+        <a class="wa-btn" href={whatsapp.href} target="_blank" rel="noopener noreferrer">
+          <svg class="wa-icon" viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
+            <path d="M19.05 4.91A9.82 9.82 0 0 0 12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.91-7.01ZM12.05 20.15h-.01a8.2 8.2 0 0 1-4.18-1.15l-.3-.18-3.11.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.39c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.7 8.24-8.24 8.24Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.25-.64.81-.78.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.51.11-.11.25-.29.37-.43.13-.14.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.35-.77-1.85-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.23.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28Z"/>
+          </svg>
+          <span class="lng-en">{booking.en.whatsappCta}</span>
+          <span class="lng-ka">{booking.ka.whatsappCta}</span>
+        </a>
+        <span class="wa-num">{whatsapp.number}</span>
+      </div>
     </aside>
 
     <form class="form" id="zz-booking-form" novalidate>
@@ -22,38 +41,44 @@ const fk = booking.ka.fields;
         <div class="field">
           <label class="lng-en">{f.name.label}</label>
           <label class="lng-ka">{fk.name.label}</label>
-          <input type="text" name="name" required data-ph-en={f.name.ph} data-ph-ka={fk.name.ph} placeholder={f.name.ph} />
+          <input type="text" name="name" required autocomplete="name" />
         </div>
         <div class="field">
-          <label class="lng-en">{f.contact.label}</label>
-          <label class="lng-ka">{fk.contact.label}</label>
-          <input type="text" name="contact" required data-ph-en={f.contact.ph} data-ph-ka={fk.contact.ph} placeholder={f.contact.ph} />
+          <label class="lng-en">{f.phone.label}</label>
+          <label class="lng-ka">{fk.phone.label}</label>
+          <input type="tel" name="phone" required autocomplete="tel" inputmode="tel" />
         </div>
+      </div>
+
+      <div class="field">
+        <label class="lng-en">{f.email.label}</label>
+        <label class="lng-ka">{fk.email.label}</label>
+        <input type="email" name="email" autocomplete="email" inputmode="email" />
       </div>
 
       <div class="two">
         <div class="field">
           <label class="lng-en">{f.date.label}</label>
           <label class="lng-ka">{fk.date.label}</label>
-          <input type="text" name="date" id="zz-booking-date" autocomplete="off" data-ph-en={f.date.ph} data-ph-ka={fk.date.ph} placeholder={f.date.ph} />
+          <input type="text" name="date" id="zz-booking-date" autocomplete="off" />
         </div>
         <div class="field">
           <label class="lng-en">{f.guests.label}</label>
           <label class="lng-ka">{fk.guests.label}</label>
-          <input type="text" name="guests" data-ph-en={f.guests.ph} data-ph-ka={fk.guests.ph} placeholder={f.guests.ph} />
+          <input type="text" name="guests" inputmode="numeric" />
         </div>
       </div>
 
       <div class="field">
         <label class="lng-en">{f.venue.label}</label>
         <label class="lng-ka">{fk.venue.label}</label>
-        <input type="text" name="venue" data-ph-en={f.venue.ph} data-ph-ka={fk.venue.ph} placeholder={f.venue.ph} />
+        <input type="text" name="venue" />
       </div>
 
       <div class="field">
         <label class="lng-en">{f.note.label}</label>
         <label class="lng-ka">{fk.note.label}</label>
-        <textarea name="note" data-ph-en={f.note.ph} data-ph-ka={fk.note.ph} placeholder={f.note.ph}></textarea>
+        <textarea name="note"></textarea>
       </div>
 
       <p class="tasting-note">
@@ -93,16 +118,6 @@ const fk = booking.ka.fields;
     const out  = document.getElementById('zz-booking-result');
     if (!form || !btn || !out) return;
 
-    function updatePlaceholders() {
-      const lang = document.documentElement.getAttribute('data-lang') === 'ka' ? 'ka' : 'en';
-      form.querySelectorAll('[data-ph-en], [data-ph-ka]').forEach((el) => {
-        const ph = el.getAttribute('data-ph-' + lang);
-        if (ph) el.setAttribute('placeholder', ph);
-      });
-    }
-    updatePlaceholders();
-    document.addEventListener('langchange', updatePlaceholders);
-
     function t(en, ka) {
       const lang = document.documentElement.getAttribute('data-lang') === 'ka' ? 'ka' : 'en';
       return lang === 'ka' ? ka : en;
@@ -113,13 +128,22 @@ const fk = booking.ka.fields;
       const data = new FormData(form);
       const payload = {
         name: String(data.get('name') || ''),
-        contact: String(data.get('contact') || ''),
+        phone: String(data.get('phone') || ''),
+        email: String(data.get('email') || ''),
         date: String(data.get('date') || ''),
         guests: String(data.get('guests') || ''),
         venue: String(data.get('venue') || ''),
         note: String(data.get('note') || ''),
         lang: document.documentElement.getAttribute('data-lang') || 'en',
       };
+      // Require name + phone before sending.
+      if (!payload.name.trim() || !payload.phone.trim()) {
+        out.dataset.state = 'error';
+        out.textContent = t(enFailure, kaFailure);
+        const firstEmpty = !payload.name.trim() ? form.querySelector('[name="name"]') : form.querySelector('[name="phone"]');
+        if (firstEmpty) firstEmpty.focus();
+        return;
+      }
       btn.disabled = true;
       btn.textContent = t(enSending, kaSending);
       out.dataset.state = 'sending';
@@ -258,6 +282,62 @@ const fk = booking.ka.fields;
     transition: color 0.3s var(--ease-out-quart), border-color 0.3s var(--ease-out-quart);
   }
   .left .mail:hover { color: var(--gold-bright); border-color: var(--gold-bright); }
+
+  .min-order {
+    font-family: var(--body);
+    font-weight: 500;
+    font-size: var(--t-sm);
+    color: var(--gold-bright);
+    letter-spacing: 0.02em;
+    margin: -12px 0 28px;
+  }
+  html[data-lang="ka"] .min-order { font-family: var(--ka); font-weight: 400; }
+
+  .wa {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    margin-top: 40px;
+    padding-top: 28px;
+    border-top: 1px solid rgba(198,152,89,0.18);
+  }
+  .wa-lead {
+    font-family: var(--body);
+    font-weight: 350;
+    font-size: var(--t-sm);
+    color: var(--ash);
+  }
+  html[data-lang="ka"] .wa-lead { font-family: var(--ka); font-weight: 400; }
+  .wa-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--body);
+    font-weight: 600;
+    font-size: var(--t-sm);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--night);
+    background: var(--gold);
+    padding: 12px 20px;
+    transition: background 0.3s var(--ease-out-quart);
+  }
+  .wa-btn:hover { background: var(--gold-bright); }
+  .wa-icon { flex-shrink: 0; }
+  html[data-lang="ka"] .wa-btn {
+    font-family: var(--ka);
+    text-transform: none;
+    letter-spacing: 0.04em;
+    font-size: var(--t-base);
+  }
+  .wa-num {
+    font-family: var(--body);
+    font-weight: 400;
+    font-size: var(--t-sm);
+    color: var(--bone-warm);
+    letter-spacing: 0.04em;
+  }
 
   .form { display: flex; flex-direction: column; gap: 32px; }
   .two { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }

@@ -191,7 +191,10 @@ const { current = 'home' } = Astro.props;
     text-transform: uppercase;
     letter-spacing: 0.14em;
     background: var(--bone);
-    color: var(--night);
+    /* Force dark text: the more-specific `.drawer-links a` rule sets color to
+       var(--bone), which would otherwise leave cream text on a cream button
+       (it read as a blank white rectangle under "about"). */
+    color: var(--night) !important;
     padding: 18px !important;
     border: 0 !important;
   }
@@ -202,14 +205,4 @@ const { current = 'home' } = Astro.props;
     letter-spacing: 0.04em;
     font-size: var(--t-base) !important;
   }
-  .drawer-lang { margin-top: auto; }
-
-  @media (max-width: 860px) {
-    .zz-nav {
-      grid-template-columns: 1fr auto;
-      padding: 18px 22px;
-    }
-    .links, .right { display: none; }
-    .mobile-right { display: inline-flex; }
-  }
-</style>
+  .drawer-lang { ma

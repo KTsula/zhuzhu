@@ -6,7 +6,8 @@ export const prerender = false;
 
 type Body = {
   name?: string;
-  contact?: string;
+  phone?: string;
+  email?: string;
   date?: string;
   guests?: string;
   venue?: string;
@@ -77,10 +78,16 @@ export const POST: APIRoute = async ({ request }) => {
     return json({ ok: false, error: 'bad-json' }, 400);
   }
 
-  const name    = (body.name    || '').trim().slice(0, 200);
-  const contact = (body.contact || '').trim().slice(0, 200);
-  if (!name || !contact) {
+  const name  = (body.name  || '').trim().slice(0, 200);
+  const phone = (body.phone || '').trim().slice(0, 100);
+  const email = (body.email || '').trim().slice(0, 200).toLowerCase();
+  // Phone is required; email is optional. Name is required.
+  if (!name || !phone) {
     return json({ ok: false, error: 'missing-fields' }, 422);
+  }
+  // If an email was given, it must look valid.
+  if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    return json({ ok: false, error: 'bad-email' }, 422);
   }
 
   const date   = (body.date   || '').trim().slice(0, 100);
@@ -89,17 +96,20 @@ export const POST: APIRoute = async ({ request }) => {
   const note   = (body.note   || '').trim().slice(0, 4000);
   const lang: 'en' | 'ka' = body.lang === 'ka' ? 'ka' : 'en';
 
-  await saveToSupabase({ name, contact, date, guests, venue, note, lang });
+  // `contact` kept populated for backward-compatibility with older rows/readers.
+  const contact = [phone, email].filter(Boolean).join(' · ');
+  await saveToSupabase({ name, phone, email: email || null, contact, date, guests, venue, note, lang });
 
   const { text, html } = buildEmail({
     title: `New booking — ${name}`,
     rows: [
-      ['Name',    name],
-      ['Contact', contact],
-      ['Date',    date],
-      ['Guests',  guests],
-      ['Venue',   venue],
-      ['Lang',    lang],
+      ['Name',   name],
+      ['Phone',  phone],
+      ['Email',  email],
+      ['Date',   date],
+      ['Guests', guests],
+      ['Venue',  venue],
+      ['Lang',   lang],
     ],
     note,
   });
@@ -114,7 +124,7 @@ export const POST: APIRoute = async ({ request }) => {
   }
 
   const resend = new Resend(apiKey);
-  const replyTo = contact.includes('@') ? contact : undefined;
+  const replyTo = email || undefined;
   try {
     const { error } = await resend.emails.send({
       from,

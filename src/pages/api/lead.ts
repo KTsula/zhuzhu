@@ -12,6 +12,31 @@ type Body = {
   lang?: string;
 };
 
+// Persist the lead to Supabase via a direct PostgREST upsert with the service
+// key (no SDK). Best-effort: if Supabase isn't configured or errors, the lead
+// still succeeds for the user (the team email is the backup source of truth).
+// Upsert on `email` so a returning visitor doesn't error or duplicate.
+async function saveToSupabase(row: Record<string, unknown>) {
+  const url = process.env.SUPABASE_URL;
+  const key = process.env.SUPABASE_SERVICE_KEY;
+  if (!url || !key) return;
+  try {
+    const res = await fetch(`${url}/rest/v1/leads?on_conflict=email`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        apikey: key,
+        Authorization: `Bearer ${key}`,
+        Prefer: 'resolution=merge-duplicates,return=minimal',
+      },
+      body: JSON.stringify(row),
+    });
+    if (!res.ok) console.error('[/api/lead] supabase upsert failed:', res.status, await res.text());
+  } catch (err) {
+    console.error('[/api/lead] supabase threw:', err);
+  }
+}
+
 export const POST: APIRoute = async ({ request }) => {
   let body: Body;
   try { body = await request.json(); }
@@ -29,32 +54,13 @@ export const POST: APIRoute = async ({ request }) => {
   const refEmail = (body.refEmail || '').trim().slice(0, 200).toLowerCase();
   const lang = body.lang === 'ka' ? 'ka' : 'en';
 
-  // TODO: persist to Supabase.
-  // Schema:
-  //   create table public.leads (
-  //     id uuid default gen_random_uuid() primary key,
-  //     email text not null unique,
-  //     birth_month int check (birth_month between 1 and 12),
-  //     source text,
-  //     ref_email text,
-  //     lang text default 'en',
-  //     is_customer boolean default false,
-  //     last_order_at timestamptz,
-  //     created_at timestamptz default now()
-  //   );
-  // create index on public.leads (created_at desc);
-  // create index on public.leads (ref_email) where ref_email is not null;
-  //
-  // Then add @supabase/supabase-js and:
-  //   const { createClient } = await import('@supabase/supabase-js');
-  //   const supabase = createClient(
-  //     import.meta.env.SUPABASE_URL!,
-  //     import.meta.env.SUPABASE_SERVICE_KEY!
-  //   );
-  //   await supabase.from('leads').upsert(
-  //     { email, birth_month: birthMonth, source, ref_email: refEmail || null, lang },
-  //     { onConflict: 'email' }
-  //   );
+  await saveToSupabase({
+    email,
+    birth_month: birthMonth,
+    source: source || null,
+    ref_email: refEmail || null,
+    lang,
+  });
 
   const month = birthMonth ? new Date(2000, birthMonth - 1, 1).toLocaleString('en-US', { month: 'long' }) : '—';
   const { text, html } = buildEmail({

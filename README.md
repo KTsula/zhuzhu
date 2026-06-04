@@ -69,8 +69,16 @@ LEADS_FROM          # optional, defaults to "ZhuZhu Leads <leads@zhuzhu.ge>"
 LEADS_TO            # optional, defaults to "hello@zhuzhu.ge"
 ```
 
-Lead persistence (Supabase) and box checkout (Paddle) are not yet wired —
-see the inline `TODO` notes in `src/pages/api/lead.ts` and `src/pages/box.astro`.
+Both `/api/book` and `/api/lead` also persist to **Supabase** via a direct
+PostgREST insert with the service key (`SUPABASE_URL`, `SUPABASE_SERVICE_KEY`).
+Bookings land in `public.bookings` (now with separate `phone` / `email`
+columns); leads and box-waitlist signups upsert into `public.leads` (keyed on
+`email`, with a `source` tag — e.g. `box-waitlist`). Saves are best-effort: if
+Supabase is unconfigured or errors, the form still succeeds and the team email
+is the backup.
+
+The mystery-box subscription (Paddle) is not live yet — the `/box` page is an
+email **waitlist** for now (writes to `public.leads`, `source = box-waitlist`).
 
 ## Design language
 
@@ -110,18 +118,4 @@ src/
     tasted-us.astro      /tasted-us   post-event list signup
     book.astro           → 301 /#book
     packages.astro       → 301 /order
-    api/book.ts          POST booking → Resend
-    api/lead.ts          POST lead    → Resend
-  scripts/
-    lang.ts              language toggle
-  styles/
-    global.css           ← branding source of truth + reset
-```
-
-> Print-design surfaces (business cards, stand poster, product cards) and the
-> Remotion marketing pipeline live under `scripts/`, `social/` and `marketing/`
-> and are git-ignored — local-only, never deployed.
-
-## License
-
-Private — © ZhuZhu / ჟუჟუ
+    ap

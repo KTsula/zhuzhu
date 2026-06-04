@@ -32,10 +32,22 @@ import { boxPage, pageMeta } from '../content/copy';
       </div>
     </div>
 
-    <button class="cta subscribe-btn" id="zz-subscribe">
-      <span class="lng-en">{boxPage.en.cta}</span>
-      <span class="lng-ka">{boxPage.ka.cta}</span>
-    </button>
+    <form class="waitlist" id="zz-waitlist" novalidate>
+      <div class="wl-row">
+        <input type="email" name="email" required autocomplete="email" inputmode="email"
+               data-ph-en={boxPage.en.emailPh} data-ph-ka={boxPage.ka.emailPh}
+               placeholder={boxPage.en.emailPh} aria-label="email" />
+        <button type="submit" class="cta" id="zz-waitlist-btn">
+          <span class="lng-en">{boxPage.en.cta}</span>
+          <span class="lng-ka">{boxPage.ka.cta}</span>
+        </button>
+      </div>
+      <p class="wl-note">
+        <span class="lng-en">{boxPage.en.waitlistNote}</span>
+        <span class="lng-ka">{boxPage.ka.waitlistNote}</span>
+      </p>
+      <div class="wl-result" id="zz-waitlist-result" data-state="idle"></div>
+    </form>
   </section>
 
   <section class="zz-box-steps">
@@ -71,26 +83,71 @@ import { boxPage, pageMeta } from '../content/copy';
       <span class="lng-en">{boxPage.en.finalHead}</span>
       <span class="lng-ka">{boxPage.ka.finalHead}</span>
     </h2>
-    <button class="cta subscribe-btn" id="zz-subscribe-2">
+    <a class="cta" href="#zz-waitlist">
       <span class="lng-en">{boxPage.en.finalCta}</span>
       <span class="lng-ka">{boxPage.ka.finalCta}</span>
-    </button>
+    </a>
   </section>
 </Base>
 
-<script is:inline>
-  // TODO Paddle Billing: load https://cdn.paddle.com/paddle/v2/paddle.js in Base.astro,
-  // run Paddle.Initialize({ token: 'YOUR_CLIENT_TOKEN' }), then replace the alert below
-  // with: Paddle.Checkout.open({ items: [{ priceId: 'pri_XXX', quantity: 1 }] });
+<script is:inline define:vars={{
+  enCta: boxPage.en.cta,
+  enSubmitting: boxPage.en.submitting,
+  enSuccess: boxPage.en.success,
+  enFailure: boxPage.en.failure,
+  kaCta: boxPage.ka.cta,
+  kaSubmitting: boxPage.ka.submitting,
+  kaSuccess: boxPage.ka.success,
+  kaFailure: boxPage.ka.failure,
+}}>
   (function () {
-    var btns = document.querySelectorAll('#zz-subscribe, #zz-subscribe-2');
-    btns.forEach(function (b) {
-      b.addEventListener('click', function () {
-        var lang = document.documentElement.getAttribute('data-lang') === 'ka' ? 'ka' : 'en';
-        alert(lang === 'ka'
-          ? 'გადახდა მალე ხელმისაწვდომი იქნება. ამ დროისთვის მოგვწერეთ hello@zhuzhu.ge.'
-          : 'Checkout coming soon. Write to hello@zhuzhu.ge in the meantime to reserve your spot.');
+    var form = document.getElementById('zz-waitlist');
+    var btn  = document.getElementById('zz-waitlist-btn');
+    var out  = document.getElementById('zz-waitlist-result');
+    if (!form || !btn || !out) return;
+
+    function lang() { return document.documentElement.getAttribute('data-lang') === 'ka' ? 'ka' : 'en'; }
+    function t(en, ka) { return lang() === 'ka' ? ka : en; }
+
+    function syncPh() {
+      var L = lang();
+      form.querySelectorAll('[data-ph-en],[data-ph-ka]').forEach(function (el) {
+        var ph = el.getAttribute('data-ph-' + L);
+        if (ph) el.setAttribute('placeholder', ph);
       });
+    }
+    syncPh();
+    document.addEventListener('langchange', syncPh);
+
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      var data = new FormData(form);
+      var email = String(data.get('email') || '').trim().toLowerCase();
+      if (!email) return;
+
+      btn.disabled = true;
+      btn.textContent = t(enSubmitting, kaSubmitting);
+      out.dataset.state = 'sending';
+      out.textContent = '';
+
+      try {
+        var res = await fetch('/api/lead', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: email, source: 'box-waitlist', lang: lang() }),
+        });
+        if (!res.ok) throw new Error('bad status ' + res.status);
+        out.dataset.state = 'success';
+        out.textContent = t(enSuccess, kaSuccess);
+        form.reset();
+        btn.textContent = t(enCta, kaCta);
+        btn.disabled = false;
+      } catch (err) {
+        out.dataset.state = 'error';
+        out.textContent = t(enFailure, kaFailure);
+        btn.textContent = t(enCta, kaCta);
+        btn.disabled = false;
+      }
     });
   })();
 </script>
@@ -118,7 +175,7 @@ import { boxPage, pageMeta } from '../content/copy';
     font-size: var(--t-lg);
     color: var(--bone-warm);
     line-height: 1.55;
-    max-width: 42ch;
+    max-width: 46ch;
     margin: 36px auto 0;
   }
   html[data-lang="ka"] .zz-box-hero .sub { font-family: var(--ka); font-weight: 400; }
@@ -154,12 +211,58 @@ import { boxPage, pageMeta } from '../content/copy';
   }
   html[data-lang="ka"] .price-note { font-family: var(--ka); font-weight: 400; }
 
-  .subscribe-btn {
-    margin-top: 40px;
-    padding: 20px 44px;
-    font-size: var(--t-sm);
+  .waitlist {
+    margin: 44px auto 0;
+    max-width: 480px;
+    scroll-margin-top: 90px;
   }
-  html[data-lang="ka"] .subscribe-btn { font-size: var(--t-base); }
+  .wl-row {
+    display: flex;
+    gap: 12px;
+    align-items: stretch;
+  }
+  .waitlist input {
+    flex: 1;
+    min-width: 0;
+    padding: 16px 0;
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid rgba(198,152,89,0.3);
+    color: var(--bone);
+    font-family: var(--body);
+    font-weight: 400;
+    font-size: var(--t-base);
+    border-radius: 0;
+    transition: border-color 0.3s var(--ease-out-quart);
+  }
+  html[data-lang="ka"] .waitlist input { font-family: var(--ka); }
+  .waitlist input::placeholder { color: var(--ash-dim); }
+  .waitlist input:focus { outline: none; border-bottom-color: var(--gold); }
+  .waitlist .cta { flex-shrink: 0; padding: 16px 28px; }
+  .wl-note {
+    font-family: var(--body);
+    font-weight: 350;
+    font-size: var(--t-xs);
+    color: var(--ash-dim);
+    line-height: 1.5;
+    margin: 16px 0 0;
+    text-align: center;
+  }
+  html[data-lang="ka"] .wl-note { font-family: var(--ka); font-weight: 400; font-size: var(--t-sm); }
+  .wl-result {
+    font-family: var(--body);
+    font-weight: 400;
+    font-size: var(--t-sm);
+    line-height: 1.5;
+    padding: 14px 18px;
+    margin-top: 14px;
+    text-align: center;
+  }
+  html[data-lang="ka"] .wl-result { font-family: var(--ka); }
+  .wl-result[data-state="idle"] { display: none; }
+  .wl-result[data-state="sending"] { color: var(--ash); background: rgba(198,152,89,0.06); }
+  .wl-result[data-state="success"] { color: var(--bone); background: rgba(227,183,109,0.10); }
+  .wl-result[data-state="error"]   { color: var(--bone); background: rgba(183,58,90,0.12); }
 
   .zz-box-steps {
     padding: 110px 24px;
@@ -246,12 +349,9 @@ import { boxPage, pageMeta } from '../content/copy';
     }
     .price-row { gap: 6px; }
     .cadence { font-size: var(--t-base); }
-    .subscribe-btn {
-      margin-top: 32px;
-      width: 100%;
-      max-width: 320px;
-      padding: 18px 28px;
-    }
+    .waitlist { margin-top: 36px; }
+    .wl-row { flex-direction: column; gap: 16px; }
+    .waitlist .cta { width: 100%; padding: 16px 24px; }
     .zz-box-steps { padding: 72px 22px; }
     .steps-head { font-size: var(--t-xl); margin-bottom: 40px; }
     .step { grid-template-columns: 56px 1fr; gap: 20px; padding: 28px 0; }
