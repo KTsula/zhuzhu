@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import { tastedUs, footer, whatsapp, pageMeta } from '../content/copy';
 const t = tastedUs;
+const instagramHref = footer.en.socials.find((s) => s.label === 'Instagram')?.href ?? 'https://instagram.com/she_zhuzhu_ndi';
 ---
 <Base title={pageMeta.tastedUs.en.title}
       description={pageMeta.tastedUs.en.desc}>
@@ -175,8 +176,17 @@ const t = tastedUs;
               <span class="lng-en">{p.body}</span>
               <span class="lng-ka">{ka.body}</span>
             </p>
-            {p.cta && p.href && (
-              <a class="cta-ghost" href={p.href}>
+            {p.cta && p.href === 'share:friend' && (
+              <button class="cta-ghost share-friend" type="button">
+                <span class="lng-en">{p.cta}</span>
+                <span class="lng-ka">{ka.cta}</span>
+              </button>
+            )}
+            {p.cta && p.href && p.href !== 'share:friend' && (
+              <a class="cta-ghost"
+                 href={p.href}
+                 target={p.href.startsWith('http') ? '_blank' : undefined}
+                 rel={p.href.startsWith('http') ? 'noopener noreferrer' : undefined}>
                 <span class="lng-en">{p.cta}</span>
                 <span class="lng-ka">{ka.cta}</span>
               </a>
@@ -202,6 +212,7 @@ const t = tastedUs;
   enCopy: tastedUs.en.copyBtn,
   enShareTitle: tastedUs.en.shareTitle,
   enShareText: tastedUs.en.shareText,
+  instagramHref,
   kaSubmit: tastedUs.ka.submit,
   kaSubmitting: tastedUs.ka.submitting,
   kaFailure: tastedUs.ka.failure,
@@ -224,11 +235,28 @@ const t = tastedUs;
       return document.documentElement.getAttribute('data-lang') === 'ka' ? 'ka' : 'en';
     }
     function t(en, ka) { return lang() === 'ka' ? ka : en; }
+    function friendMessage() {
+      return t(enShareText, kaShareText) + ' ' + instagramHref;
+    }
+    async function shareFriend() {
+      var message = friendMessage();
+      if (navigator.share) {
+        try {
+          await navigator.share({
+            title: t(enShareTitle, kaShareTitle),
+            text: message,
+          });
+          return;
+        } catch (e) { /* user cancelled */ }
+      }
+      try {
+        await navigator.clipboard.writeText(message);
+      } catch (e2) {}
+    }
 
-    // Pick up ?at=event-name and ?ref=referrer-email
+    // Pick up ?at=event-name for QR/event attribution.
     var params = new URLSearchParams(window.location.search);
     var source   = params.get('at')  || 'qr';
-    var refEmail = params.get('ref') || '';
 
     // Localise placeholders
     function syncPh() {
@@ -255,14 +283,13 @@ const t = tastedUs;
         var res = await fetch('/api/lead', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email: email, birthMonth: birthMonth, source: source, refEmail: refEmail, lang: lang() }),
+          body: JSON.stringify({ email: email, birthMonth: birthMonth, source: source, lang: lang() }),
         });
         if (!res.ok) throw new Error('bad status ' + res.status);
 
-        // Build share link with their email as ref
-        var shareUrl = window.location.origin + '/?ref=' + encodeURIComponent(email);
-        linkEl.textContent = shareUrl;
-        linkEl.setAttribute('data-url', shareUrl);
+        var message = friendMessage();
+        linkEl.textContent = message;
+        linkEl.setAttribute('data-message', message);
 
         // Show native share button if available
         if (navigator.share) shareBtn.hidden = false;
@@ -280,9 +307,9 @@ const t = tastedUs;
     });
 
     copyBtn.addEventListener('click', async function () {
-      var url = linkEl.getAttribute('data-url') || linkEl.textContent || '';
+      var message = linkEl.getAttribute('data-message') || linkEl.textContent || '';
       try {
-        await navigator.clipboard.writeText(url);
+        await navigator.clipboard.writeText(message);
         var orig = copyBtn.innerHTML;
         copyBtn.textContent = t(enCopied, kaCopied);
         setTimeout(function () { copyBtn.innerHTML = orig; }, 2000);
@@ -296,15 +323,17 @@ const t = tastedUs;
     });
 
     shareBtn.addEventListener('click', async function () {
-      var url = linkEl.getAttribute('data-url') || '';
       if (!navigator.share) return;
       try {
         await navigator.share({
           title: t(enShareTitle, kaShareTitle),
-          text:  t(enShareText,  kaShareText),
-          url:   url,
+          text:  linkEl.getAttribute('data-message') || friendMessage(),
         });
       } catch (e) { /* user cancelled */ }
+    });
+
+    document.querySelectorAll('.share-friend').forEach(function (el) {
+      el.addEventListener('click', shareFriend);
     });
   })();
 </script>
