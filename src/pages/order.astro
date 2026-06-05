@@ -1,12 +1,11 @@
 ---
 import Base from '../layouts/Base.astro';
 import BookingForm from '../components/BookingForm.astro';
-import { orderPage, pageMeta, sharedLabels, signatures, classics, menuClassics } from '../content/copy';
+import { orderPage, pageMeta, signatures, classics, menuClassics } from '../content/copy';
 
 const rows = [
   ...signatures.map((s) => ({
     name: s.name,
-    price: s.price,
     accent: s.accent,
     img: s.img,
     tag: { en: s.line.en, ka: s.line.ka },
@@ -14,7 +13,6 @@ const rows = [
   })),
   ...classics.map((c) => ({
     name: c.name,
-    price: c.price,
     accent: c.accent,
     img: null,
     tag: { en: menuClassics.en.eyebrow, ka: menuClassics.ka.eyebrow },
@@ -52,11 +50,6 @@ const rows = [
             <span class="lng-en">{r.name.en}</span>
             <span class="lng-ka">{r.name.ka}</span>
           </span>
-        </div>
-        <div class="price">
-          ₾{r.price * 8}
-          <span class="per lng-en">{sharedLabels.en.perSet}</span>
-          <span class="per lng-ka">{sharedLabels.ka.perSet}</span>
         </div>
       </div>
     ))}
@@ -142,26 +135,6 @@ const rows = [
   }
   html[data-lang="ka"] .name { font-family: var(--ka); font-weight: 400; }
 
-  .price {
-    flex-shrink: 0;
-    text-align: right;
-    font-family: var(--display);
-    font-weight: 300;
-    font-style: italic;
-    font-size: var(--t-xl);
-    color: var(--gold-bright);
-    line-height: 1;
-    white-space: nowrap;
-  }
-  .row:not(.premium) .price { color: var(--bone); }
-  .price .per {
-    font-family: var(--body);
-    font-style: normal;
-    font-size: var(--t-sm);
-    color: var(--ash);
-  }
-  html[data-lang="ka"] .price .per { font-family: var(--ka); }
-
   @media (max-width: 720px) {
     .order-head { padding: 80px 22px 56px; }
     .order-head .sub { font-size: var(--t-base); }
@@ -169,6 +142,5 @@ const rows = [
     .row { gap: 18px; padding: 20px 0; }
     .thumb { width: 48px; height: 48px; }
     .name { font-size: var(--t-base); }
-    .price { font-size: var(--t-lg); }
   }
 </style>

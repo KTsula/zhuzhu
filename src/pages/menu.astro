@@ -44,16 +44,6 @@ import { menuPage, pageMeta, sharedLabels, signatures } from '../content/copy';
               <span class="lng-ka">{s.meta.line.ka}</span>
             </div>
           </div>
-          <div class="m">
-            <div class="label">
-              <span class="lng-en">{sharedLabels.en.price}</span>
-              <span class="lng-ka">{sharedLabels.ka.price}</span>
-            </div>
-            <div class="v">
-              <span class="lng-en">₾{s.price * 8} {sharedLabels.en.perSet}<span class="set-note">{sharedLabels.en.setIs}</span></span>
-              <span class="lng-ka">₾{s.price * 8} {sharedLabels.ka.perSet}<span class="set-note">{sharedLabels.ka.setIs}</span></span>
-            </div>
-          </div>
         </div>
       </div>
       <div class="image-side">
@@ -158,12 +148,6 @@ import { menuPage, pageMeta, sharedLabels, signatures } from '../content/copy';
     color: var(--bone);
   }
   html[data-lang="ka"] .meta .v { font-family: var(--ka); }
-  .set-note {
-    display: block;
-    margin-top: 6px;
-    color: var(--ash);
-    font-size: var(--t-xs);
-  }
 
   .image-side {
     position: relative;

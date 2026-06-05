@@ -21,15 +21,9 @@ import { boxPage, pageMeta } from '../content/copy';
       <span class="lng-ka">{boxPage.ka.sub}</span>
     </p>
 
-    <div class="price-block">
-      <div class="price-row">
-        <span class="price"><span class="lng-en">{boxPage.en.price}</span><span class="lng-ka">{boxPage.ka.price}</span></span>
-        <span class="cadence"><span class="lng-en">{boxPage.en.cadence}</span><span class="lng-ka">{boxPage.ka.cadence}</span></span>
-      </div>
-      <div class="price-note">
-        <span class="lng-en">{boxPage.en.priceNote}</span>
-        <span class="lng-ka">{boxPage.ka.priceNote}</span>
-      </div>
+    <div class="box-note">
+      <span class="lng-en">{boxPage.en.note}</span>
+      <span class="lng-ka">{boxPage.ka.note}</span>
     </div>
 
     <form class="waitlist" id="zz-waitlist" novalidate>
@@ -180,36 +174,19 @@ import { boxPage, pageMeta } from '../content/copy';
   }
   html[data-lang="ka"] .zz-box-hero .sub { font-family: var(--ka); font-weight: 400; }
 
-  .price-block {
-    margin: 64px auto 0;
+  .box-note {
     display: inline-flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    padding: 28px 56px;
+    margin: 44px auto 0;
+    padding: 16px 28px;
     border-top: 1px solid rgba(198,152,89,0.3);
     border-bottom: 1px solid rgba(198,152,89,0.3);
-  }
-  .price-row {
-    display: flex;
-    align-items: baseline;
-    gap: 8px;
-    color: var(--bone);
-    font-family: var(--display);
-    font-style: italic;
-    font-weight: 300;
-  }
-  .price { font-size: var(--t-display); line-height: 1; }
-  .cadence { font-size: var(--t-lg); color: var(--bone-warm); }
-  html[data-lang="ka"] .price-row { font-family: var(--ka); font-weight: 400; }
-  .price-note {
     font-family: var(--body);
     font-weight: 400;
     font-size: var(--t-sm);
     color: var(--ash);
     letter-spacing: 0.04em;
   }
-  html[data-lang="ka"] .price-note { font-family: var(--ka); font-weight: 400; }
+  html[data-lang="ka"] .box-note { font-family: var(--ka); font-weight: 400; }
 
   .waitlist {
     margin: 44px auto 0;
@@ -343,12 +320,10 @@ import { boxPage, pageMeta } from '../content/copy';
     .zz-box-hero .eyebrow { margin-bottom: 20px; }
     .zz-box-hero .head { font-size: var(--t-3xl); }
     .zz-box-hero .sub { font-size: var(--t-base); margin-top: 28px; }
-    .price-block {
+    .box-note {
       margin-top: 48px;
-      padding: 24px 32px;
+      padding: 14px 24px;
     }
-    .price-row { gap: 6px; }
-    .cadence { font-size: var(--t-base); }
     .waitlist { margin-top: 36px; }
     .wl-row { flex-direction: column; gap: 16px; }
     .waitlist .cta { width: 100%; padding: 16px 24px; }

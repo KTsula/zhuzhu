@@ -47,7 +47,7 @@ function confirmation(name: string, lang: 'en' | 'ka') {
         subject: 'მივიღეთ თქვენი ჯავშანი — ჟუჟუ',
         hiText: `მადლობა, ${name}.`,
         hiHtml: `მადლობა, ${safe}.`,
-        body: 'თქვენი მოთხოვნა მივიღეთ. ერთ სამუშაო დღეში გიპასუხებთ — მენიუს პირველ ვერსიასა და ფასს გამოგიგზავნით.',
+        body: 'თქვენი მოთხოვნა მივიღეთ. ერთ სამუშაო დღეში გიპასუხებთ — მენიუს პირველ ვერსიასა და შემდეგ ნაბიჯებს გამოგიგზავნით.',
         tasting: 'დიდი ღონისძიებისთვის წინასწარი დეგუსტაციის მოწყობაც შეგვიძლია — უბრალოდ უპასუხეთ ამ წერილს.',
         sign: 'ჟუჟუ · კოქტეილ-დესერტები, თბილისი',
       }
@@ -55,7 +55,7 @@ function confirmation(name: string, lang: 'en' | 'ka') {
         subject: "We've got your booking — ZhuZhu",
         hiText: `Thank you, ${name}.`,
         hiHtml: `Thank you, ${safe}.`,
-        body: 'We have your request and will reply within one working day with a draft menu and a quote.',
+        body: 'We have your request and will reply within one working day with a draft menu and next steps.',
         tasting: 'For a larger event we can also arrange a tasting beforehand — just reply to this email.',
         sign: 'ZhuZhu · cocktail desserts, Tbilisi',
       };

@@ -34,15 +34,11 @@ export const manifesto = {
 export const sharedLabels = {
   en: {
     line: 'line',
-    price: 'price',
-    perSet: '/ set',
     setIs: 'A set is 8 cubes.',
     language: 'language',
   },
   ka: {
     line: 'სერია',
-    price: 'ფასი',
-    perSet: '/ ნაკრები',
     setIs: 'ერთი ნაკრები — 8 კუბი.',
     language: 'ენა',
   },
@@ -56,7 +52,6 @@ export type SignatureItem = {
   meta: { line: { en: string; ka: string } };
   img: string;
   accent: string;
-  price: number;
 };
 
 export const signatures: SignatureItem[] = [
@@ -73,7 +68,6 @@ export const signatures: SignatureItem[] = [
     },
     img: '/cubes/cream-kiss.png',
     accent: 'rgba(196, 140, 70, 0.30)',
-    price: 14,
   },
   {
     id: '02',
@@ -88,7 +82,6 @@ export const signatures: SignatureItem[] = [
     },
     img: '/cubes/honey-chacha.png',
     accent: 'rgba(220, 170, 70, 0.32)',
-    price: 13,
   },
   {
     id: '03',
@@ -103,7 +96,6 @@ export const signatures: SignatureItem[] = [
     },
     img: '/cubes/kinza-garden.png',
     accent: 'rgba(130, 185, 110, 0.32)',
-    price: 12,
   },
 ];
 
@@ -112,7 +104,6 @@ export type ClassicSet = {
   name: { en: string; ka: string };
   blurb: { en: string; ka: string };
   accent: string;
-  price: number; // per-cube base; serving = price × 8
 };
 
 export const classics: ClassicSet[] = [
@@ -124,7 +115,6 @@ export const classics: ClassicSet[] = [
       ka: 'სუფთა ვოდკა და ახლად დაწურული ფორთოხალი — მსუბუქი, ცოცხალი და ყველასთვის საყვარელი.',
     },
     accent: 'rgba(240, 150, 60, 0.45)',
-    price: 5,
   },
   {
     id: 'c02',
@@ -134,7 +124,6 @@ export const classics: ClassicSet[] = [
       ka: 'ვოდკა მუქი, მომჟავო ალუბლით — მყარი, ლალისფერი და ზემოდან ერთი ალუბლით.',
     },
     accent: 'rgba(180, 40, 70, 0.45)',
-    price: 5,
   },
   {
     id: 'c03',
@@ -144,7 +133,6 @@ export const classics: ClassicSet[] = [
       ka: 'აპეროლი, პროსეკო და ფორთოხალი — საზაფხულო კუბი მსუბუქი სიმწარით.',
     },
     accent: 'rgba(240, 110, 40, 0.45)',
-    price: 7,
   },
   {
     id: 'c04',
@@ -154,7 +142,6 @@ export const classics: ClassicSet[] = [
       ka: 'ტეკილა, ფორთოხალი და გრენადინი — ოქროსფრიდან წითლამდე ჩასული ფენები.',
     },
     accent: 'rgba(245, 150, 50, 0.45)',
-    price: 7,
   },
   {
     id: 'c05',
@@ -164,7 +151,6 @@ export const classics: ClassicSet[] = [
       ka: 'თეთრი რომი, ლაიმი, ახალი პიტნა — მკვეთრად და ცოცხლად აწყობილი.',
     },
     accent: 'rgba(120, 180, 130, 0.45)',
-    price: 7,
   },
 ];
 
@@ -172,12 +158,12 @@ export const menuClassics = {
   en: {
     eyebrow: 'Classics',
     head: 'Beyond the signatures.',
-    sub: 'Familiar cocktails, set the same way. Priced per set — every set is 8 cubes. Minimum order ₾250, Tbilisi delivery.',
+    sub: 'Familiar cocktails, set the same way. Every set is 8 cubes. Minimum order ₾250, Tbilisi delivery.',
   },
   ka: {
     eyebrow: 'კლასიკა',
     head: 'საავტორო გემოებს მიღმაც.',
-    sub: 'ნაცნობი კოქტეილები იმავე ფორმით. ფასი მითითებულია ნაკრებზე — ერთ ნაკრებში 8 კუბია. მინიმალური შეკვეთა ₾250, მიწოდება თბილისში.',
+    sub: 'ნაცნობი კოქტეილები იმავე ფორმით. ერთ ნაკრებში 8 კუბია. მინიმალური შეკვეთა ₾250, მიწოდება თბილისში.',
   },
 };
 
@@ -202,7 +188,7 @@ export const whatsapp = {
 export const booking = {
   en: {
     head: 'book your event',
-    sub: 'Tell us about the night. We answer within a working day, with a draft menu and a quote.',
+    sub: 'Tell us about the night. We answer within a working day, with a draft menu and next steps.',
     minOrder: 'Minimum order ₾250. A set is 8 cubes.',
     whatsappLead: 'Prefer to message?',
     whatsappCta: 'Contact us on WhatsApp',
@@ -224,7 +210,7 @@ export const booking = {
   },
   ka: {
     head: 'დაჯავშნე ღონისძიება',
-    sub: 'მოგვიყევი შენი საღამოს შესახებ. ერთ სამუშაო დღეში გიპასუხებთ — მენიუს პირველ ვერსიასა და ფასს გამოგიგზავნით.',
+    sub: 'მოგვიყევი შენი საღამოს შესახებ. ერთ სამუშაო დღეში გიპასუხებთ — მენიუს პირველ ვერსიასა და შემდეგ ნაბიჯებს გამოგიგზავნით.',
     minOrder: 'მინიმალური შეკვეთა ₾250. ერთი ნაკრები — 8 კუბი.',
     whatsappLead: 'მოწერა გირჩევნია?',
     whatsappCta: 'მოგვწერე WhatsApp-ზე',
@@ -299,11 +285,11 @@ export const menuPage = {
 export const orderPage = {
   en: {
     head: 'Your plates. Your numbers.',
-    sub: 'Priced per set — a set is always 8 cubes. Minimum order ₾250. Set the day before, delivered chilled within Tbilisi.',
+    sub: 'Every set is 8 cubes. Minimum order ₾250. Set the day before, delivered chilled within Tbilisi.',
   },
   ka: {
     head: 'შენი მაგიდა. შენი რაოდენობა.',
-    sub: 'ფასი მითითებულია ნაკრებზე — ერთ ნაკრებში ყოველთვის 8 კუბია. მინიმალური შეკვეთა ₾250. კუბებს წინა დღეს ვამზადებთ და თბილისში გაგრილებულს გიგზავნით.',
+    sub: 'ერთ ნაკრებში ყოველთვის 8 კუბია. მინიმალური შეკვეთა ₾250. კუბებს წინა დღეს ვამზადებთ და თბილისში გაგრილებულს გიგზავნით.',
   },
 };
 
@@ -345,7 +331,7 @@ export const tastedUs = {
       {
         n: '01',
         title: 'The mystery box — coming soon.',
-        body: 'Nine new cubes at your door every month. We’re setting up subscriptions now — join the waitlist for first access and a founding-member price.',
+        body: 'Nine new cubes at your door every month. We’re setting up subscriptions now — join the waitlist for first access.',
         cta: 'join the waitlist  →',
         href: '/box',
       },
@@ -404,7 +390,7 @@ export const tastedUs = {
       {
         n: '01',
         title: 'საიდუმლო ყუთი — მალე.',
-        body: 'ყოველ თვე ცხრა ახალი კუბი პირდაპირ შენს კართან. გამოწერას ახლა ვამზადებთ — ჩაეწერე სიაში, რომ პირველმა მიიღო წვდომა და დამფუძნებლის ფასი.',
+        body: 'ყოველ თვე ცხრა ახალი კუბი პირდაპირ შენს კართან. გამოწერას ახლა ვამზადებთ — ჩაეწერე სიაში, რომ პირველმა მიიღო წვდომა.',
         cta: 'ჩაეწერე სიაში  →',
         href: '/box',
       },
@@ -434,9 +420,7 @@ export const boxPage = {
     eyebrow: 'coming soon',
     head: 'The mystery box.',
     sub: 'A new set of cubes at your door, every month — nine bites, new flavours, never the same twice. We are setting up monthly subscriptions now. Join the waitlist and you will be the first in when it opens.',
-    price: '₾80',
-    cadence: '/ month',
-    priceNote: '9 cubes · Tbilisi delivery · planned pricing',
+    note: '9 cubes · Tbilisi delivery',
     // Waitlist (subscriptions not live yet)
     emailLabel: 'your email',
     emailPh: 'you@example.com',
@@ -447,7 +431,7 @@ export const boxPage = {
     waitlistNote: 'No charge now — this just reserves your spot. We will email you before billing ever starts.',
     stepsHead: 'How it will work.',
     steps: [
-      { n: '01', name: 'Join the waitlist', d: 'Leave your email. When subscriptions open you get first access and a founding-member price.' },
+      { n: '01', name: 'Join the waitlist', d: 'Leave your email. When subscriptions open you get first access.' },
       { n: '02', name: 'We curate',  d: 'Every month, we set a new line. Kinza today, sour cherry tomorrow, walnut churchkhela next month — we follow the season and the kitchen.' },
       { n: '03', name: 'You bite',   d: 'We hand-deliver within Tbilisi during the first week of every month. Allergens are listed on the box; flavours stay a secret until you open it.' },
     ],
@@ -458,9 +442,7 @@ export const boxPage = {
     eyebrow: 'მალე',
     head: 'საიდუმლო ყუთი.',
     sub: 'ყოველ თვე ახალი ნაკრები შენს კართან — ცხრა ლუკმა, ახალი გემოები და არასდროს ერთი და იგივე. ყოველთვიურ გამოწერას ახლა ვამზადებთ. ჩაეწერე სიაში და გახსნისთანავე პირველებს შორის იქნები.',
-    price: '₾80',
-    cadence: '/ თვეში',
-    priceNote: '9 კუბი · მიწოდება თბილისში · დაგეგმილი ფასი',
+    note: '9 კუბი · მიწოდება თბილისში',
     emailLabel: 'შენი ელფოსტა',
     emailPh: 'you@example.com',
     cta: 'ჩაეწერე სიაში',
@@ -470,7 +452,7 @@ export const boxPage = {
     waitlistNote: 'ახლა არაფერს იხდი — ეს მხოლოდ ადგილს გინახავს. გადახდის დაწყებამდე აუცილებლად მოგწერთ.',
     stepsHead: 'როგორ იმუშავებს',
     steps: [
-      { n: '01', name: 'ჩაეწერე სიაში', d: 'დატოვე ელფოსტა. გამოწერის გახსნისას პირველმა მიიღო წვდომა და დამფუძნებლის ფასი.' },
+      { n: '01', name: 'ჩაეწერე სიაში', d: 'დატოვე ელფოსტა. გამოწერის გახსნისას პირველმა მიიღო წვდომა.' },
       { n: '02', name: 'ჩვენ გემოებს ვარჩევთ', d: 'ყოველ თვე ახალ ხაზს ვაწყობთ. დღეს ქინძი, ხვალ ალუბალი, შემდეგ თვეში — ნიგვზის ჩურჩხელა. სეზონსა და სამზარეულოს მივყვებით.' },
       { n: '03', name: 'შენ აგემოვნებ', d: 'ყოველი თვის პირველ კვირაში ყუთს თბილისში ხელით მოგაწვდით. ალერგენები ყუთზე იქნება მითითებული; გემოები კი საიდუმლოდ დარჩება, სანამ არ გახსნი.' },
     ],
@@ -505,8 +487,8 @@ export const founders = [
     name: { en: 'Keti', ka: 'ქეთი' },
     role: { en: 'Brand & business', ka: 'ბრენდი და ბიზნესი' },
     bio: {
-      en: 'IE University graduate; interned at Google; now building products at Bending Spoons in Milan. Keti runs the brand surface — the site, the pricing — and what the world sees and clicks.',
-      ka: 'IE University-ის კურსდამთავრებული; სტაჟირება Google-ში; ახლა პროდუქტებზე მუშაობს მილანის Bending Spoons-ში. ქეთი ბრენდის ხილულ მხარეს უძღვება — საიტს, ფასებს და ყველაფერს, რასაც ადამიანები ხედავენ და აჭერენ.',
+      en: 'IE University graduate; interned at Google; now building products at Bending Spoons in Milan. Keti runs the brand surface — the site, the story — and what the world sees and clicks.',
+      ka: 'IE University-ის კურსდამთავრებული; სტაჟირება Google-ში; ახლა პროდუქტებზე მუშაობს მილანის Bending Spoons-ში. ქეთი ბრენდის ხილულ მხარეს უძღვება — საიტს, ამბავს და ყველაფერს, რასაც ადამიანები ხედავენ და აჭერენ.',
     },
     accent: 'rgba(196, 140, 70, 0.30)',
   },
@@ -545,9 +527,9 @@ export const pageMeta = {
   },
   order: {
     en: { title: 'Order. ZhuZhu, cocktail desserts.',
-          desc: 'Order ZhuZhu cocktail desserts for your event. Per-cube pricing, minimum ₾250. Tbilisi delivery.' },
+          desc: 'Order ZhuZhu cocktail desserts for your event. Minimum order ₾250. Tbilisi delivery.' },
     ka: { title: 'შეკვეთა. ჟუჟუ, კოქტეილ-დესერტები.',
-          desc: 'შეუკვეთე ჟუჟუს კოქტეილ-დესერტები შენი ღონისძიებისთვის. ფასი ნაკრებზე, მინიმალური შეკვეთა ₾250, მიწოდება თბილისში.' },
+          desc: 'შეუკვეთე ჟუჟუს კოქტეილ-დესერტები შენი ღონისძიებისთვის. მინიმალური შეკვეთა ₾250, მიწოდება თბილისში.' },
   },
   about: {
     en: { title: 'About. ZhuZhu, cocktail desserts.',
