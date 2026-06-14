@@ -1,8 +1,8 @@
 export type Lang = 'en' | 'ka';
 
 export const nav = {
-  en: { menu: 'menu', order: 'order', box: 'box', about: 'about', reserve: 'reserve', reserveTasting: 'reserve a tasting' },
-  ka: { menu: 'მენიუ', order: 'შეკვეთა', box: 'ნაკრები', about: 'ჩვენ შესახებ', reserve: 'დაჯავშნა', reserveTasting: 'დეგუსტაციის დაჯავშნა' },
+  en: { menu: 'menu', order: 'order', box: 'box', about: 'about', contact: 'contact', reserve: 'reserve', reserveTasting: 'reserve a tasting' },
+  ka: { menu: 'მენიუ', order: 'შეკვეთა', box: 'ნაკრები', about: 'ჩვენ შესახებ', contact: 'დაგვეკონტაქტეთ', reserve: 'დაჯავშნა', reserveTasting: 'დეგუსტაციის დაჯავშნა' },
 };
 
 export const hero = {
@@ -512,6 +512,39 @@ export const founders = [
   },
 ];
 
+export const contactPage = {
+  en: {
+    eyebrow: 'contact',
+    head: 'Let’s talk.',
+    sub: 'Three ways to reach us. We answer within a working day.',
+    waLabel: 'WhatsApp',
+    waNote: 'Fastest — usually within a few hours.',
+    waCta: 'Open WhatsApp',
+    emailLabel: 'Email',
+    emailNote: 'For longer briefs, attachments, anything quieter.',
+    emailCta: 'hello@zhuzhu.ge',
+    socialLabel: 'Follow along',
+    socialNote: 'Tonight’s flavours, new sets, behind the kitchen.',
+    addrHead: 'The atelier',
+    addrLines: ['ZhuZhu Atelier', 'Tbilisi · Georgia'],
+  },
+  ka: {
+    eyebrow: 'კონტაქტი',
+    head: 'მოგვწერე.',
+    sub: 'სამი გზა დაგვეკონტაქტო. ერთ სამუშაო დღეში გიპასუხებთ.',
+    waLabel: 'WhatsApp',
+    waNote: 'ყველაზე სწრაფი — ჩვეულებრივ რამდენიმე საათში გიპასუხებთ.',
+    waCta: 'WhatsApp-ში გახსნა',
+    emailLabel: 'ელფოსტა',
+    emailNote: 'უფრო ვრცელი ბრიფისთვის, დანართებისთვის, წყნარი მიმოწერისთვის.',
+    emailCta: 'hello@zhuzhu.ge',
+    socialLabel: 'გვადევნე',
+    socialNote: 'დღევანდელი გემოები, ახალი ნაკრებები, სამზარეულოს კულუარები.',
+    addrHead: 'ატელიე',
+    addrLines: ['ჟუჟუ ატელიე', 'თბილისი · საქართველო'],
+  },
+};
+
 export const pageMeta = {
   home: {
     en: { title: 'ZhuZhu — Cocktail desserts · Tbilisi atelier',
@@ -548,6 +581,12 @@ export const pageMeta = {
           desc: 'You tasted us tonight. Stay close — monthly flavours, birthday perks, and the first word on the box.' },
     ka: { title: 'სია. ჟუჟუ, კოქტეილ-დესერტები.',
           desc: 'დღეს ჟუჟუ გასინჯე. დარჩი ახლოს — ყოველთვიური გემოები, დაბადების დღის საჩუქრები და პირველი ამბავი საიდუმლო ყუთზე.' },
+  },
+  contact: {
+    en: { title: 'Contact. ZhuZhu, cocktail desserts.',
+          desc: 'Reach ZhuZhu by WhatsApp, email, or socials. Tbilisi atelier — we answer within a working day.' },
+    ka: { title: 'კონტაქტი. ჟუჟუ, კოქტეილ-დესერტები.',
+          desc: 'დაგვეკონტაქტეთ WhatsApp-ით, ელფოსტით ან სოციალურით. ჟუჟუ ატელიე, თბილისი — ერთ სამუშაო დღეში გიპასუხებთ.' },
   },
 };
 

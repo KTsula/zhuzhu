@@ -8,7 +8,7 @@ import { pageMeta } from '../content/copy';
 interface Props {
   title?: string;
   description?: string;
-  current?: 'menu' | 'order' | 'box' | 'about' | 'home';
+  current?: 'menu' | 'order' | 'box' | 'about' | 'contact' | 'home';
   showHook?: boolean;
 }
 const {
@@ -28,6 +28,9 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://zhuzhu.ge')
     <meta name="theme-color" content="#0a0706" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="canonical" href={canonical} />
+
+    <!-- Pinterest domain verification. Required to claim zhuzhu.ge on Pinterest. -->
+    <meta name="p:domain_verify" content="504f3b81138f15fefa9d41a23bac0be4" />
 
     <title>{title}</title>
     <meta name="description" content={description} />
