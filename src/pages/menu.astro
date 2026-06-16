@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import MenuClassics from '../components/MenuClassics.astro';
+import MenuBundles from '../components/MenuBundles.astro';
 import { menuPage, pageMeta, sharedLabels, signatures } from '../content/copy';
 ---
 <Base current="menu"
@@ -16,6 +17,8 @@ import { menuPage, pageMeta, sharedLabels, signatures } from '../content/copy';
       <span class="lng-ka">{menuPage.ka.sub}</span>
     </p>
   </section>
+
+  <MenuBundles />
 
   {signatures.map((s, i) => (
     <article class:list={["spread", i % 2 === 1 && 'right']}>

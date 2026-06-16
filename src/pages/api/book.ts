@@ -11,6 +11,7 @@ type Body = {
   date?: string;
   guests?: string;
   venue?: string;
+  basket?: string;
   note?: string;
   lang?: string;
 };
@@ -93,12 +94,13 @@ export const POST: APIRoute = async ({ request }) => {
   const date   = (body.date   || '').trim().slice(0, 100);
   const guests = (body.guests || '').trim().slice(0, 100);
   const venue  = (body.venue  || '').trim().slice(0, 200);
+  const basket = (body.basket || '').trim().slice(0, 200);
   const note   = (body.note   || '').trim().slice(0, 4000);
   const lang: 'en' | 'ka' = body.lang === 'ka' ? 'ka' : 'en';
 
   // `contact` kept populated for backward-compatibility with older rows/readers.
   const contact = [phone, email].filter(Boolean).join(' · ');
-  await saveToSupabase({ name, phone, email: email || null, contact, date, guests, venue, note, lang });
+  await saveToSupabase({ name, phone, email: email || null, contact, date, guests, venue, basket, note, lang });
 
   const { text, html } = buildEmail({
     title: `New booking — ${name}`,
@@ -109,6 +111,7 @@ export const POST: APIRoute = async ({ request }) => {
       ['Date',   date],
       ['Guests', guests],
       ['Address', venue],
+      ['Basket', basket],
       ['Lang',   lang],
     ],
     note,

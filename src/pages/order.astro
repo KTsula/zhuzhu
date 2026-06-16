@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import BookingForm from '../components/BookingForm.astro';
+import MenuBundles from '../components/MenuBundles.astro';
 import { orderPage, pageMeta, signatures, classics, menuClassics } from '../content/copy';
 
 const rows = [
@@ -34,7 +35,24 @@ const rows = [
     </p>
   </section>
 
+  <MenuBundles />
+
   <section class="order-list">
+    <header class="list-head">
+      <span class="label">
+        <span class="lng-en">{orderPage.en.flavoursEyebrow}</span>
+        <span class="lng-ka">{orderPage.ka.flavoursEyebrow}</span>
+      </span>
+      <h2 class="display list-title">
+        <span class="lng-en">{orderPage.en.flavoursHead}</span>
+        <span class="lng-ka">{orderPage.ka.flavoursHead}</span>
+      </h2>
+      <p class="list-sub">
+        <span class="lng-en">{orderPage.en.flavoursSub}</span>
+        <span class="lng-ka">{orderPage.ka.flavoursSub}</span>
+      </p>
+    </header>
+
     {rows.map((r) => (
       <div class:list={["row", r.premium && 'premium']}>
         <div class="thumb">
@@ -83,6 +101,29 @@ const rows = [
     margin: 0 auto 40px;
     padding: 0 40px;
   }
+  .list-head {
+    text-align: center;
+    max-width: 620px;
+    margin: 88px auto 48px;
+  }
+  .list-head .label {
+    display: block;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+  .list-title {
+    font-size: var(--t-2xl);
+    margin: 0;
+  }
+  .list-sub {
+    margin: 20px auto 0;
+    font-family: var(--body);
+    font-weight: 350;
+    font-size: var(--t-base);
+    line-height: 1.6;
+    color: var(--bone-warm);
+  }
+  html[data-lang="ka"] .list-sub { font-family: var(--ka); font-weight: 400; }
   .row {
     display: flex;
     align-items: center;
@@ -139,6 +180,8 @@ const rows = [
     .order-head { padding: 80px 22px 56px; }
     .order-head .sub { font-size: var(--t-base); }
     .order-list { padding: 0 22px; }
+    .list-head { margin: 64px auto 36px; }
+    .list-title { font-size: var(--t-xl); }
     .row { gap: 18px; padding: 20px 0; }
     .thumb { width: 48px; height: 48px; }
     .name { font-size: var(--t-base); }

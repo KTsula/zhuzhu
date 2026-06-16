@@ -167,6 +167,100 @@ export const menuClassics = {
   },
 };
 
+export type BundleTier = {
+  id: string;
+  name: { en: string; ka: string };
+  kicker: { en: string; ka: string };
+  guests: { en: string; ka: string };
+  cubes: { en: string; ka: string };
+  price: string;
+  body: { en: string; ka: string };
+  mix: Array<{
+    label: { en: string; ka: string };
+    count: string;
+  }>;
+  note: { en: string; ka: string };
+  featured?: boolean;
+};
+
+export const menuBundles = {
+  en: {
+    eyebrow: 'Baskets',
+    head: 'Baskets for your table.',
+    sub: 'Pick a ready mix for the size of your night. We tune the exact flavours with you before we set the cubes.',
+    priceLabel: 'basket price',
+    mixLabel: 'inside',
+    cta: 'build my basket',
+    foot: 'Need a different guest count? We scale the same logic up or down and keep the mix balanced.',
+  },
+  ka: {
+    eyebrow: 'ნაკრები',
+    head: 'ნაკრები შენი მაგიდისთვის.',
+    sub: 'აირჩიე მზა მიქსი შენი საღამოს ზომისთვის. ზუსტ გემოებს ერთად შევარჩევთ, სანამ კუბებს დავაყენებთ.',
+    priceLabel: 'ნაკრების ფასი',
+    mixLabel: 'შიგნით',
+    cta: 'ნაკრების აწყობა',
+    foot: 'სხვა რაოდენობის სტუმარია? იგივე ლოგიკით გავზრდით ან შევამცირებთ და ბალანსს შევინარჩუნებთ.',
+  },
+  tiers: [
+    {
+      id: '01',
+      name: { en: 'First Round', ka: 'პირველი წრე' },
+      kicker: { en: 'Starter basket', ka: 'სტარტერი' },
+      guests: { en: '5–10 people', ka: '5–10 სტუმარი' },
+      cubes: { en: '40 cubes', ka: '40 კუბი' },
+      price: '₾288',
+      body: {
+        en: 'A lively first tray for birthdays, apartment dinners and small pre-games: enough signature character to feel special, with easy classics carrying the room.',
+        ka: 'პირველი ცოცხალი თეფში დაბადების დღეებისთვის, სახლში ვახშმისთვის და პატარა პრე-გეიმისთვის: საკმარისი საავტორო ხასიათი და მარტივი კლასიკა, რომ ყველამ თავისი იპოვოს.',
+      },
+      mix: [
+        { label: { en: 'Signature cubes', ka: 'საავტორო კუბები' }, count: '8' },
+        { label: { en: 'Classic cocktail cubes', ka: 'კლასიკური კოქტეილები' }, count: '16' },
+        { label: { en: 'Vodka & juice cubes', ka: 'ვოდკა-წვენის კუბები' }, count: '16' },
+      ],
+      note: { en: 'Best when guests take 3–5 bites each.', ka: 'საუკეთესოა, როცა თითო სტუმარს 3–5 ლუკმა შეხვდება.' },
+    },
+    {
+      id: '02',
+      name: { en: 'Table Glow', ka: 'მაგიდის ნათება' },
+      kicker: { en: 'Most balanced', ka: 'ყველაზე დაბალანსებული' },
+      guests: { en: '12–20 people', ka: '12–20 სტუმარი' },
+      cubes: { en: '80 cubes', ka: '80 კუბი' },
+      price: '₾640',
+      body: {
+        en: 'The safest business choice for mixed crowds: enough signatures for the story, enough classics for repeat bites, and a clean vodka-juice lane for easy reach.',
+        ka: 'ყველაზე უსაფრთხო არჩევანი შერეული აუდიტორიისთვის: საავტორო გემოები ამბისთვის, კლასიკა განმეორებისთვის და მარტივი ვოდკა-წვენის ხაზი ყველასთვის.',
+      },
+      mix: [
+        { label: { en: 'Signature cubes', ka: 'საავტორო კუბები' }, count: '24' },
+        { label: { en: 'Classic cocktail cubes', ka: 'კლასიკური კოქტეილები' }, count: '32' },
+        { label: { en: 'Vodka & juice cubes', ka: 'ვოდკა-წვენის კუბები' }, count: '24' },
+      ],
+      note: { en: 'Our default recommendation for office nights and dinner parties.', ka: 'ჩვენი ძირითადი რეკომენდაცია ოფისის საღამოებისა და ვახშმებისთვის.' },
+      featured: true,
+    },
+    {
+      id: '03',
+      name: { en: 'Full Room', ka: 'სრული დარბაზი' },
+      kicker: { en: 'Event basket', ka: 'ღონისძიებისთვის' },
+      guests: { en: '25–40 people', ka: '25–40 სტუმარი' },
+      cubes: { en: '160 cubes', ka: '160 კუბი' },
+      price: '₾1,344',
+      body: {
+        en: 'A full dessert bar for launches, weddings and brand nights. More signatures up front, broad classics through the middle, and simple cubes to keep the table moving.',
+        ka: 'სრული დესერტ-ბარი პრეზენტაციებისთვის, ქორწილებისთვის და ბრენდის საღამოებისთვის. წინ მეტი საავტორო გემო, შუაში ფართო კლასიკა და მარტივი კუბები უწყვეტი მოძრაობისთვის.',
+      },
+      mix: [
+        { label: { en: 'Signature cubes', ka: 'საავტორო კუბები' }, count: '56' },
+        { label: { en: 'Classic cocktail cubes', ka: 'კლასიკური კოქტეილები' }, count: '64' },
+        { label: { en: 'Vodka & juice cubes', ka: 'ვოდკა-წვენის კუბები' }, count: '40' },
+      ],
+      note: { en: 'Built to sit beautifully on a long table or move with service.', ka: 'ლამაზად ეწყობა გრძელ მაგიდაზეც და სერვისით გატარებისთვისაც.' },
+    },
+  ] satisfies BundleTier[],
+};
+
 export const moreFlavours = {
   en: {
     eyebrow: 'and beyond the signatures',
@@ -199,8 +293,11 @@ export const booking = {
       date:   { label: 'When is the event?' },
       venue:  { label: 'Address' },
       guests: { label: 'How many people?' },
+      basket: { label: 'Which basket are you interested in?' },
       note:   { label: 'Anything else? (optional)' },
     },
+    basketPlaceholder: 'Choose a basket',
+    customBasket: 'Custom basket',
     submit: 'send',
     sending: 'sending…',
     success: 'thank you. we have your brief and will answer within a working day.',
@@ -221,8 +318,11 @@ export const booking = {
       date:   { label: 'როდის არის ღონისძიება?' },
       venue:  { label: 'მისამართი' },
       guests: { label: 'რამდენი სტუმარი?' },
+      basket: { label: 'რომელი ნაკრები გაინტერესებს?' },
       note:   { label: 'კიდევ რამე? (სურვილისამებრ)' },
     },
+    basketPlaceholder: 'აირჩიე ნაკრები',
+    customBasket: 'ინდივიდუალური ნაკრები',
     submit: 'გაგზავნა',
     sending: 'იგზავნება…',
     success: 'მადლობა. ინფორმაცია მივიღეთ და ერთ სამუშაო დღეში გიპასუხებთ.',
@@ -284,12 +384,18 @@ export const menuPage = {
 
 export const orderPage = {
   en: {
-    head: 'Your plates. Your numbers.',
-    sub: 'Every set is 8 cubes. Minimum order ₾250. Set the day before, delivered chilled within Tbilisi.',
+    head: 'Choose a basket. Or build your own.',
+    sub: 'Start with one of our ready event baskets, or tell us your guest count and we will shape the mix. Set the day before, delivered chilled within Tbilisi.',
+    flavoursEyebrow: 'individual flavours',
+    flavoursHead: 'Prefer to choose cube by cube?',
+    flavoursSub: 'Use the list below as your flavour board. We will help turn it into the right quantity for your event.',
   },
   ka: {
-    head: 'შენი მაგიდა. შენი რაოდენობა.',
-    sub: 'ერთ ნაკრებში ყოველთვის 8 კუბია. მინიმალური შეკვეთა ₾250. კუბებს წინა დღეს ვამზადებთ და თბილისში გაგრილებულს გიგზავნით.',
+    head: 'აირჩიე ნაკრები. ან ავაწყოთ შენი.',
+    sub: 'დაიწყე მზა ღონისძიების ნაკრებით, ან მოგვწერე სტუმრების რაოდენობა და მიქსს ჩვენ მოვარგებთ. კუბებს წინა დღეს ვამზადებთ და თბილისში გაგრილებულს გიგზავნით.',
+    flavoursEyebrow: 'ცალკეული გემოები',
+    flavoursHead: 'გინდა კუბებად აარჩიო?',
+    flavoursSub: 'ქვემოთ ნახე გემოების სია. რაოდენობას შენი ღონისძიებისთვის ჩვენ მოვარგებთ.',
   },
 };
 

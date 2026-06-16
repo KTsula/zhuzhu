@@ -1,5 +1,5 @@
 ---
-import { booking, whatsapp } from '../content/copy';
+import { booking, menuBundles, whatsapp } from '../content/copy';
 const f = booking.en.fields;
 const fk = booking.ka.fields;
 ---
@@ -76,6 +76,24 @@ const fk = booking.ka.fields;
       </div>
 
       <div class="field">
+        <label class="lng-en" for="zz-booking-basket">{f.basket.label}</label>
+        <label class="lng-ka" for="zz-booking-basket">{fk.basket.label}</label>
+        <select name="basket" id="zz-booking-basket">
+          <option value="">
+            {booking.en.basketPlaceholder} / {booking.ka.basketPlaceholder}
+          </option>
+          {menuBundles.tiers.map((tier) => (
+            <option value={`${tier.name.en} (${tier.guests.en})`}>
+              {tier.name.en} · {tier.guests.en} / {tier.name.ka} · {tier.guests.ka}
+            </option>
+          ))}
+          <option value="Custom basket">
+            {booking.en.customBasket} / {booking.ka.customBasket}
+          </option>
+        </select>
+      </div>
+
+      <div class="field">
         <label class="lng-en">{f.note.label}</label>
         <label class="lng-ka">{fk.note.label}</label>
         <textarea name="note"></textarea>
@@ -133,6 +151,7 @@ const fk = booking.ka.fields;
         date: String(data.get('date') || ''),
         guests: String(data.get('guests') || ''),
         venue: String(data.get('venue') || ''),
+        basket: String(data.get('basket') || ''),
         note: String(data.get('note') || ''),
         lang: document.documentElement.getAttribute('data-lang') || 'en',
       };
@@ -359,6 +378,7 @@ const fk = booking.ka.fields;
     font-size: var(--t-sm);
   }
   .field input,
+  .field select,
   .field textarea {
     width: 100%;
     padding: 14px 0;
@@ -373,11 +393,30 @@ const fk = booking.ka.fields;
     transition: border-color 0.3s var(--ease-out-quart);
   }
   html[data-lang="ka"] .field input,
+  html[data-lang="ka"] .field select,
   html[data-lang="ka"] .field textarea { font-family: var(--ka); }
   .field input:focus,
+  .field select:focus,
   .field textarea:focus {
     outline: none;
     border-bottom-color: var(--gold);
+  }
+  .field select {
+    appearance: none;
+    background-image:
+      linear-gradient(45deg, transparent 50%, var(--gold) 50%),
+      linear-gradient(135deg, var(--gold) 50%, transparent 50%);
+    background-position:
+      calc(100% - 14px) 50%,
+      calc(100% - 8px) 50%;
+    background-size: 6px 6px, 6px 6px;
+    background-repeat: no-repeat;
+    padding-right: 34px;
+    cursor: pointer;
+  }
+  .field select option {
+    background: var(--graphite);
+    color: var(--bone);
   }
   .field textarea {
     min-height: 100px;
