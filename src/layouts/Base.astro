@@ -3,6 +3,7 @@ import '../styles/global.css';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import HookVeil from '../components/HookVeil.astro';
+import Seo from '../components/Seo.astro';
 import { pageMeta } from '../content/copy';
 
 interface Props {
@@ -53,6 +54,8 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://zhuzhu.ge')
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={new URL('/og.png', Astro.site ?? 'https://zhuzhu.ge').toString()} />
     <meta name="twitter:image:alt" content="ZhuZhu — cocktail desserts, hand-set in Tbilisi" />
+
+    <Seo url={canonical} />
 
     <script is:inline>
       // Set <html data-lang> from localStorage as early as possible to avoid FOUC.

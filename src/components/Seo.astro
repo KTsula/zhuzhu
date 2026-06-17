@@ -1,0 +1,113 @@
+---
+// Structured data + hreflang for every page.
+// Drop this into <head> after the existing meta block.
+//
+// What it does:
+//   - JSON-LD @graph: Organization + FoodEstablishment + WebSite, all tied
+//     together via @id. Includes founders, sameAs socials, alternateName in
+//     Georgian. This is the single biggest SEO win for a local brand —
+//     Google reads it to build the Knowledge Graph entity for "ZhuZhu" /
+//     "ჟუჟუ" and unlocks rich results / local pack eligibility.
+//   - hreflang self-references so Google knows the same URL serves EN+KA
+//     content (single-URL JS toggle pattern).
+//   - Locale alternates for og:locale.
+//
+// Update the WhatsApp phone or socials in src/content/copy.ts — this
+// component re-reads them on build, so the JSON-LD stays in sync.
+import { whatsapp, footer } from '../content/copy';
+
+interface Props { url: string; }
+const { url } = Astro.props;
+
+const SITE = 'https://zhuzhu.ge';
+
+// Strip the wa.me number for E.164 format (Schema.org expects +CCNXXXXXXXX).
+const telE164 = `+${whatsapp.href.replace(/^https?:\/\/wa\.me\//, '').replace(/\D/g, '')}`;
+
+const sameAs = [
+  ...footer.en.socials.map((s) => s.href),
+  'https://www.pinterest.com/zhuzhu_ge/',
+];
+
+const graph = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': `${SITE}/#org`,
+      name: 'ZhuZhu',
+      alternateName: ['ჟუჟუ', 'ZhuZhu Atelier', 'ჟუჟუ ატელიე'],
+      url: `${SITE}/`,
+      logo: `${SITE}/logo-transparent.png`,
+      image: `${SITE}/og.png`,
+      description:
+        'ZhuZhu (ჟუჟუ) — cocktail desserts hand-set in Tbilisi. Honey Chacha, Cream Kiss, Kinza Garden. For weddings, brand evenings and after-hours tables.',
+      foundingDate: '2026',
+      founders: [
+        { '@type': 'Person', name: 'Keti Sulamanidze', alternateName: 'ქეთი სულამანიძე' },
+        { '@type': 'Person', name: 'Anna Chigladze',   alternateName: 'ანა ჭიღლაძე' },
+        { '@type': 'Person', name: 'Vladimer Rusetsky', alternateName: 'ვლადიმერ რუსეცკი' },
+      ],
+      sameAs,
+      contactPoint: [{
+        '@type': 'ContactPoint',
+        telephone: telE164,
+        email: 'hello@zhuzhu.ge',
+        contactType: 'customer service',
+        areaServed: 'GE',
+        availableLanguage: ['en', 'ka'],
+      }],
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'Tbilisi',
+        addressCountry: 'GE',
+      },
+    },
+    {
+      '@type': 'FoodEstablishment',
+      '@id': `${SITE}/#biz`,
+      name: 'ZhuZhu',
+      alternateName: 'ჟუჟუ',
+      url: `${SITE}/`,
+      image: `${SITE}/og.png`,
+      description:
+        'Cocktail desserts hand-set in Tbilisi. Cocktails reduced to a single bite — eaten on the tongue, never sipped from a glass.',
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'Tbilisi',
+        addressCountry: 'GE',
+      },
+      telephone: telE164,
+      email: 'hello@zhuzhu.ge',
+      priceRange: '₾₾',
+      servesCuisine: ['Cocktail Desserts', 'Georgian-inspired'],
+      parentOrganization: { '@id': `${SITE}/#org` },
+      sameAs,
+    },
+    {
+      '@type': 'WebSite',
+      '@id': `${SITE}/#site`,
+      name: 'ZhuZhu',
+      alternateName: 'ჟუჟუ',
+      url: `${SITE}/`,
+      publisher: { '@id': `${SITE}/#org` },
+      inLanguage: ['en', 'ka'],
+    },
+  ],
+};
+---
+<!-- hreflang — single URL serves both EN and KA via JS toggle.
+     Self-references tell Google the URL is multi-lingual; x-default is fallback. -->
+<link rel="alternate" hreflang="en" href={url} />
+<link rel="alternate" hreflang="ka" href={url} />
+<link rel="alternate" hreflang="x-default" href={url} />
+
+<!-- og:locale alternates so Facebook/LinkedIn know the page is bilingual. -->
+<meta property="og:locale:alternate" content="ka_GE" />
+
+<!-- Extra structured author hints. -->
+<meta name="author" content="ZhuZhu Atelier · Tbilisi" />
+<meta name="keywords" content="ZhuZhu, ჟუჟუ, ჟუჟუ ატელიე, cocktail desserts, კოქტეილ-დესერტი, Tbilisi catering, თბილისი, Georgian cocktails, wedding food Tbilisi, brand activation Tbilisi, Honey Chacha, Cream Kiss, Kinza Garden, churchkhela cocktail" />
+
+<!-- JSON-LD — Organization + FoodEstablishment + WebSite graph. -->
+<script type="application/ld+json" set:html={JSON.stringify(graph)}></script>
