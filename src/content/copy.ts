@@ -618,6 +618,92 @@ export const founders = [
   },
 ];
 
+// Visible on /order AND used to generate FAQPage JSON-LD on the same page.
+// Keep questions natural — Google's guidance is that FAQ schema must
+// reflect content that's visibly answered on the page.
+export const orderFaqs = [
+  {
+    q: { en: 'What is the minimum order?',
+         ka: 'რა არის მინიმალური შეკვეთა?' },
+    a: { en: 'Minimum order is ₾250 — about eighteen to twenty cubes depending on the line you pick.',
+         ka: 'მინიმალური შეკვეთა ₾250-ია — დაახლოებით თვრამეტიდან ოც კუბამდე, არჩეული ხაზის მიხედვით.' },
+  },
+  {
+    q: { en: 'How far in advance should I order?',
+         ka: 'რამდენი ხნით ადრე უნდა შემოვუკვეთო?' },
+    a: { en: 'Ideally a week. Three days is the practical minimum so we can set the cubes the day before and deliver them properly chilled.',
+         ka: 'იდეალურია ერთი კვირით ადრე. სამი დღე მინიმუმია, რომ წინა დღეს მოვამზადოთ კუბები და სათანადოდ გაცივებული მოგაწოდოთ.' },
+  },
+  {
+    q: { en: 'Do you deliver outside Tbilisi?',
+         ka: 'ხდება თუ არა მიწოდება თბილისის გარეთ?' },
+    a: { en: 'Tbilisi only for now. The cubes are a cold-chain item — every minute outside refrigeration changes the texture.',
+         ka: 'ჯერჯერობით მხოლოდ თბილისში. კუბები ცივ ჯაჭვს მოითხოვს — ყოველი წუთი მაცივრის გარეთ ცვლის მათ ტექსტურას.' },
+  },
+  {
+    q: { en: 'Are the cubes alcoholic?',
+         ka: 'შეიცავს თუ არა კუბები ალკოჰოლს?' },
+    a: { en: 'Most of the signatures and classics contain alcohol — chacha, gin, Khvanchkara, Baileys. We also keep alcohol-free options: Berry Mint, Pomegranate Citrus, Tarragon Lemonade. We mark them clearly so service can route guests correctly.',
+         ka: 'სიგნატურებისა და კლასიკის უმეტესობა შეიცავს ალკოჰოლს — ჭაჭა, ჯინი, ხვანჩკარა, ბეილისი. ასევე გვაქვს უალკოჰოლო ვარიანტები: Berry Mint, Pomegranate Citrus, Tarragon Lemonade. მკაფიოდ ვნიშნავთ მათ.' },
+  },
+  {
+    q: { en: 'How long do they last?',
+         ka: 'რამდენ ხანს ინახება?' },
+    a: { en: 'Hand-set the day before, best eaten within twenty-four hours of delivery, kept refrigerated until service. After that the texture drifts.',
+         ka: 'წინა დღეს ხელით აწყობილი, საუკეთესოა მიწოდებიდან ოცდაოთხ საათში მოხმარდეს, მოწოდებამდე — გაცივებული. ამის შემდეგ ტექსტურა იცვლება.' },
+  },
+  {
+    q: { en: 'Can you do custom flavours?',
+         ka: 'შესაძლებელია თუ არა ინდივიდუალური გემოები?' },
+    a: { en: 'No. Three Georgian-inspired signatures and six classics — that is the menu. Hand-set quality is only possible because we keep the kitchen focused.',
+         ka: 'არა. სამი ქართული საავტორო გემო და ექვსი კლასიკა — ეს არის მენიუ. ხელის ხარისხი მხოლოდ მაშინაა შესაძლებელი, როცა სამზარეულო ფოკუსირებულია.' },
+  },
+];
+
+export const orderFaqMeta = {
+  en: {
+    eyebrow: 'Common questions',
+    head: 'Before you order.',
+    sub: 'Six things people ask us before the first event. Anything else — WhatsApp us.',
+  },
+  ka: {
+    eyebrow: 'ხშირი კითხვები',
+    head: 'სანამ შემოუკვეთავ.',
+    sub: 'ექვსი რამ, რასაც ხალხი ხშირად გვეკითხება პირველი ღონისძიების წინ. სხვა რამე — WhatsApp-ით მოგვწერე.',
+  },
+};
+
+export const journal = {
+  // Index page copy + list of posts.
+  index: {
+    en: {
+      eyebrow: 'journal',
+      head: 'Notes from the kitchen.',
+      sub: 'Short pieces — the format, the ingredients, the night service we built ZhuZhu for.',
+    },
+    ka: {
+      eyebrow: 'ჟურნალი',
+      head: 'ჩანაწერები სამზარეულოდან.',
+      sub: 'მოკლე ჩანაწერები — ფორმატი, ინგრედიენტები, ის საღამოს მომსახურება, რომლისთვისაც ჟუჟუ შევქმენით.',
+    },
+  },
+  posts: [
+    {
+      slug: 'what-is-a-cocktail-dessert',
+      date: '2026-06-09',          // ISO date for JSON-LD + display
+      readingMinutes: 3,
+      title: {
+        en: 'What is a cocktail dessert?',
+        ka: 'რა არის კოქტეილ-დესერტი?',
+      },
+      lede: {
+        en: 'Not a shot. Not a jelly. A cocktail measured in bites — a Tbilisi format we set by hand.',
+        ka: 'არც შოტი, არც ჟელე. კოქტეილი ლუკმად გაზომილი — თბილისური ფორმატი, ხელით ნაკეთები.',
+      },
+    },
+  ],
+};
+
 export const contactPage = {
   en: {
     eyebrow: 'contact',
@@ -693,6 +779,18 @@ export const pageMeta = {
           desc: 'Reach ZhuZhu (ჟუჟუ) by WhatsApp, email, or socials. Tbilisi atelier — we answer within a working day.' },
     ka: { title: 'კონტაქტი — ჟუჟუ (ZhuZhu), კოქტეილ-დესერტები · თბილისი',
           desc: 'დაგვეკონტაქტეთ WhatsApp-ით, ელფოსტით ან სოციალურით. ჟუჟუ ატელიე, თბილისი — ერთ სამუშაო დღეში გიპასუხებთ.' },
+  },
+  journal: {
+    en: { title: 'Journal — ZhuZhu (ჟუჟუ), cocktail desserts · Tbilisi',
+          desc: 'Notes from the ZhuZhu (ჟუჟუ) kitchen. The format, the ingredients, and the Tbilisi night service we built it for.' },
+    ka: { title: 'ჟურნალი — ჟუჟუ (ZhuZhu), კოქტეილ-დესერტები · თბილისი',
+          desc: 'ჩანაწერები ჟუჟუს სამზარეულოდან — ფორმატი, ინგრედიენტები და თბილისის საღამოს მომსახურება.' },
+  },
+  'journal/what-is-a-cocktail-dessert': {
+    en: { title: 'What is a cocktail dessert? — ZhuZhu (ჟუჟუ), Tbilisi',
+          desc: 'A cocktail dessert is a cocktail measured in bites — eaten on the tongue, never sipped from a glass. The format ZhuZhu (ჟუჟუ) hand-sets in Tbilisi.' },
+    ka: { title: 'რა არის კოქტეილ-დესერტი? — ჟუჟუ (ZhuZhu), თბილისი',
+          desc: 'კოქტეილ-დესერტი არის კოქტეილი, ლუკმად გაზომილი — ენაზე, არასოდეს ჭიქით. ფორმატი, რომელსაც ჟუჟუ ხელით აწყობს თბილისში.' },
   },
 };
 

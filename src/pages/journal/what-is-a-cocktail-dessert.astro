@@ -1,0 +1,233 @@
+---
+import Base from '../../layouts/Base.astro';
+import { journal, pageMeta } from '../../content/copy';
+
+const post = journal.posts.find((p) => p.slug === 'what-is-a-cocktail-dessert')!;
+const meta = pageMeta['journal/what-is-a-cocktail-dessert'];
+
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: post.title.en,
+  alternateHeadline: post.title.ka,
+  inLanguage: ['en', 'ka'],
+  datePublished: post.date,
+  dateModified: post.date,
+  description: post.lede.en,
+  image: 'https://zhuzhu.ge/og.png',
+  author: { '@id': 'https://zhuzhu.ge/#org' },
+  publisher: { '@id': 'https://zhuzhu.ge/#org' },
+  mainEntityOfPage: `https://zhuzhu.ge/journal/${post.slug}`,
+  keywords: 'cocktail dessert, ZhuZhu, ჟუჟუ, Tbilisi, cocktail format, hand-set cocktails',
+};
+
+function fmtDate(iso: string, lang: 'en' | 'ka') {
+  const d = new Date(iso);
+  return d.toLocaleDateString(lang === 'ka' ? 'ka-GE' : 'en-GB', {
+    day: 'numeric', month: 'long', year: 'numeric',
+  });
+}
+---
+<Base current="home"
+      title={meta.en.title}
+      description={meta.en.desc}>
+
+  <article class="post">
+    <header class="post-head">
+      <a class="back" href="/journal">
+        <span class="lng-en">←  Journal</span>
+        <span class="lng-ka">←  ჟურნალი</span>
+      </a>
+      <div class="post-meta">
+        <time datetime={post.date}>
+          <span class="lng-en">{fmtDate(post.date, 'en')}</span>
+          <span class="lng-ka">{fmtDate(post.date, 'ka')}</span>
+        </time>
+        <span class="dot">·</span>
+        <span>
+          <span class="lng-en">{post.readingMinutes} min read</span>
+          <span class="lng-ka">{post.readingMinutes} წთ კითხვა</span>
+        </span>
+      </div>
+      <h1 class="display post-title">
+        <span class="lng-en">{post.title.en}</span>
+        <span class="lng-ka">{post.title.ka}</span>
+      </h1>
+      <p class="lede">
+        <span class="lng-en">{post.lede.en}</span>
+        <span class="lng-ka">{post.lede.ka}</span>
+      </p>
+    </header>
+
+    <div class="body lng-en">
+      <p>
+        A cocktail dessert is a cocktail measured in bites. Not a shot you
+        knock back, not a jelly with a garnish on top — a balanced drink,
+        set firm enough to be eaten on the tongue, where the temperature
+        and the acid and the alcohol all hit the way they would in a glass,
+        but compressed into a single moment.
+      </p>
+      <p>
+        We started <strong>ZhuZhu</strong> because the format did not
+        exist properly in Tbilisi. There were alcoholic gummies. There were
+        dessert shots. There were spheres on cocktail menus that read more
+        as theatre than as drinks. None of them honoured the cocktail the
+        way a serious bartender would have built it — with proportion,
+        with restraint, with one ingredient pulling lead and the others
+        stepping behind.
+      </p>
+      <blockquote>
+        Our cubes are set the day before service. Real chacha, single-origin
+        Khvanchkara, mountain honey from Kvemo Kartli, Baileys for the
+        cream line. No syrups. No artificial colours. No artificial
+        flavours.
+      </blockquote>
+      <p>
+        The cube is a vehicle for the cocktail, not a flavour of its own.
+        When you bite, you should taste what the bartender intended — not
+        what the gel did.
+      </p>
+      <p>
+        Three friends. One kitchen. Three signatures — <em>Honey Chacha</em>,
+        <em>Cream Kiss</em>, <em>Kinza Garden</em> — six classics, and an
+        alcohol-free row. We hand-deliver in Tbilisi for weddings, brand
+        evenings, and after-hours tables that want something they have not
+        seen before.
+      </p>
+      <p class="closer">
+        A cocktail measured in bites. That is the whole idea.
+      </p>
+    </div>
+
+    <div class="body lng-ka">
+      <p>
+        კოქტეილ-დესერტი არის კოქტეილი, ლუკმად გაზომილი. არც შოტი, რომელსაც
+        სწრაფად ჩაყლაპავ, არც ჟელე გარნირით ზემოდან — დაბალანსებული სასმელი,
+        საკმარისად მყარად დაყენებული, რომ ენაზე იგრძნოს, სადაც ტემპერატურა,
+        მჟავიანობა და ალკოჰოლი ისე ხვდება, როგორც ჭიქიდან, მხოლოდ ერთ
+        მომენტში გადატანილი.
+      </p>
+      <p>
+        <strong>ჟუჟუ</strong> დავიწყეთ, რადგან ეს ფორმატი თბილისში
+        სრულფასოვნად არ არსებობდა. იყო ალკოჰოლიანი ტკბილეული, იყო
+        დესერტ-შოტები, იყო სფერული ფორმები კოქტეილების მენიუებში — უფრო
+        თეატრად იკითხებოდა, ვიდრე სასმელად. არცერთი მათგანი არ პატივს
+        სცემდა კოქტეილს ისე, როგორც სერიოზული ბარმენი მოამზადებდა —
+        პროპორციით, თავშეკავებით, ერთი ინგრედიენტი წინა პლანზე, დანარჩენი —
+        უკან.
+      </p>
+      <blockquote>
+        ჩვენი კუბები წინა დღეს ვამზადებთ. ნამდვილი ჭაჭა, ერთწარმოშობის
+        ხვანჩკარა, ქვემო ქართლის მთის თაფლი, ბეილისი კრემის ხაზისთვის.
+        სიროფი არ გვაქვს. ხელოვნური საღებავი არ გვაქვს. ხელოვნური არომატი
+        არ გვაქვს.
+      </blockquote>
+      <p>
+        კუბი კოქტეილის გადამცემია — არა საკუთარი გემო. როცა აგემოვნებ,
+        ბარმენის განზრახული უნდა იგრძნოს, არა ჟელეს გემო.
+      </p>
+      <p>
+        სამი მეგობარი. ერთი სამზარეულო. სამი სიგნატური — <em>Honey Chacha</em>,
+        <em>Cream Kiss</em>, <em>Kinza Garden</em> — ექვსი კლასიკა და
+        უალკოჰოლო ხაზი. თბილისში ხელით ვაწვდით ქორწილებისთვის, ბრენდის
+        საღამოებისთვის და იმ ღამის სუფრებისთვის, რომელთაც სიახლე სურთ.
+      </p>
+      <p class="closer">
+        კოქტეილი ლუკმად გაზომილი. სულ ეს არის.
+      </p>
+    </div>
+
+    <footer class="post-foot">
+      <a class="cta" href="/order">
+        <span class="lng-en">Order a tasting</span>
+        <span class="lng-ka">დაჯავშნე დეგუსტაცია</span>
+      </a>
+      <a class="cta-ghost" href="/journal">
+        <span class="lng-en">More from the journal  →</span>
+        <span class="lng-ka">მეტი ჟურნალიდან  →</span>
+      </a>
+    </footer>
+  </article>
+
+  <!-- Article structured data so Google can show this in news/article rich results -->
+  <script type="application/ld+json" set:html={JSON.stringify(articleLd)}></script>
+</Base>
+
+<style>
+  .post { max-width: 700px; margin: 0 auto; padding: 100px 24px 120px; }
+  .post-head { margin-bottom: 56px; }
+  .back {
+    font-family: var(--body); font-weight: 500; font-size: var(--t-xs);
+    text-transform: uppercase; letter-spacing: 0.16em; color: var(--ash);
+    transition: color 0.3s var(--ease-out-quart);
+  }
+  html[data-lang="ka"] .back {
+    font-family: var(--ka); font-style: italic; font-weight: 400;
+    text-transform: none; letter-spacing: 0.04em; font-size: var(--t-sm);
+  }
+  .back:hover { color: var(--gold-bright); }
+
+  .post-meta {
+    margin-top: 56px;
+    font-family: var(--body); font-weight: 500; font-size: var(--t-xs);
+    text-transform: uppercase; letter-spacing: 0.16em; color: var(--ash);
+    display: flex; align-items: center; gap: 12px;
+  }
+  html[data-lang="ka"] .post-meta {
+    font-family: var(--ka); font-style: italic; font-weight: 400;
+    text-transform: none; letter-spacing: 0.04em; font-size: var(--t-sm);
+  }
+  .post-meta .dot { color: var(--gold); }
+
+  .post-title {
+    font-size: var(--t-3xl); margin: 16px 0 22px; line-height: 1.1;
+  }
+  .lede {
+    font-family: var(--display); font-style: italic; font-weight: 300;
+    font-size: var(--t-xl); color: var(--bone-warm); line-height: 1.4;
+    margin: 0; max-width: 50ch;
+  }
+  html[data-lang="ka"] .lede { font-family: var(--ka); }
+
+  .body p {
+    font-family: var(--body); font-weight: 350; font-size: var(--t-base);
+    color: var(--bone-warm); line-height: 1.75;
+    margin: 0 0 26px; max-width: 60ch;
+  }
+  html[data-lang="ka"] .body p { font-family: var(--ka); font-weight: 400; }
+  .body p strong { color: var(--bone); font-weight: 500; }
+  .body p em {
+    font-family: var(--display); font-style: italic; font-weight: 300;
+    color: var(--bone);
+  }
+  html[data-lang="ka"] .body p em { font-family: var(--ka); }
+
+  .body blockquote {
+    font-family: var(--display); font-style: italic; font-weight: 300;
+    font-size: var(--t-lg); color: var(--bone); line-height: 1.5;
+    border-left: 1px solid var(--gold);
+    margin: 36px 0 36px; padding: 6px 0 6px 28px;
+    max-width: 52ch;
+  }
+  html[data-lang="ka"] .body blockquote { font-family: var(--ka); }
+
+  .body .closer {
+    font-family: var(--display); font-style: italic; font-weight: 300;
+    font-size: var(--t-lg); color: var(--bone);
+    margin-top: 40px;
+  }
+  html[data-lang="ka"] .body .closer { font-family: var(--ka); }
+
+  .post-foot {
+    margin-top: 72px; padding-top: 40px;
+    border-top: 1px solid rgba(198,152,89,0.18);
+    display: flex; align-items: center; gap: 24px; flex-wrap: wrap;
+  }
+
+  @media (max-width: 720px) {
+    .post { padding: 64px 22px 80px; }
+    .post-title { font-size: var(--t-2xl); }
+    .lede { font-size: var(--t-lg); }
+    .body blockquote { font-size: var(--t-base); padding-left: 20px; }
+  }
+</style>

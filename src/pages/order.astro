@@ -2,7 +2,19 @@
 import Base from '../layouts/Base.astro';
 import BookingForm from '../components/BookingForm.astro';
 import MenuBundles from '../components/MenuBundles.astro';
-import { orderPage, pageMeta, signatures, classics, menuClassics } from '../content/copy';
+import { orderPage, pageMeta, signatures, classics, menuClassics, orderFaqs, orderFaqMeta } from '../content/copy';
+
+// FAQPage JSON-LD — Google awards rich results only when the answers
+// are visible on the page. The FAQ section below renders them.
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: orderFaqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q.en,
+    acceptedAnswer: { '@type': 'Answer', text: f.a.en },
+  })),
+};
 
 const rows = [
   ...signatures.map((s) => ({
@@ -73,7 +85,43 @@ const rows = [
     ))}
   </section>
 
+  <section class="faq">
+    <header class="faq-head">
+      <span class="label">
+        <span class="lng-en">{orderFaqMeta.en.eyebrow}</span>
+        <span class="lng-ka">{orderFaqMeta.ka.eyebrow}</span>
+      </span>
+      <h2 class="display faq-title">
+        <span class="lng-en">{orderFaqMeta.en.head}</span>
+        <span class="lng-ka">{orderFaqMeta.ka.head}</span>
+      </h2>
+      <p class="faq-sub">
+        <span class="lng-en">{orderFaqMeta.en.sub}</span>
+        <span class="lng-ka">{orderFaqMeta.ka.sub}</span>
+      </p>
+    </header>
+
+    <div class="faq-list">
+      {orderFaqs.map((f) => (
+        <details class="faq-item">
+          <summary>
+            <span class="lng-en">{f.q.en}</span>
+            <span class="lng-ka">{f.q.ka}</span>
+            <span class="caret" aria-hidden="true">+</span>
+          </summary>
+          <div class="answer">
+            <span class="lng-en">{f.a.en}</span>
+            <span class="lng-ka">{f.a.ka}</span>
+          </div>
+        </details>
+      ))}
+    </div>
+  </section>
+
   <BookingForm />
+
+  <!-- FAQPage structured data, mirroring the visible FAQ above. -->
+  <script type="application/ld+json" set:html={JSON.stringify(faqLd)}></script>
 </Base>
 
 <style>
@@ -185,5 +233,54 @@ const rows = [
     .row { gap: 18px; padding: 20px 0; }
     .thumb { width: 48px; height: 48px; }
     .name { font-size: var(--t-base); }
+  }
+
+  /* ── FAQ ─────────────────────────────────────────────── */
+  .faq {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 100px 24px 110px;
+    border-top: 1px solid rgba(198,152,89,0.15);
+  }
+  .faq-head { text-align: center; margin-bottom: 56px; }
+  .faq-title { font-size: var(--t-3xl); margin: 14px 0 18px; line-height: 1.1; }
+  .faq-sub {
+    font-family: var(--body); font-weight: 350; font-size: var(--t-base);
+    color: var(--bone-warm); line-height: 1.55; margin: 0 auto; max-width: 42ch;
+  }
+  html[data-lang="ka"] .faq-sub { font-family: var(--ka); font-weight: 400; }
+
+  .faq-list { display: flex; flex-direction: column; }
+  .faq-item {
+    border-top: 1px solid rgba(198,152,89,0.18);
+    padding: 22px 0;
+  }
+  .faq-item:last-child { border-bottom: 1px solid rgba(198,152,89,0.18); }
+  .faq-item summary {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 18px; cursor: pointer; list-style: none;
+    font-family: var(--display);
+    font-style: italic; font-weight: 300;
+    font-size: var(--t-lg); color: var(--bone);
+    letter-spacing: -0.005em; line-height: 1.3;
+  }
+  .faq-item summary::-webkit-details-marker { display: none; }
+  html[data-lang="ka"] .faq-item summary { font-family: var(--ka); font-weight: 500; }
+  .faq-item .caret {
+    font-family: var(--body); font-weight: 300; font-size: var(--t-xl);
+    color: var(--gold); transition: transform 0.3s var(--ease-out-quart);
+    flex-shrink: 0;
+  }
+  .faq-item[open] .caret { transform: rotate(45deg); }
+  .answer {
+    font-family: var(--body); font-weight: 350; font-size: var(--t-base);
+    color: var(--bone-warm); line-height: 1.7; margin-top: 14px; max-width: 60ch;
+  }
+  html[data-lang="ka"] .answer { font-family: var(--ka); font-weight: 400; }
+
+  @media (max-width: 720px) {
+    .faq { padding: 64px 22px 80px; }
+    .faq-head { margin-bottom: 36px; }
+    .faq-item summary { font-size: var(--t-base); }
   }
 </style>
