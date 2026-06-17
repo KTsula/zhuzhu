@@ -36,12 +36,15 @@ const graph = {
       '@type': 'Organization',
       '@id': `${SITE}/#org`,
       name: 'ZhuZhu',
-      alternateName: ['ჟუჟუ', 'ZhuZhu Atelier', 'ჟუჟუ ატელიე'],
+      // "JuJu" / "Juju" are common alternate spellings — we own juju.ge and 301
+      // it here. Listing them as alternateName tells Google + LLM crawlers
+      // that these strings resolve to the same entity.
+      alternateName: ['ჟუჟუ', 'JuJu', 'Juju', 'ZhuZhu Atelier', 'ჟუჟუ ატელიე'],
       url: `${SITE}/`,
       logo: `${SITE}/logo-transparent.png`,
       image: `${SITE}/og.png`,
       description:
-        'ZhuZhu (ჟუჟუ) — cocktail desserts hand-set in Tbilisi. Honey Chacha, Cream Kiss, Kinza Garden. For weddings, brand evenings and after-hours tables.',
+        'ZhuZhu (also written JuJu, ჟუჟუ) — cocktail desserts hand-set in Tbilisi. Honey Chacha, Cream Kiss, Kinza Garden. For weddings, brand evenings and after-hours tables.',
       foundingDate: '2026',
       founders: [
         { '@type': 'Person', name: 'Keti Sulamanidze', alternateName: 'ქეთი სულამანიძე' },
@@ -67,7 +70,7 @@ const graph = {
       '@type': 'FoodEstablishment',
       '@id': `${SITE}/#biz`,
       name: 'ZhuZhu',
-      alternateName: 'ჟუჟუ',
+      alternateName: ['ჟუჟუ', 'JuJu', 'Juju'],
       url: `${SITE}/`,
       image: `${SITE}/og.png`,
       description:
@@ -88,7 +91,7 @@ const graph = {
       '@type': 'WebSite',
       '@id': `${SITE}/#site`,
       name: 'ZhuZhu',
-      alternateName: 'ჟუჟუ',
+      alternateName: ['ჟუჟუ', 'JuJu', 'Juju'],
       url: `${SITE}/`,
       publisher: { '@id': `${SITE}/#org` },
       inLanguage: ['en', 'ka'],
@@ -107,7 +110,7 @@ const graph = {
 
 <!-- Extra structured author hints. -->
 <meta name="author" content="ZhuZhu Atelier · Tbilisi" />
-<meta name="keywords" content="ZhuZhu, ჟუჟუ, ჟუჟუ ატელიე, cocktail desserts, კოქტეილ-დესერტი, Tbilisi catering, თბილისი, Georgian cocktails, wedding food Tbilisi, brand activation Tbilisi, Honey Chacha, Cream Kiss, Kinza Garden, churchkhela cocktail" />
+<meta name="keywords" content="ZhuZhu, ჟუჟუ, JuJu, Juju, ჟუჟუ ატელიე, cocktail desserts, კოქტეილ-დესერტი, Tbilisi catering, თბილისი, Georgian cocktails, wedding food Tbilisi, brand activation Tbilisi, Honey Chacha, Cream Kiss, Kinza Garden, churchkhela cocktail" />
 
 <!-- JSON-LD — Organization + FoodEstablishment + WebSite graph. -->
 <script type="application/ld+json" set:html={JSON.stringify(graph)}></script>

@@ -658,6 +658,12 @@ export const orderFaqs = [
     a: { en: 'No. Three Georgian-inspired signatures and six classics — that is the menu. Hand-set quality is only possible because we keep the kitchen focused.',
          ka: 'არა. სამი ქართული საავტორო გემო და ექვსი კლასიკა — ეს არის მენიუ. ხელის ხარისხი მხოლოდ მაშინაა შესაძლებელი, როცა სამზარეულო ფოკუსირებულია.' },
   },
+  {
+    q: { en: 'Wait — are you ZhuZhu or JuJu?',
+         ka: 'ჟუჟუ ხართ თუ JuJu?' },
+    a: { en: 'Same place, different spelling. The brand is ZhuZhu (ჟუჟუ in Georgian). JuJu is how people often type it — we own juju.ge and it routes here too.',
+         ka: 'ერთი და იგივე — სხვადასხვა მართლწერა. ბრენდი არის ჟუჟუ (ZhuZhu ლათინურად). JuJu არის ხშირი ვარიანტი, რომელსაც აკრეფენ — juju.ge ჩვენ გვეკუთვნის და აქვე გადმოგამისამართებთ.' },
+  },
 ];
 
 export const orderFaqMeta = {
