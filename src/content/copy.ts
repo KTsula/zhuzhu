@@ -643,8 +643,8 @@ export const orderFaqs = [
   {
     q: { en: 'Are the cubes alcoholic?',
          ka: 'შეიცავს თუ არა კუბები ალკოჰოლს?' },
-    a: { en: 'Most of the signatures and classics contain alcohol — chacha, gin, Khvanchkara, Baileys. We also keep alcohol-free options: Berry Mint, Pomegranate Citrus, Tarragon Lemonade. We mark them clearly so service can route guests correctly.',
-         ka: 'სიგნატურებისა და კლასიკის უმეტესობა შეიცავს ალკოჰოლს — ჭაჭა, ჯინი, ხვანჩკარა, ბეილისი. ასევე გვაქვს უალკოჰოლო ვარიანტები: Berry Mint, Pomegranate Citrus, Tarragon Lemonade. მკაფიოდ ვნიშნავთ მათ.' },
+    a: { en: 'Most of the signatures and classics contain alcohol — chacha, gin, limoncello, Baileys. We also keep alcohol-free options: Berry Mint, Pomegranate Citrus, Tarragon Lemonade. We mark them clearly so service can route guests correctly.',
+         ka: 'სიგნატურებისა და კლასიკის უმეტესობა შეიცავს ალკოჰოლს — ჭაჭა, ჯინი, ლიმონჩელო, ბეილისი. ასევე გვაქვს უალკოჰოლო ვარიანტები: Berry Mint, Pomegranate Citrus, Tarragon Lemonade. მკაფიოდ ვნიშნავთ მათ.' },
   },
   {
     q: { en: 'How long do they last?',
