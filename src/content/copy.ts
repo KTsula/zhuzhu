@@ -97,6 +97,48 @@ export const signatures: SignatureItem[] = [
     img: '/cubes/kinza-garden.png',
     accent: 'rgba(130, 185, 110, 0.32)',
   },
+  {
+    id: '04',
+    line: { en: 'Signature · Aperitivo', ka: 'საავტორო · აპერიტივი' },
+    name: { en: 'Aperol', ka: 'აპეროლი' },
+    blurb: {
+      en: 'Aperol and sparkling wine, set into a glossy domed bite with that bittersweet orange edge. Bright, a little bitter, easy in the heat — the aperitivo we kept coming back to.',
+      ka: 'აპეროლი და ცქრიალა ღვინო — პრიალა, გუმბათისებრ ლუკმად ქცეული, მწარულ-ტკბილი ფორთოხლისფერი კიდით. ნათელი, ოდნავ მწარე და ზაფხულში მსუბუქი — აპერიტივი, რომელსაც ისევ და ისევ ვუბრუნდებოდით.',
+    },
+    meta: {
+      line: { en: 'Signature · Aperitivo', ka: 'საავტორო · აპერიტივი' },
+    },
+    img: '/cubes/aperol.png',
+    accent: 'rgba(230, 90, 40, 0.34)',
+  },
+  {
+    id: '05',
+    line: { en: 'Signature · Georgian-inspired', ka: 'საავტორო · ქართული შთაგონებით' },
+    name: { en: 'Feijoa Brandy', ka: 'ფეიხოა ბრენდი' },
+    blurb: {
+      en: 'Feijoa brandy and a clean shot of vodka, brightened with fresh lime, set into a soft green dome. Feijoa is autumn in Georgia — that green, guava-and-pear note — caught here while it is still fresh.',
+      ka: 'ფეიხოას ბრენდი და სუფთა არაყი, ახალი ლაიმით გაცოცხლებული — რბილ, მწვანე გუმბათად ქცეული. ფეიხოა საქართველოში შემოდგომაა — ის მწვანე, გუავა-მსხლისებრი ნოტი — აქ ჯერ კიდევ ახალი დაჭერილი.',
+    },
+    meta: {
+      line: { en: 'Signature · Georgian-inspired', ka: 'საავტორო · ქართული შთაგონებით' },
+    },
+    img: '/cubes/feijoa-brandy.png',
+    accent: 'rgba(170, 200, 60, 0.32)',
+  },
+  {
+    id: '06',
+    line: { en: 'Signature · Herbal', ka: 'საავტორო · მწვანილოვანი' },
+    name: { en: 'Midnight Basil', ka: 'შუაღამის რეჰანი' },
+    blurb: {
+      en: 'Fresh basil — a whole bunch, steeped — with limoncello and a clean spirit, set into a deep teal dome. Herbal and aromatic, darker than it looks, finished with a single purple basil leaf.',
+      ka: 'ახალი რეჰანი — მთელი კონა, დაყენებული — ლიმონჩელოსა და სუფთა ალკოჰოლთან ერთად, ღრმა ზურმუხტისფერ გუმბათად ქცეული. მწვანილოვანი და არომატული, იმაზე მუქი, ვიდრე ჩანს, ბოლოს ერთი იისფერი რეჰანის ფოთლით.',
+    },
+    meta: {
+      line: { en: 'Signature · Herbal', ka: 'საავტორო · მწვანილოვანი' },
+    },
+    img: '/cubes/midnight-basil.png',
+    accent: 'rgba(40, 150, 130, 0.34)',
+  },
 ];
 
 export type ClassicSet = {
